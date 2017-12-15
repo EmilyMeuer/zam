@@ -50,6 +50,29 @@ Z.prototype.css = function(props, e) {
 	}
 }
 
+Z.prototype.each = function(e, func) {
+	if(typeof e === "function") {
+		func = e;
+		e = this.self
+	}
+	var elems = document.querySelectorAll(e);
+	Array.prototype.forEach.call(elems, function(elem, i) {
+		func(elem, i);
+	});
+}
+
+Z.prototype.addStyle = function(val, id) {
+	var newStyle = document.createElement("style");
+	newStyle.innerHTML = val;
+	newStyle.id = id;
+	document.getElementsByTagName("head")[0].appendChild(newStyle);
+}
+
+Z.prototype.removeStyle = function(id) {
+	var elem = document.querySelector('#'+id);
+	elem.parentNode.removeChild(elem);
+}
+
 Z.prototype.ajax = function(obj, func) {
 	if(obj.method === undefined) {
 		obj.method = 'GET';
@@ -71,6 +94,9 @@ Z.prototype.ajax = function(obj, func) {
 			func(this.response);
 		}
 	}
+	xhttp.onerror = function () {
+		console.log("AJAX error.");
+	};
 	xhttp.open(obj.method, obj.url, true);
 	xhttp.setRequestHeader('Content-type', obj.content);
 	xhttp.send(obj.data);
