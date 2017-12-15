@@ -50,6 +50,26 @@ Z.prototype.css = function(props, e) {
 	}
 }
 
+Z.prototype.fadeIn = function(e, value) {
+	if (value === undefined) {
+		value = '1s';
+	}
+	this.css({'transition': 'opacity ' + value}, e);
+	setTimeout(() => {
+		this.css({'opacity': '1.0'}, e);
+	},1);
+}
+
+Z.prototype.fadeOut = function(e, value) {
+	if (value === undefined) {
+		value = '1s';
+	}
+	this.css({'transition': 'opacity ' + value}, e);
+	setTimeout(() => {
+		this.css({'opacity': '0.0'}, e);
+	},1);
+}
+
 Z.prototype.each = function(e, func) {
 	if(typeof e === "function") {
 		func = e;
