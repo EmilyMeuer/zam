@@ -1,0 +1,8 @@
+*.json
+node_modules
+*.html
+gulpfile.js
+index.js
+main.js
+dist
+.project
