@@ -43,7 +43,17 @@ Z.prototype.css = function(props, e) {
 					key = key.slice(0, idx-1) + key[idx].toUpperCase() + key.slice(idx+1);
 					x[i].style[key] = val;
 				} else {
-					x[i].style[key] = props[key];
+					if(key === 'transition' || key === 'animation') {
+						if (props[key] === '') {
+							x[i].style[key] = props[key];
+						} else if (x[i].style[key] === '') {
+							x[i].style[key] = props[key];
+						} else {
+							x[i].style[key] += (',' + props[key]);
+						}
+					} else {
+						x[i].style[key] = props[key];
+					}
 				}
 			}
 		}
