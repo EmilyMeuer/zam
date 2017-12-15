@@ -51,6 +51,10 @@ Z.prototype.css = function(props, e) {
 }
 
 Z.prototype.fadeIn = function(e, value) {
+	if(value === undefined) {
+		value = e;
+		e = this.self;
+	}
 	if (value === undefined) {
 		value = '1s';
 	}
@@ -61,6 +65,10 @@ Z.prototype.fadeIn = function(e, value) {
 }
 
 Z.prototype.fadeOut = function(e, value) {
+	if(value === undefined) {
+		value = e;
+		e = this.self;
+	}
 	if (value === undefined) {
 		value = '1s';
 	}
