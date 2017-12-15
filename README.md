@@ -71,7 +71,7 @@ Function 'callback' -> required
 var z = new Z();
     
 z.on('mousedown', 'div', () => {
-	z.css({'transition': '3s color', 'color': '#135791'}, 'div:nth-child(1)');
+  z.css({'transition': '3s color', 'color': '#135791'}, 'div:nth-child(1)');
 });
     
 z.on('mouseup', 'div', () => {
