@@ -1,6 +1,12 @@
 # Z
 A fast 1KB micro library that simplifies DOM traversal, event handling, and Ajax.
 
+# Import
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/roecrew/Z@v1.0/z.min.js"></script>
+```
+
 # Methods
 
 ## .e(selector)
