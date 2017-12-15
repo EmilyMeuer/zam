@@ -65,6 +65,18 @@ String 'id' -> required
 
 Returns nothing
 
+## .fadeIn(selector, value);
+
+String 'selector' -> optional | If undefined then last used selector is used.
+
+String 'value' -> required
+
+## .fadeOut(selector, value);
+
+String 'selector' -> optional | If undefined then last used selector is used.
+
+String 'value' -> required
+
 ## .ajax(options, callback);
 
 Object 'options' -> required
