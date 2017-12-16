@@ -95,7 +95,7 @@ Function 'callback' -> required
 var z = new Z();
     
 z.on('mousedown', 'div', () => {
-  z.css({'transition': '3s color', 'color': '#135791'}, 'div:nth-child(1)');
+  z.css({'transition': '3s color', 'color': '#135791'}, 'div:nth-of-type(1)');
 });
     
 z.on('mouseup', 'div', () => {
@@ -103,10 +103,10 @@ z.on('mouseup', 'div', () => {
 });
     
 z.addStyle('@keyframes example {from {background-color: red;}to {background-color: yellow;}}', 'newStyleId');
-z.css({'animation': 'example 3s'}, 'div:nth-child(1)');
+z.css({'animation': 'example 3s'}, 'div:nth-of-type(1)');
     
 setTimeout(() => {
-  z.css({'animation': ''}, 'div:nth-child(1)');
+  z.css({'animation': ''}, 'div:nth-of-type(1)');
   z.removeStyle('newStyleId');
 }, 5000);
     
