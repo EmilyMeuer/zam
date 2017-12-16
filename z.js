@@ -13,8 +13,10 @@ Z.prototype.e = function(e) {
 Z.prototype.index = function(elem) {
   var i = 0;
   var a = elem.target;
-  while((a = a.previousSibling) != null) {
-    i++;
+  while((a = a.previousElementSibling) != null) {
+  	if(a.tagName.toLowerCase() === elem.target.tagName.toLowerCase()) {
+  	  i++;
+  	}
   }
   return i;
 }
