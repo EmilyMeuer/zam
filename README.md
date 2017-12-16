@@ -94,8 +94,8 @@ Function 'callback' -> required
 ```javascript
 var z = new Z();
     
-z.on('mousedown', 'div', () => {
-  z.css({'transition': '3s color', 'color': '#135791'}, 'div:nth-of-type(1)');
+z.on('mousedown', 'div', (e) => {
+  z.css({'transition': '3s color', 'color': '#135791'}, 'div:nth-of-type(' + (z.index(e) + 1) + ')');
 });
     
 z.on('mouseup', 'div', () => {
