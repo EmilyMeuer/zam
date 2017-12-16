@@ -49,7 +49,12 @@ Z.prototype.css = function(props, e) {
 						} else if (x[i].style[key] === '') {
 							x[i].style[key] = props[key];
 						} else {
-							x[i].style[key] += (',' + props[key]);
+							if(x[i].style[key].indexOf(props[key].slice(props[key].indexOf(' '))) === -1) {
+								x[i].style[key] += (',' + props[key]);
+							} else {
+								var start = x[i].style[key].indexOf(props[key].slice(props[key].indexOf(' ')));
+								x[i].style[key] = x[i].style[key].slice(start) + props[key] + x[i].style[key].slice(start + props[key].length);
+							}
 						}
 					} else {
 						x[i].style[key] = props[key];
