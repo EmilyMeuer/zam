@@ -4,7 +4,7 @@ A fast 1KB micro library that simplifies DOM traversal, event handling, and Ajax
 # Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/Z@v1.4/z.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/Z@v1.5/z.min.js"></script>
 ```
 
 # Methods
