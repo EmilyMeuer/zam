@@ -39,39 +39,54 @@ Z.prototype.off = function(event, e, func) {
 	}
 }
 
-Z.prototype.css = function(props, e) {
-	if(e === undefined) {
-		e = this.self;
-	}
+Z.prototype.a = function(props, e) {
 	var x = document.querySelectorAll(e);
 	var len = x.length;
 	for(var i=0;i<len; i++) {
-		for (var key in props) {
-			if (props.hasOwnProperty(key)) {
-				if(key.indexOf('-') !== -1) {
-					var val = props[key];
-					var idx = key.indexOf('-') + 1;
-					key = key.slice(0, idx-1) + key[idx].toUpperCase() + key.slice(idx+1);
-					x[i].style[key] = val;
-				} else {
-					if(key === 'transition' || key === 'animation') {
-						if (props[key] === '') {
-							x[i].style[key] = props[key];
-						} else if (x[i].style[key] === '') {
-							x[i].style[key] = props[key];
-						} else {
-							if(x[i].style[key].indexOf(props[key].slice(props[key].indexOf(' '))) === -1) {
-								x[i].style[key] += (',' + props[key]);
-							} else {
-								var start = x[i].style[key].indexOf(props[key].slice(props[key].indexOf(' ')));
-								x[i].style[key] = x[i].style[key].slice(start) + props[key] + x[i].style[key].slice(start + props[key].length);
-							}
-						}
+		this.b(props, x[i]);
+	}
+}
+
+Z.prototype.b = function(props, x) {
+	for (var key in props) {
+		if (props.hasOwnProperty(key)) {
+			if(key.indexOf('-') !== -1) {
+				var val = props[key];
+				var idx = key.indexOf('-') + 1;
+				key = key.slice(0, idx - 1) + key[idx].toUpperCase() + key.slice(idx+1);
+				x.style[key] = val;
+			} else {
+				if(key === 'transition' || key === 'animation') {
+					if (props[key] === '') {
+						x.style[key] = props[key];
+					} else if (x.style[key] === '') {
+						x.style[key] = props[key];
 					} else {
-						x[i].style[key] = props[key];
+						if(x.style[key].indexOf(props[key].slice(props[key].indexOf(' '))) === -1) {
+							x.style[key] += (',' + props[key]);
+						} else {
+							var start = x.style[key].indexOf(props[key].slice(props[key].indexOf(' ')));
+							x.style[key] = x.style[key].slice(start) + props[key] + x.style[key].slice(start + props[key].length);
+						}
 					}
+				} else {
+					x.style[key] = props[key];
 				}
 			}
+		}
+	}
+}
+
+Z.prototype.css = function(props, e) {
+
+	if(e === undefined) {
+		e = this.self;
+		this.a(props, e);
+	} else {
+		if(typeof(e) === 'object') {
+			this.b(props, e);
+		} else {
+			this.a(props, e);
 		}
 	}
 }
