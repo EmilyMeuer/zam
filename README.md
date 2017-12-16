@@ -4,7 +4,7 @@ A fast 1KB micro library that simplifies DOM traversal, event handling, and Ajax
 # Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/Z@v1.5/z.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/Z@v1.6/z.min.js"></script>
 ```
 
 # Methods
@@ -45,7 +45,7 @@ Returns nothing
 
 String 'declaration' -> required
 
-String 'selector' -> optional | If undefined then last used selector is used.
+String or DOMElement 'selector' -> optional | If undefined then last used selector (String) is used.
 
 Returns nothing
 
