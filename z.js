@@ -10,6 +10,15 @@ Z.prototype.e = function(e) {
 	return document.querySelectorAll(e);
 }
 
+Z.prototype.index = function(elem) {
+  var i = 0;
+  var a = elem.target;
+  while((a = a.previousSibling) != null) {
+    i++;
+  }
+  return i;
+}
+
 Z.prototype.on = function(event, e, func) {
 	this.self = e;
 	var x = document.querySelectorAll(e);
