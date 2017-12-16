@@ -15,6 +15,12 @@ String 'selector' -> optional | If undefined then last used selector is used.
 
 Returns Array of Elements
 
+## .index(element)
+
+DOMElement 'selector' -> required
+
+Returns index
+
 ## .on(event, selector, func);
 
 String 'event' -> required
