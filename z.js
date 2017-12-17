@@ -21,12 +21,25 @@ Z.prototype.index = function(elem) {
   return i;
 }
 
-Z.prototype.on = function(event, e, func) {
-	this.self = e;
+Z.prototype.c = function(event, e, func) {
 	var x = document.querySelectorAll(e);
 	var len = x.length;
 	for(var i=0;i<len; i++) {
 		x[i].addEventListener(event, func);
+	}
+}
+
+Z.prototype.on = function(event, e, func) {
+	this.self = e;
+	if (event.indexOf(' ') !== -1) {
+		var eve = event;
+		while(eve.indexOf(' ') !== -1) {
+			this.c(eve.slice(0, eve.indexOf(' ')), e, func);
+			eve = eve.slice(eve.indexOf(' ') + 1);
+		}
+		this.c(eve, e, func);
+	} else {
+		this.c(event, e, func);
 	}
 }
 
