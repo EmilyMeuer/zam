@@ -11,14 +11,22 @@ Z.prototype.e = function(e) {
 }
 
 Z.prototype.index = function(elem) {
-  var i = 0;
-  var a = elem.target;
-  while((a = a.previousElementSibling) != null) {
-  	if(a.tagName.toLowerCase() === elem.target.tagName.toLowerCase()) {
-  	  i++;
-  	}
-  }
-  return i;
+	var i = 0;
+	var a = elem.target;
+	while((a = a.previousElementSibling) != null) {
+		if(a.tagName.toLowerCase() === elem.target.tagName.toLowerCase()) {
+			i++;
+		}
+	}
+	return i;
+}
+
+Z.prototype.d = function(event, e, func) {
+	var x = document.querySelectorAll(e);
+	var len = x.length;
+	for(var i=0;i<len; i++) {
+		x[i].removeEventListener(event, func);
+	}
 }
 
 Z.prototype.c = function(event, e, func) {
@@ -45,10 +53,15 @@ Z.prototype.on = function(event, e, func) {
 
 Z.prototype.off = function(event, e, func) {
 	this.self = e;
-	var x = document.querySelectorAll(e);
-	var len = x.length;
-	for(var i=0;i<len; i++) {
-		x[i].removeEventListener(event, func);
+	if (event.indexOf(' ') !== -1) {
+		var eve = event;
+		while(eve.indexOf(' ') !== -1) {
+			this.d(eve.slice(0, eve.indexOf(' ')), e, func);
+			eve = eve.slice(eve.indexOf(' ') + 1);
+		}
+		this.d(eve, e, func);
+	} else {
+		this.d(event, e, func);
 	}
 }
 
@@ -57,6 +70,23 @@ Z.prototype.a = function(props, e) {
 	var len = x.length;
 	for(var i=0;i<len; i++) {
 		this.b(props, x[i]);
+	}
+}
+
+Z.prototype.g = function(x, key, value) {
+	if(x.style[key].indexOf(value.slice(0, value.indexOf(' '))) === -1) {
+		x.style[key] += (',' + value);
+	} else {
+		var start = x.style[key].indexOf(value.slice(0, value.indexOf(' ')));
+		var before = x.style[key].slice(0, start);
+		var middle = value;
+		var end = "";
+		var after = x.style[key].slice(start).indexOf(',');
+		if(after !== -1) {
+			end = x.style[key].slice(x.style[key].slice(start).indexOf(',')); 
+		}
+		console.log(before + " | " + middle + " | " + end);
+		x.style[key] = before + middle + end;
 	}
 }
 
@@ -75,12 +105,14 @@ Z.prototype.b = function(props, x) {
 					} else if (x.style[key] === '') {
 						x.style[key] = props[key];
 					} else {
-						if(x.style[key].indexOf(props[key].slice(props[key].indexOf(' '))) === -1) {
-							x.style[key] += (',' + props[key]);
-						} else {
-							var start = x.style[key].indexOf(props[key].slice(props[key].indexOf(' ')));
-							x.style[key] = x.style[key].slice(start) + props[key] + x.style[key].slice(start + props[key].length);
+						var stack = props[key];
+						var value = "";
+						while(stack.indexOf(',') !== -1) {
+							value = stack.slice(0, stack.indexOf(',')).trim();
+							this.g(x, key, value);
+							stack = stack.slice(stack.indexOf(',') + 1).trim();
 						}
+						this.g(x, key, stack);
 					}
 				} else {
 					x.style[key] = props[key];
@@ -104,7 +136,7 @@ Z.prototype.css = function(props, e) {
 	}
 }
 
-Z.prototype.fadeIn = function(e, value) {
+Z.prototype.fadeIn = function(e, value, callback) {
 	if(value === undefined) {
 		value = e;
 		e = this.self;
@@ -118,7 +150,7 @@ Z.prototype.fadeIn = function(e, value) {
 	},1);
 }
 
-Z.prototype.fadeOut = function(e, value) {
+Z.prototype.fadeOut = function(e, value, callback) {
 	if(value === undefined) {
 		value = e;
 		e = this.self;
