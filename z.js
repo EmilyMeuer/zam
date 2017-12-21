@@ -85,7 +85,6 @@ Z.prototype.g = function(x, key, value) {
 		if(after !== -1) {
 			end = x.style[key].slice(x.style[key].slice(start).indexOf(',')); 
 		}
-		console.log(before + " | " + middle + " | " + end);
 		x.style[key] = before + middle + end;
 	}
 }
@@ -212,6 +211,6 @@ Z.prototype.ajax = function(obj, func) {
 		console.log("AJAX error.");
 	};
 	xhttp.open(obj.method, obj.url, true);
-	xhttp.setRequestHeader('Content-type', obj.content);
+	xhttp.setRequestHeader('Accept', obj.content);
 	xhttp.send(obj.data);
 }
