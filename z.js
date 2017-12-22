@@ -30,15 +30,21 @@ Z.prototype.d = function(event, e, func) {
 }
 
 Z.prototype.c = function(event, e, func) {
-	var x = document.querySelectorAll(e);
-	var len = x.length;
-	for(var i=0;i<len; i++) {
-		x[i].addEventListener(event, func);
+	if(typeof(e) !== 'object') {
+		var x = document.querySelectorAll(e);
+		var len = x.length;
+		for(var i=0;i<len; i++) {
+			x[i].addEventListener(event, func);
+		}
+	} else {
+		e.addEventListener(event, func);
 	}
 }
 
 Z.prototype.on = function(event, e, func) {
-	this.self = e;
+	if(typeof(e) !== 'object') {
+		this.self = e;
+	}
 	if (event.indexOf(' ') !== -1) {
 		var eve = event;
 		while(eve.indexOf(' ') !== -1) {
