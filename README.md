@@ -1,7 +1,7 @@
 # Z
 
 - Compact: 3KB
-- Fast: About 7 times faster than jQuery with event binding.
+- Fast: At best, 7 times faster than jQuery with event binding.
 - Simple: Makes for easier DOM traversal, event handling, and Ajax
 
 # Speed Tests
