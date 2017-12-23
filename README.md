@@ -117,7 +117,7 @@ z.each((elem, i) => {
   console.log(elem);
 });
 
-z.ajax({method: 'get', url: 'http:\/\/freegeoip.net\/json\/'}, function(data) {
+z.ajax({method: 'get', url: 'http:\/\/freegeoip.net\/json\/', headers: {'Accept':'application/json'}}, function(data) {
   z.e('.stats')[0].innerHTML = '<span>IP: '+data.ip+' City: '+data.city+'\nZip: '+data.zip_code+'&nbsp;</span><span></span>';
 });
 ```
