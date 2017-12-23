@@ -18,9 +18,9 @@ Z is 7.09 times faster than jQuery.
 | 20ms | 21ms | 21ms | 21ms | 22ms | 21ms | Z |
 | 164ms | 160ms | 153ms | 122ms | 146ms | 149ms | jQuery |
 
+<br/>
 
-
-With 50,000 div tages events mouseover and mouseleave.
+With 50,000 div tags events mouseover and mouseleave.
 
 Z is 6.74 times faster than jQuery.
 
@@ -29,6 +29,27 @@ Z is 6.74 times faster than jQuery.
 | 117ms | 114ms | 106ms | 112ms | 111ms | 112ms | Z |
 | 713ms | 766ms | 732ms | 772ms | 794ms | 755.4ms | jQuery |
 
+## Setting CSS
+
+With 10,000 div tags setting all divs to font-size: 40px.
+
+Z is 1.62 times faster than jQuery.
+
+| Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
+|-------|-------|-------|-------|-------|---------|---------|
+| 38ms | 30ms | 35ms | 26ms | 29ms | 31.6ms | Z |
+| 49ms | 48ms | 49ms | 52ms | 58ms | 51.2ms | jQuery |
+
+<br/>
+
+With 50,000 div tags setting all divs to font-size: 40px.
+
+Z is 1.41 times faster than jQuery.
+
+| Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
+|-------|-------|-------|-------|-------|---------|---------|
+| 170ms | 160ms | 166ms | 128ms | 170ms | 158.8ms | Z |
+| 219ms | 236ms | 205ms | 201ms | 255ms | 223.2ms | jQuery |
 
 # Import
 
