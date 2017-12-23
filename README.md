@@ -1,5 +1,8 @@
-# Z
-A fast 3KB micro library that simplifies DOM traversal, event handling, and Ajax.
+# Z · [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
+
+- Fast 
+- 3KB
+- Simplifies DOM traversal, event handling, and Ajax.
 
 # Import
 
