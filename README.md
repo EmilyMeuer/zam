@@ -4,6 +4,20 @@
 - Fast: About twice as fast as jQuery
 - Simple: Makes for easier DOM traversal, event handling, and Ajax
 
+# Speed Tests
+
+## Event binding
+
+With 10,000 div tags with events mouseover and mouseleave. Z is 7.09 times faster than jQuery.
+
+
+| Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
+|-------|-------|-------|-------|-------|---------|---------|
+| 20ms | 21ms | 21ms | 21ms | 22ms | 21ms | Z |
+| 164ms | 160ms | 153ms | 122ms | 146ms | 149ms | jQuery |
+
+
+
 # Import
 
 ```html
