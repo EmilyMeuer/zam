@@ -8,7 +8,9 @@
 
 ## Event binding
 
-With 10,000 div tags with events mouseover and mouseleave. Z is 7.09 times faster than jQuery.
+With 10,000 div tags with events mouseover and mouseleave.
+
+Z is 7.09 times faster than jQuery.
 
 
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
