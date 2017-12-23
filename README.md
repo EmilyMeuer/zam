@@ -1,4 +1,4 @@
-# Z · [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
+# Z - [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
 
 - Fast 
 - 3KB
