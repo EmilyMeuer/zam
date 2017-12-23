@@ -199,15 +199,15 @@ Z.prototype.ajax = function(obj, func) {
 	if(obj.data === undefined) {
 		obj.data = null;
 	}
-	if(obj.content === undefined) {
-		obj.content = 'application/json';
+	if(obj.headers === undefined) {
+		obj.headers = {'Accept':'application/json'};
 	}
-	if (obj.content === 'application/json') {
+	if (obj.headers.Accept === 'application/json' && obj.data !== undefined) {
 		obj.data = JSON.stringify(obj.data);
 	}
 	var xhttp = new XMLHttpRequest();
 	xhttp.onload = function() {
-		if(obj.content === 'application/json') {
+		if(obj.headers.Accept === 'application/json') {
 			func(JSON.parse(this.response));
 		} else {
 			func(this.response);
@@ -217,6 +217,11 @@ Z.prototype.ajax = function(obj, func) {
 		console.log("AJAX error.");
 	};
 	xhttp.open(obj.method, obj.url, true);
-	xhttp.setRequestHeader('Accept', obj.content);
+	for (var prop in obj.headers) {
+        if(obj.headers.hasOwnProperty(prop)) {
+        	xhttp.setRequestHeader(prop, obj.headers[prop]);
+        	console.log(prop + " " +obj.headers[prop])
+        }
+    }
 	xhttp.send(obj.data);
 }
