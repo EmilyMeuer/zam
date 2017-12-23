@@ -1,8 +1,8 @@
-# Z - [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)]()
+# Z
 
-- Fast 
-- 3KB
-- Simplifies DOM traversal, event handling, and Ajax.
+- Compact: 3KB
+- Fast: About twice as fast as jQuery.
+- Simple: Makes for easier DOM traversal, event handling, and Ajax.
 
 # Import
 
