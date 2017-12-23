@@ -1,8 +1,8 @@
 # Z
 
 - Compact: 3KB
-- Fast: About twice as fast as jQuery.
-- Simple: Makes for easier DOM traversal, event handling, and Ajax.
+- Fast: About twice as fast as jQuery
+- Simple: Makes for easier DOM traversal, event handling, and Ajax
 
 # Import
 
@@ -16,7 +16,7 @@
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
-Returns Array of Elements
+Returns Array of DOMElement
 
 ## .index(element)
 
