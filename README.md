@@ -9,9 +9,11 @@
 
 ## Overview/Philosophy
 
+Z provides a small toolset to supplement and encourage vanilla js development.
+
 This project was created with one goal in mind.
 
-* To stay as raw as possible/encourage vanilla js development.
+* To stay as raw as possible.
 
 ## Import
 
