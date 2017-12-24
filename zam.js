@@ -1,4 +1,4 @@
-function Z() {
+function Zam() {
 	this.self = 'html';
 }
 
@@ -220,7 +220,6 @@ Z.prototype.ajax = function(obj, func) {
 	for (var prop in obj.headers) {
         if(obj.headers.hasOwnProperty(prop)) {
         	xhttp.setRequestHeader(prop, obj.headers[prop]);
-        	console.log(prop + " " +obj.headers[prop])
         }
     }
 	xhttp.send(obj.data);
