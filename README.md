@@ -167,7 +167,7 @@ String 'id' -> required
 
 Returns nothing
 
-### .fadeIn(selector, value);
+### .fadeIn(selector, time);
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
@@ -175,7 +175,7 @@ String 'value' -> required
 
 Returns nothing
 
-### .fadeOut(selector, value);
+### .fadeOut(selector, time);
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
