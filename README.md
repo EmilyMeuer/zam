@@ -51,6 +51,19 @@ Z is 1.41 times faster than jQuery.
 | 170ms | 160ms | 166ms | 128ms | 170ms | 158.8ms | Z |
 | 219ms | 236ms | 205ms | 201ms | 255ms | 223.2ms | jQuery |
 
+<br/>
+
+With 250,000 div tags setting all divs to font-size: 40px.
+
+jQuery errors out. Z doesn't.
+
+| Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
+|-------|-------|-------|-------|-------|---------|---------|
+| 1496ms | 1484ms | 1471ms | 1480ms | 1478ms | 1481.8ms | Z |
+| \* | \* | \* | \* | \* | 223.2ms | jQuery |
+
+\*'Maximum call stack size exceeded'
+
 # Import
 
 ```html
