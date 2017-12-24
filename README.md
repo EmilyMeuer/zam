@@ -11,9 +11,7 @@
 
 Z provides a small toolset to supplement and encourage vanilla js development.
 
-This project was created with one goal in mind.
-
-* To stay as raw as possible.
+This project was created with one goal in mind — to stay as raw as possible.
 
 ## Import
 
