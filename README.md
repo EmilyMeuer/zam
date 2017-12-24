@@ -97,7 +97,7 @@ jQuery errors out. Z doesn't.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/Z@v2.3/z.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/Z@v2.4/z.min.js"></script>
 ```
 
 ## Methods
