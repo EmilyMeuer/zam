@@ -16,7 +16,7 @@ This project was created with one goal in mind — to stay as raw as possible.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@v2.4/z.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@v3.0/zam.min.js"></script>
 ```
 ```
 npm install node-z
