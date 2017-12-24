@@ -4,9 +4,9 @@
 - Fast: See speed tests.
 - Simple: Makes for easier DOM traversal, event handling, and Ajax
 
-# Speed Tests
+## Speed Tests
 
-## Event binding
+### Event binding
 
 With 2,500 div tags with events mouseover and mouseleave.
 
@@ -43,7 +43,7 @@ Z is 6.74 times faster than jQuery.
 
 <img src="https://i.imgur.com/nbtnM9A.png" />
 
-## Setting CSS
+### Setting CSS
 
 With 2,500 div tags setting all divs to font-size: 40px.
 
@@ -91,27 +91,27 @@ jQuery errors out. Z doesn't.
 
 <img src="https://i.imgur.com/qET0osb.png" />
 
-# Import
+## Import
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/roecrew/Z@v2.3/z.min.js"></script>
 ```
 
-# Methods
+## Methods
 
-## .e(selector)
+### .e(selector)
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
 Returns Array of DOMElement
 
-## .index(element)
+### .index(element)
 
 DOMElement 'selector' -> required
 
 Returns index
 
-## .on(event, selector, func);
+### .on(event, selector, func);
 
 String 'event' -> required
 
@@ -121,7 +121,7 @@ Function 'func' -> required
 
 Returns nothing
 
-## .off(event, selector, funct);
+### .off(event, selector, funct);
 
 String 'event' -> required
 
@@ -131,7 +131,7 @@ Function 'func' -> required
 
 Returns nothing
 
-## .css(declaration, selector);
+### .css(declaration, selector);
 
 String 'declaration' -> required
 
@@ -139,7 +139,7 @@ String or DOMElement 'selector' -> optional | If undefined then last used select
 
 Returns nothing
 
-## .each(selector, callback);
+### .each(selector, callback);
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
@@ -147,7 +147,7 @@ Function 'callback' -> required
 
 Returns nothing
 
-## .addStyle(innerHTML, id)
+### .addStyle(innerHTML, id)
 
 String 'innerHTML' -> required
 
@@ -155,31 +155,31 @@ String 'id' -> required
 
 Returns nothing
 
-## .removeStyle(id);
+### .removeStyle(id);
 
 String 'id' -> required
 
 Returns nothing
 
-## .fadeIn(selector, value);
+### .fadeIn(selector, value);
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
 String 'value' -> required
 
-## .fadeOut(selector, value);
+### .fadeOut(selector, value);
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
 String 'value' -> required
 
-## .ajax(options, callback);
+### .ajax(options, callback);
 
 Object 'options' -> required
 
 Function 'callback' -> required
 
-# Example
+## Example
 
 ```javascript
 var z = new Z();
