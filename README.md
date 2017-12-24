@@ -1,8 +1,17 @@
-# Z
+<p align="center"><img src="https://i.imgur.com/SMmZeCd.png" width="auto" height="400px" /><p/>
 
-- Compact: 3.34KB
-- Fast: See speed tests.
-- Simple: Makes for easier DOM traversal, event handling, and Ajax
+#
+<p align="center">
+<strong>Compact</strong>
+</p>
+
+<p align="center">
+<strong>Fast</strong>
+</p>
+
+<p align="center">
+<strong>Simple</strong>
+</p>
 
 ## Speed Tests
 
