@@ -2,7 +2,7 @@ function Zam() {
 	this.self = 'html';
 }
 
-Z.prototype.e = function(e) {
+Zam.prototype.e = function(e) {
 	if(e === undefined) {
 		e = this.self;
 	}
@@ -10,7 +10,7 @@ Z.prototype.e = function(e) {
 	return document.querySelectorAll(e);
 }
 
-Z.prototype.index = function(elem) {
+Zam.prototype.index = function(elem) {
 	var i = 0;
 	var a = elem.target;
 	while((a = a.previousElementSibling) != null) {
@@ -21,7 +21,7 @@ Z.prototype.index = function(elem) {
 	return i;
 }
 
-Z.prototype.d = function(event, e, func) {
+Zam.prototype.d = function(event, e, func) {
 	var x = document.querySelectorAll(e);
 	var len = x.length;
 	for(var i=0;i<len; i++) {
@@ -29,7 +29,7 @@ Z.prototype.d = function(event, e, func) {
 	}
 }
 
-Z.prototype.c = function(event, e, func) {
+Zam.prototype.c = function(event, e, func) {
 	if(typeof(e) !== 'object') {
 		var x = document.querySelectorAll(e);
 		var len = x.length;
@@ -41,7 +41,7 @@ Z.prototype.c = function(event, e, func) {
 	}
 }
 
-Z.prototype.on = function(event, e, func) {
+Zam.prototype.on = function(event, e, func) {
 	if(typeof(e) !== 'object') {
 		this.self = e;
 	}
@@ -57,7 +57,7 @@ Z.prototype.on = function(event, e, func) {
 	}
 }
 
-Z.prototype.off = function(event, e, func) {
+Zam.prototype.off = function(event, e, func) {
 	this.self = e;
 	if (event.indexOf(' ') !== -1) {
 		var eve = event;
@@ -71,7 +71,7 @@ Z.prototype.off = function(event, e, func) {
 	}
 }
 
-Z.prototype.a = function(props, e) {
+Zam.prototype.a = function(props, e) {
 	var x = document.querySelectorAll(e);
 	var len = x.length;
 	for(var i=0;i<len; i++) {
@@ -79,7 +79,7 @@ Z.prototype.a = function(props, e) {
 	}
 }
 
-Z.prototype.g = function(x, key, value) {
+Zam.prototype.g = function(x, key, value) {
 	if(x.style[key].indexOf(value.slice(0, value.indexOf(' '))) === -1) {
 		x.style[key] += (',' + value);
 	} else {
@@ -95,7 +95,7 @@ Z.prototype.g = function(x, key, value) {
 	}
 }
 
-Z.prototype.b = function(props, x) {
+Zam.prototype.b = function(props, x) {
 	for (var key in props) {
 		if (props.hasOwnProperty(key)) {
 			if(key.indexOf('-') !== -1) {
@@ -127,7 +127,7 @@ Z.prototype.b = function(props, x) {
 	}
 }
 
-Z.prototype.css = function(props, e) {
+Zam.prototype.css = function(props, e) {
 
 	if(e === undefined) {
 		e = this.self;
@@ -141,7 +141,7 @@ Z.prototype.css = function(props, e) {
 	}
 }
 
-Z.prototype.fadeIn = function(e, value) {
+Zam.prototype.fadeIn = function(e, value) {
 	if(value === undefined) {
 		value = e;
 		e = this.self;
@@ -155,7 +155,7 @@ Z.prototype.fadeIn = function(e, value) {
 	},1);
 }
 
-Z.prototype.fadeOut = function(e, value) {
+Zam.prototype.fadeOut = function(e, value) {
 	if(value === undefined) {
 		value = e;
 		e = this.self;
@@ -169,7 +169,7 @@ Z.prototype.fadeOut = function(e, value) {
 	},1);
 }
 
-Z.prototype.each = function(e, func) {
+Zam.prototype.each = function(e, func) {
 	if(typeof e === "function") {
 		func = e;
 		e = this.self
@@ -180,19 +180,19 @@ Z.prototype.each = function(e, func) {
 	});
 }
 
-Z.prototype.addStyle = function(val, id) {
+Zam.prototype.addStyle = function(val, id) {
 	var newStyle = document.createElement("style");
 	newStyle.innerHTML = val;
 	newStyle.id = id;
 	document.getElementsByTagName("head")[0].appendChild(newStyle);
 }
 
-Z.prototype.removeStyle = function(id) {
+Zam.prototype.removeStyle = function(id) {
 	var elem = document.querySelector('#'+id);
 	elem.parentNode.removeChild(elem);
 }
 
-Z.prototype.ajax = function(obj, func) {
+Zam.prototype.ajax = function(obj, func) {
 	if(obj.method === undefined) {
 		obj.method = 'GET';
 	}
