@@ -127,7 +127,7 @@ Function 'func' -> required
 
 Returns nothing
 
-### .off(event, selector, funct);
+### .off(event, selector, func);
 
 String 'event' -> required
 
