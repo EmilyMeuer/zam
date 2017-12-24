@@ -8,6 +8,18 @@
 
 ## Event binding
 
+With 2,500 div tags with events mouseover and mouseleave.
+
+Z is 5.38 times faster than jQuery.
+
+
+| Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
+|-------|-------|-------|-------|-------|---------|---------|
+| 8ms | 8ms | 8ms | 10ms | 8ms | 8.4ms | Z |
+| 42ms | 50ms | 42ms | 50ms | 42ms | 45.2ms | jQuery |
+
+<br/>
+
 With 10,000 div tags with events mouseover and mouseleave.
 
 Z is 7.09 times faster than jQuery.
@@ -30,6 +42,17 @@ Z is 6.74 times faster than jQuery.
 | 713ms | 766ms | 732ms | 772ms | 794ms | 755.4ms | jQuery |
 
 ## Setting CSS
+
+With 2,500 div tags setting all divs to font-size: 40px.
+
+Z is 1.47 times faster than jQuery.
+
+| Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
+|-------|-------|-------|-------|-------|---------|---------|
+| 10ms | 9ms | 9ms | 10ms | 11ms | 9.8ms | Z |
+| 14ms | 15ms | 14ms | 15ms | 14ms | 14.4ms | jQuery |
+
+<br/>
 
 With 10,000 div tags setting all divs to font-size: 40px.
 
@@ -62,7 +85,7 @@ jQuery errors out. Z doesn't.
 | 1496ms | 1484ms | 1471ms | 1480ms | 1478ms | 1481.8ms | Z |
 | \* | \* | \* | \* | \* | unknown | jQuery |
 
-\*'Maximum call stack size exceeded'
+\* 'Maximum call stack size exceeded'
 
 # Import
 
