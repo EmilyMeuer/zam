@@ -60,7 +60,7 @@ jQuery errors out. Z doesn't.
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
 |-------|-------|-------|-------|-------|---------|---------|
 | 1496ms | 1484ms | 1471ms | 1480ms | 1478ms | 1481.8ms | Z |
-| \* | \* | \* | \* | \* | 223.2ms | jQuery |
+| \* | \* | \* | \* | \* | unknown | jQuery |
 
 \*'Maximum call stack size exceeded'
 
