@@ -113,7 +113,7 @@ Returns Array of DOMElement
 
 ### .index(element)
 
-DOMElement 'selector' -> required
+DOMElement 'element' -> required
 
 Returns index
 
@@ -197,7 +197,7 @@ Returns nothing
 var z = new Z();
     
 z.on('mousedown', 'div', (e) => {
-  z.css({'transition': '3s color', 'color': '#135791'}, 'div:nth-of-type(' + (z.index(e) + 1) + ')');
+  z.css({'transition': '3s color', 'color': '#135791'}, 'div:nth-of-type(' + (z.index(e.target) + 1) + ')');
 });
     
 z.on('mouseup', 'div', () => {
