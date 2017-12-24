@@ -99,6 +99,9 @@ jQuery errors out. Z doesn't.
 ```html
 <script src="https://cdn.jsdelivr.net/gh/roecrew/Z@v2.4/z.min.js"></script>
 ```
+```
+npm install node-z
+```
 
 ## Methods
 
