@@ -170,17 +170,23 @@ String 'selector' -> optional | If undefined then last used selector is used.
 
 String 'value' -> required
 
+Returns nothing
+
 ### .fadeOut(selector, value);
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
 String 'value' -> required
 
+Returns nothing
+
 ### .ajax(options, callback);
 
 Object 'options' -> required
 
 Function 'callback' -> required
+
+Returns nothing
 
 ## Example
 
