@@ -201,7 +201,7 @@ Returns nothing
 ## Example
 
 ```javascript
-var z = new Z();
+var z = new Zam();
     
 z.on('mousedown', 'div', (e) => {
   z.css({'transition': '3s color', 'color': '#135791'}, e.target);
