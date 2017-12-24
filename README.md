@@ -1,6 +1,6 @@
 # Z
 
-- Compact: 3KB
+- Compact: 3.34KB
 - Fast: See speed tests.
 - Simple: Makes for easier DOM traversal, event handling, and Ajax
 
