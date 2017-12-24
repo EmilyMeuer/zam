@@ -1,11 +1,11 @@
-<p align="center"><img src="https://i.imgur.com/SMmZeCd.png" width="auto" height="100px" /><p/>
+<p align="center"><img src="https://i.imgur.com/SMmZeCd.png" width="auto" height="200px" /><p/>
 
 <p align="center">
 <strong>Fast - Simple - Appressed</strong>
 </p>
-<p align="center">
+<!--<p align="center">
 <img src="https://cdn.worldvectorlogo.com/logos/chrome-7.svg" width="48px" height="48px" alt="Chrome logo">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://www.underconsideration.com/brandnew/archives/firefox_2017_logo.jpg" width="48px" height="48px" alt="Firefox logo">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Microsoft_Edge_logo.svg/2000px-Microsoft_Edge_logo.svg.png" width="48px" height="48px" alt="Edge logo">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://operasoftware.github.io/logo/dest/logo/full-red.svg" width="48px" height="48px" alt="Opera logo">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://www.gfxmag.com/wp-content/uploads/2016/07/safari-icon-vector-logo.jpg" width="48px" height="48px" alt="Safari logo">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/2000px-Android_robot.svg.png" width="48px" height="48px" alt="Android Browser Logo" >
-</p>
+</p>-->
 
 ## Speed Tests
 
