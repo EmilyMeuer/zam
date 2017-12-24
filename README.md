@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.imgur.com/SMmZeCd.png" width="auto" height="300px" /><p/>
+<p align="center"><img src="https://i.imgur.com/SMmZeCd.png" width="auto" height="250px" /><p/>
 
 <p align="center">
 <strong>Fast - Simple - Compact</strong>
