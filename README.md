@@ -1,16 +1,15 @@
 <p align="center"><img src="https://i.imgur.com/SMmZeCd.png" width="auto" height="400px" /><p/>
 
-#
-<p align="center">
-<strong>Compact</strong>
-</p>
-
 <p align="center">
 <strong>Fast</strong>
 </p>
 
 <p align="center">
 <strong>Simple</strong>
+</p>
+
+<p align="center">
+<strong>Compact</strong>
 </p>
 
 ## Speed Tests
