@@ -9,7 +9,7 @@
 
 ## Overview/Philosophy
 
-Z provides a small toolset that supplements and encourages vanilla js development.
+Zam provides a small toolset that supplements and encourages vanilla js development.
 
 This project was created with one goal in mind — to stay as raw as possible.
 
