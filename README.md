@@ -9,9 +9,9 @@
 
 ## Overview/Philosophy
 
-Zam provides a small toolset that supplements and encourages vanilla js development.
+A small toolset that simplifies DOM traversal, event handling, and Ajax.
 
-This project was created with one goal in mind — to stay as raw as possible.
+This library was created with one goal in mind — to stay as vanilla as possible.
 
 ## Import
 
