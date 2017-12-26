@@ -17,7 +17,7 @@ This library was created with one goal in mind — to promote vanillajs developm
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.3.4/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.3.5/zam.min.js"></script>
 ```
 ```
 npm install node-zam
@@ -125,13 +125,11 @@ DOMElement 'element' -> required
 
 Returns index
 
-### .html(selector, html, callback)
+### .html(selector, html)
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
 String 'html' -> required
-
-Function 'callback' -> optional
 
 Returns nothing
 

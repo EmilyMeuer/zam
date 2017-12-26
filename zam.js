@@ -192,13 +192,9 @@ Zam.prototype.removeStyle = function(id) {
 	elem.parentNode.removeChild(elem);
 }
 
-Zam.prototype.html = function(e, html, callback) {
+Zam.prototype.html = function(e, html) {
 
-	if(callback === undefined && html === undefined) {
-		html = e;
-		e = this.self;
-	} else if(callback === undefined) {
-		callback = html;
+	if(html === undefined) {
 		html = e;
 		e = this.self;
 	}
@@ -209,10 +205,6 @@ Zam.prototype.html = function(e, html, callback) {
 	var len = x.length;
 	for(var i=0;i<len; i++) {
 		x[i].innerHTML = html;
-	}
-
-	if(callback !== undefined) {
-		callback();
 	}
 }
 
