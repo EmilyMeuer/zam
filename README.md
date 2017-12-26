@@ -30,24 +30,24 @@ npm install node-zam
 
 With 2,500 div tags with events mouseover and mouseleave.
 
-Z is 5.38 times faster than jQuery.
+Zam is 5.38 times faster than jQuery.
 
 
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
 |-------|-------|-------|-------|-------|---------|---------|
-| 8ms | 8ms | 8ms | 10ms | 8ms | 8.4ms | Z |
+| 8ms | 8ms | 8ms | 10ms | 8ms | 8.4ms | zam |
 | 42ms | 50ms | 42ms | 50ms | 42ms | 45.2ms | jQuery |
 
 <br/>
 
 With 10,000 div tags with events mouseover and mouseleave.
 
-Z is 7.09 times faster than jQuery.
+Zam is 7.09 times faster than jQuery.
 
 
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
 |-------|-------|-------|-------|-------|---------|---------|
-| 20ms | 21ms | 21ms | 21ms | 22ms | 21ms | Z |
+| 20ms | 21ms | 21ms | 21ms | 22ms | 21ms | zam |
 | 164ms | 160ms | 153ms | 122ms | 146ms | 149ms | jQuery |
 
 <br/>
@@ -58,7 +58,7 @@ Z is 6.74 times faster than jQuery.
 
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
 |-------|-------|-------|-------|-------|---------|---------|
-| 117ms | 114ms | 106ms | 112ms | 111ms | 112ms | Z |
+| 117ms | 114ms | 106ms | 112ms | 111ms | 112ms | zam |
 | 713ms | 766ms | 732ms | 772ms | 794ms | 755.4ms | jQuery |
 
 <img src="https://i.imgur.com/nbtnM9A.png" />
@@ -67,44 +67,44 @@ Z is 6.74 times faster than jQuery.
 
 With 2,500 div tags setting all divs to font-size: 40px.
 
-Z is 1.47 times faster than jQuery.
+Zam is 1.47 times faster than jQuery.
 
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
 |-------|-------|-------|-------|-------|---------|---------|
-| 10ms | 9ms | 9ms | 10ms | 11ms | 9.8ms | Z |
+| 10ms | 9ms | 9ms | 10ms | 11ms | 9.8ms | zam |
 | 14ms | 15ms | 14ms | 15ms | 14ms | 14.4ms | jQuery |
 
 <br/>
 
 With 10,000 div tags setting all divs to font-size: 40px.
 
-Z is 1.62 times faster than jQuery.
+Zam is 1.62 times faster than jQuery.
 
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
 |-------|-------|-------|-------|-------|---------|---------|
-| 38ms | 30ms | 35ms | 26ms | 29ms | 31.6ms | Z |
+| 38ms | 30ms | 35ms | 26ms | 29ms | 31.6ms | zam |
 | 49ms | 48ms | 49ms | 52ms | 58ms | 51.2ms | jQuery |
 
 <br/>
 
 With 50,000 div tags setting all divs to font-size: 40px.
 
-Z is 1.41 times faster than jQuery.
+Zam is 1.41 times faster than jQuery.
 
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
 |-------|-------|-------|-------|-------|---------|---------|
-| 170ms | 160ms | 166ms | 128ms | 170ms | 158.8ms | Z |
+| 170ms | 160ms | 166ms | 128ms | 170ms | 158.8ms | zam |
 | 219ms | 236ms | 205ms | 201ms | 255ms | 223.2ms | jQuery |
 
 <br/>
 
 With 250,000 div tags setting all divs to font-size: 40px.
 
-jQuery errors out. Z doesn't.
+jQuery errors out. Zam doesn't.
 
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
 |-------|-------|-------|-------|-------|---------|---------|
-| 1496ms | 1484ms | 1471ms | 1480ms | 1478ms | 1481.8ms | Z |
+| 1496ms | 1484ms | 1471ms | 1480ms | 1478ms | 1481.8ms | zam |
 | \* | \* | \* | \* | \* | unknown | jQuery |
 
 \* 'Maximum call stack size exceeded'
