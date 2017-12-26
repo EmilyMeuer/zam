@@ -192,6 +192,30 @@ Zam.prototype.removeStyle = function(id) {
 	elem.parentNode.removeChild(elem);
 }
 
+Zam.prototype.html = function(e, html, callback) {
+
+	if(func === undefined && html === undefined) {
+		html = e;
+		e = this.self;
+	} else if(func === undefined) {
+		callback = html;
+		html = e;
+		e = this.self;
+	}
+
+	html = html.replace(/(?:\r\n|\r|\n)/g, '');
+
+	var x = document.querySelectorAll(e);
+	var len = x.length;
+	for(var i=0;i<len; i++) {
+		x[i].innerHTML(html);
+	}
+
+	if(callback !== undefined) {
+		callback();
+	}
+}
+
 Zam.prototype.ajax = function(obj, func) {
 	if(obj.method === undefined) {
 		obj.method = 'GET';
