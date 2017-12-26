@@ -194,10 +194,10 @@ Zam.prototype.removeStyle = function(id) {
 
 Zam.prototype.html = function(e, html, callback) {
 
-	if(func === undefined && html === undefined) {
+	if(callback === undefined && html === undefined) {
 		html = e;
 		e = this.self;
-	} else if(func === undefined) {
+	} else if(callback === undefined) {
 		callback = html;
 		html = e;
 		e = this.self;
