@@ -125,7 +125,7 @@ DOMElement 'element' -> required
 
 Returns index
 
-### .on(event, selector, func);
+### .on(event, selector, func)
 
 String 'event' -> required
 
@@ -135,7 +135,7 @@ Function 'func' -> required
 
 Returns nothing
 
-### .off(event, selector, func);
+### .off(event, selector, func)
 
 String 'event' -> required
 
@@ -145,7 +145,7 @@ Function 'func' -> required
 
 Returns nothing
 
-### .css(declaration, selector);
+### .css(declaration, selector)
 
 String 'declaration' -> required
 
@@ -153,7 +153,7 @@ String or DOMElement 'selector' -> optional | If undefined then last used select
 
 Returns nothing
 
-### .each(selector, callback);
+### .each(selector, callback)
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
@@ -169,13 +169,13 @@ String 'id' -> required
 
 Returns nothing
 
-### .removeStyle(id);
+### .removeStyle(id)
 
 String 'id' -> required
 
 Returns nothing
 
-### .fadeIn(selector, time);
+### .fadeIn(selector, time)
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
@@ -183,7 +183,7 @@ String 'value' -> required
 
 Returns nothing
 
-### .fadeOut(selector, time);
+### .fadeOut(selector, time)
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
@@ -191,7 +191,7 @@ String 'value' -> required
 
 Returns nothing
 
-### .ajax(options, callback);
+### .ajax(options, callback)
 
 Object 'options' -> required
 
