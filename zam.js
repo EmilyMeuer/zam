@@ -200,11 +200,15 @@ Zam.prototype.html = function(e, html) {
 	}
 
 	html = html.replace(/(?:\r\n|\r|\n)/g, '');
-
-	var x = document.querySelectorAll(e);
-	var len = x.length;
-	for(var i=0;i<len; i++) {
-		x[i].innerHTML = html;
+	
+	if(typeof(e) === 'object') {
+		e.innerHTML = html;
+	} else {
+		var x = document.querySelectorAll(e);
+		var len = x.length;
+		for(var i=0;i<len; i++) {
+			x[i].innerHTML = html;
+		}
 	}
 }
 
