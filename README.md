@@ -54,7 +54,7 @@ Zam is 7.09 times faster than jQuery.
 
 With 50,000 div tags events mouseover and mouseleave.
 
-Z is 6.74 times faster than jQuery.
+Zam is 6.74 times faster than jQuery.
 
 | Run 1 | Run 2 | Run 3 | Run 4 | Run 5 | Average | Library |
 |-------|-------|-------|-------|-------|---------|---------|
