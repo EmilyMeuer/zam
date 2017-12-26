@@ -20,7 +20,7 @@ This library was created with one goal in mind — to stay as vanilla as possibl
 <script src="https://cdn.jsdelivr.net/gh/roecrew/zam@v3.1/zam.min.js"></script>
 ```
 ```
-npm install node-z
+npm install node-zam
 ```
 
 
