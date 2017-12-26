@@ -208,7 +208,7 @@ Zam.prototype.html = function(e, html, callback) {
 	var x = document.querySelectorAll(e);
 	var len = x.length;
 	for(var i=0;i<len; i++) {
-		x[i].innerHTML(html);
+		x[i].innerHTML = html;
 	}
 
 	if(callback !== undefined) {
