@@ -211,7 +211,13 @@ Returns nothing
 
 ```javascript
 var z = new Zam();
-    
+
+setTimeout(() => {
+  z.css({'animation': ''}, 'div:nth-of-type(1)');
+  z.removeStyle('newStyleId');
+  z.off('mouseup', 'div', 'mouseup1'); //zam remembers mouseup1
+}, 5000);
+
 z.on('mousedown', 'div', (e) => {
   z.css({'transition': '3s color', 'color': '#135791'}, e.target);
 });
@@ -222,12 +228,6 @@ z.on('mouseup', 'div', (mouseup1 = () => { //zam tracks event handlers/methods, 
     
 z.addStyle('@keyframes example {from {background-color: red;}to {background-color: yellow;}}', 'newStyleId');
 z.css({'animation': 'example 3s'}, 'div:nth-of-type(1)');
-    
-setTimeout(() => {
-  z.css({'animation': ''}, 'div:nth-of-type(1)');
-  z.removeStyle('newStyleId');
-  z.off('mouseup', 'div', 'mouseup1'); //zam remembers mouseup1
-}, 5000);
     
 z.each((elem, i) => {
   console.log(elem);
