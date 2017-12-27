@@ -263,7 +263,7 @@ For more examples visit http://zamjs.com/examples
       ... some content ...
     </div>
   </div>
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.3.8/zam.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.0/zam.js"></script>
 <script>
 zam.router({
     'home-tab': {view: '#home', 'display': 'flex'},
