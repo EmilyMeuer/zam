@@ -119,7 +119,7 @@ jQuery errors out. Zam doesn't.
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
-Returns Array of DOMElements
+Returns static NodeList
 
 ### .index(element)
 
