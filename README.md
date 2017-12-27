@@ -226,31 +226,81 @@ var routes = {
 
 ## Example
 
+### Frontend
+
+```html
+<html>
+  <head>
+    <style>
+      .section {
+        position: absolute;
+        left 0;
+        top: 60px;
+        width:100%
+        height: calc(100vh - 60px);
+      }
+      .bar-tab {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        jusitify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+  <div class="bar-tab">
+    <div id="home-tab">
+      HOME
+    </div>
+    <div id="stuff-tab">
+      STUFF
+    </div>
+    <div id="about-tab">
+      ABOUT
+    </div>
+  </div>
+  <div class="section" id="home">
+      ... some content ...
+    </div>
+    <div class="section" id="stuff">
+      ... some content ...
+    </div>
+    <div class="section" id="about">
+      ... some content ...
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.3.8/zam.js"></script>
+<script>
+zam.router({
+    'home-tab': {view: '#home', 'display': 'flex'},
+    'stuff-tab': {view: '#stuff', 'display': 'flex'},
+    'about-tab': {view: '#about', 'display': 'flex'}
+})
+</script>
+</body>
+</html>
+```
+
+### Backend
+
 ```javascript
-var z = new Zam();
-
-setTimeout(() => {
-  z.css({'animation': ''}, 'div:nth-of-type(1)');
-  z.removeStyle('newStyleId');
-  z.off('mouseup', 'div', 'mouseup1'); //zam remembers mouseup1
-}, 5000);
-
-z.on('mousedown', 'div', (e) => {
-  z.css({'transition': '3s color', 'color': '#135791'}, e.target);
+const http = require("http");
+const fs = require("fs");
+const express = require("express");
+const app = express();
+app.get("/", function(req, res) {
+  res.sendFile(__dirname + "/dist/home.html");
 });
-    
-z.on('mouseup', 'div', (mouseup1 = () => { //zam tracks event handlers/methods, so give it a name (mouseup1)!
-  z.css({'color': ''}));
-}));
-    
-z.addStyle('@keyframes example {from {background-color: red;}to {background-color: yellow;}}', 'newStyleId');
-z.css({'animation': 'example 3s'}, 'div:nth-of-type(1)');
-    
-z.each((elem, i) => {
-  console.log(elem);
+app.get("/home", function(req, res) {
+  res.sendFile(__dirname + "/dist/home.html");
 });
-
-z.ajax({method: 'get', url: 'http:\/\/freegeoip.net\/json\/', headers: {'Accept':'application/json'}}, function(data) {
-  z.e('.stats')[0].innerHTML = '<span>IP: '+data.ip+' City: '+data.city+'\nZip: '+data.zip_code+'&nbsp;</span><span></span>';
+app.get("/stuff", function(req, res) {
+  res.sendFile(__dirname + "/dist/home.html");
 });
+app.get("/about", function(req, res) {
+  res.sendFile(__dirname + "/dist/home.html");
+});
+const httpServer = http.createServer(app);
+httpServer.listen(80);
 ```
