@@ -125,39 +125,39 @@ DOMElement 'element' -> required
 
 Returns index
 
-### .html(selectors, html)
+### .html(selector, html)
 
-String or DOMElement 'selectors' -> optional | If undefined then last used selector (String) is used.
+String or DOMElement 'selector' -> optional | If undefined then last used selector (String) is used.
 
 String 'html' -> required
 
 Returns nothing
 
-### .on(events, selectors, func)
+### .on(events, selector, func)
 
 String 'events' -> required
 
-String 'selectors' -> required
+String 'selector' -> required
 
 Function 'func' -> required
 
 Returns nothing
 
-### .off(events, selectors, func)
+### .off(events, selector, func)
 
 String 'events' -> required
 
-String 'selectors' -> required
+String 'selector' -> required
 
 Function 'func' -> required
 
 Returns nothing
 
-### .css(declarations, selectors)
+### .css(declarations, selector)
 
 String 'declarations' -> required
 
-String or DOMElement 'selectors' -> optional | If undefined then last used selector (String) is used.
+String or DOMElement 'selector' -> optional | If undefined then last used selector (String) is used.
 
 Returns nothing
 
@@ -183,17 +183,17 @@ String 'id' -> required
 
 Returns nothing
 
-### .fadeIn(selectors, time)
+### .fadeIn(selector, time)
 
-String 'selectors' -> optional | If undefined then last used selector is used.
+String 'selector' -> optional | If undefined then last used selector is used.
 
 String 'value' -> required
 
 Returns nothing
 
-### .fadeOut(selectors, time)
+### .fadeOut(selector, time)
 
-String 'selectors' -> optional | If undefined then last used selector is used.
+String 'selector' -> optional | If undefined then last used selector is used.
 
 String 'value' -> required
 
