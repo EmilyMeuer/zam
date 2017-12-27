@@ -282,18 +282,11 @@ const http = require("http");
 const fs = require("fs");
 const express = require("express");
 const app = express();
-app.get("/", function(req, res) {
+
+app.get("/*", function(req, res) {
   res.sendFile(__dirname + "/dist/home.html");
 });
-app.get("/home", function(req, res) {
-  res.sendFile(__dirname + "/dist/home.html");
-});
-app.get("/stuff", function(req, res) {
-  res.sendFile(__dirname + "/dist/home.html");
-});
-app.get("/about", function(req, res) {
-  res.sendFile(__dirname + "/dist/home.html");
-});
+
 const httpServer = http.createServer(app);
 httpServer.listen(80);
 ```
