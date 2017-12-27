@@ -25,7 +25,7 @@ Zam.prototype.index = function(elem) {
 Zam.prototype.d = function(event, e, func) {
 
 	if(typeof(func) === 'string') {
-		func = this.function[func];
+		func = this.functions[func];
 	}
 
 	if(typeof(e) !== 'object') {
@@ -42,7 +42,7 @@ Zam.prototype.d = function(event, e, func) {
 Zam.prototype.c = function(event, e, func) {
 
 	if(typeof(func) === 'string') {
-		func = this.function[func];
+		func = this.functions[func];
 	}
 
 	if(typeof(e) !== 'object') {
