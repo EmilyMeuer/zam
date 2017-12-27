@@ -17,7 +17,7 @@ This library was created with one goal in mind — to stay close to vanilla.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.3.6/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.3.7/zam.min.js"></script>
 ```
 ```
 npm install node-zam
@@ -139,7 +139,7 @@ String 'events' -> required
 
 String 'selector' -> required
 
-Function 'func' -> required
+Function or String 'func' -> required
 
 Returns nothing
 
@@ -149,7 +149,7 @@ String 'events' -> required
 
 String 'selector' -> required
 
-Function 'func' -> required
+Function or String 'func' -> required
 
 Returns nothing
 
