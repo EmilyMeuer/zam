@@ -235,6 +235,36 @@ Zam.prototype.html = function(e, html) {
 	}
 }
 
+Zam.prototype.router = function(views, display) {
+	window.addEventListener('popstate', function (event) {
+		setContent();
+	});
+	function updateURL(path) {
+		if (history.pushState) {
+			window.history.pushState({path:path},'', path);
+		}
+	}
+	function setContent() {
+		for(var i = 0; i < views.length; i++) {
+			if(window.location.href.indexOf('/' + views[i]) !== -1) {
+				zam.css({'display': display}, '#' + views[i]);
+			} else {
+				zam.css({'display': 'none'}, '#' + views[i]);
+			}
+		}
+	} setContent();
+
+	var ids = '';
+	for (var i = 0; i < views.length; i++) {
+		ids += ('#' + views[i] + ',');
+	}
+	ids.slice(0, views.length - 2);
+	zam.on('click', ids, (e) => {
+		updateURL('/' + e.target.id);
+		setContent();
+	});
+}
+
 Zam.prototype.ajax = function(obj, func) {
 	if(obj.method === undefined) {
 		obj.method = 'GET';
@@ -257,7 +287,7 @@ Zam.prototype.ajax = function(obj, func) {
 		}
 	}
 	xhttp.onerror = function () {
-		console.log("AJAX error.");
+		console.log(xhttp.statusText);
 	};
 	xhttp.open(obj.method, obj.url, true);
 	for (var prop in obj.headers) {
