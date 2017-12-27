@@ -12,7 +12,7 @@ http://zamjs.com
 
 A small toolset that simplifies DOM traversal, event handling, and Ajax.
 
-This library was created with one goal in mind — to promote vanillajs development.
+This library was created with one goal in mind — to stay close to vanilla.
 
 ## Import
 
