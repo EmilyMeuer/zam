@@ -1,6 +1,7 @@
 function Zam() {
 	this.self = 'html';
 	this.functions = {};
+	this.routes = {};
 }
 
 Zam.prototype.e = function(e) {
@@ -235,38 +236,45 @@ Zam.prototype.html = function(e, html) {
 	}
 }
 // var = {
-// 	'tab-bar-overview':{view: 'overview', display:'flex'}
+// 	'tab-bar-overview':{view: '.overview', display:'flex'}
 // }
-Zam.prototype.router = function(routes) {
 
-	this.routes = routes;
-
-	window.addEventListener('popstate', function (event) {
-		setContent();
-	});
-	function updateURL(path) {
-		if (history.pushState) {
-			window.history.pushState({path:path},'', path);
-		}
+Zam.prototype.updateURL = function(path) {
+	if (history.pushState) {
+		window.history.pushState({path:path},'', path);
 	}
-	function setContent() {
+}
+
+Zam.prototype.setContent = function() {
+	if(window.location.href.lastIndexOf('/') !== window.location.href.length - 1) {
 		for(var key in this.routes) {
-			if(window.location.href.indexOf('/' + this.routes[key].view) !== -1) {
-				zam.css({'display': this.routes[key].display}, '#' + this.routes[key].view);
+			if(window.location.href.indexOf('/' + this.routes[key].view.slice(1)) !== -1) {
+				this.css({'display': this.routes[key].display}, this.routes[key].view);
 			} else {
-				zam.css({'display': 'none'}, '#' + this.routes[key].view);
+				this.css({'display': 'none'}, this.routes[key].view);
 			}
 		}
-	} setContent();
+	}
+}
+
+Zam.prototype.router = function(routes) {
+
+	this.routes = JSON.parse(JSON.stringify(routes));
+
+	this.setContent();
+
+	window.addEventListener('popstate', function (event) {
+		this.setContent();
+	});
 
 	var ids = '';
 	for(var key in this.routes) {
 		ids += ('#' + key + ',');
 	}
-	ids.slice(0, ids.length - 2);
-	zam.on('click', ids, (e) => {
-		updateURL('/' + this.routes[e.target.id].view);
-		setContent();
+	ids = ids.slice(0, ids.length - 1);
+	this.on('click', ids, (e) => {
+		this.updateURL('/' + this.routes[e.target.id].view.slice(1));
+		this.setContent();
 	});
 }
 
