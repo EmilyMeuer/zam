@@ -234,8 +234,13 @@ Zam.prototype.html = function(e, html) {
 		}
 	}
 }
+// var = {
+// 	'tab-bar-overview':{view: 'overview', display:'flex'}
+// }
+Zam.prototype.router = function(routes) {
 
-Zam.prototype.router = function(views, display) {
+	this.routes = routes;
+
 	window.addEventListener('popstate', function (event) {
 		setContent();
 	});
@@ -245,22 +250,22 @@ Zam.prototype.router = function(views, display) {
 		}
 	}
 	function setContent() {
-		for(var i = 0; i < views.length; i++) {
-			if(window.location.href.indexOf('/' + views[i]) !== -1) {
-				zam.css({'display': display}, '#' + views[i]);
+		for(var key in this.routes) {
+			if(window.location.href.indexOf('/' + this.routes[key].view) !== -1) {
+				zam.css({'display': this.routes[key].display}, '#' + this.routes[key].view);
 			} else {
-				zam.css({'display': 'none'}, '#' + views[i]);
+				zam.css({'display': 'none'}, '#' + this.routes[key].view);
 			}
 		}
 	} setContent();
 
 	var ids = '';
-	for (var i = 0; i < views.length; i++) {
-		ids += ('#' + views[i] + ',');
+	for(var key in this.routes) {
+		ids += ('#' + key + ',');
 	}
-	ids.slice(0, views.length - 2);
+	ids.slice(0, ids.length - 2);
 	zam.on('click', ids, (e) => {
-		updateURL('/' + e.target.id);
+		updateURL('/' + this.routes[e.target.id].view);
 		setContent();
 	});
 }
