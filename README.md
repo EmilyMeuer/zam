@@ -213,20 +213,13 @@ Returns nothing
 
 Object 'routes' -> required
 
-Example routes
-
-```
-var routes = {
-  'someID1':{view: '.someClass1', display:'flex'},
-  'someID2':{view: '.someClass2', display:'block'},
-  'someID3':{view: '#someID31', display:'flex'},
-  'someID4':{view: '#someID32', display:'flex'}
-}
-```
+See the example below to get a better idea of how .router() works.
 
 ## Example
 
-### Frontend
+For more examples visit http://zamjs.com/examples
+
+### Router - Frontend
 
 ```html
 <html>
@@ -282,7 +275,7 @@ zam.router({
 </html>
 ```
 
-### Backend
+### Router - Backend
 
 ```javascript
 const http = require("http");
