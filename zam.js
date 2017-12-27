@@ -1,5 +1,6 @@
 function Zam() {
 	this.self = 'html';
+	this.functions = {};
 }
 
 Zam.prototype.e = function(e) {
@@ -12,7 +13,7 @@ Zam.prototype.e = function(e) {
 
 Zam.prototype.index = function(elem) {
 	var i = 0;
-	var a = elem.target;
+	var a = elem;
 	while((a = a.previousElementSibling) != null) {
 		if(a.tagName.toLowerCase() === elem.target.tagName.toLowerCase()) {
 			i++;
@@ -22,22 +23,42 @@ Zam.prototype.index = function(elem) {
 }
 
 Zam.prototype.d = function(event, e, func) {
-	var x = document.querySelectorAll(e);
-	var len = x.length;
-	for(var i=0;i<len; i++) {
-		x[i].removeEventListener(event, func);
+
+	if(typeof(func) === 'string') {
+		func = this.function[func];
+	}
+
+	if(typeof(e) !== 'object') {
+		var x = document.querySelectorAll(e);
+		var len = x.length;
+		for(var i=0;i<len; i++) {
+			x[i].removeEventListener(event, func);
+		}
+	} else {
+		e.removeEventListener(event, func);
 	}
 }
 
 Zam.prototype.c = function(event, e, func) {
+
+	if(typeof(func) === 'string') {
+		func = this.function[func];
+	}
+
 	if(typeof(e) !== 'object') {
 		var x = document.querySelectorAll(e);
 		var len = x.length;
 		for(var i=0;i<len; i++) {
 			x[i].addEventListener(event, func);
 		}
+		if(func.name !== 'anonymous') {
+			this.functions[func.name] = func;
+		}
 	} else {
 		e.addEventListener(event, func);
+		if(func.name !== 'anonymous') {
+			this.functions[func.name] = func;
+		}
 	}
 }
 
@@ -58,7 +79,9 @@ Zam.prototype.on = function(event, e, func) {
 }
 
 Zam.prototype.off = function(event, e, func) {
-	this.self = e;
+	if(typeof(e) !== 'object') {
+		this.self = e;
+	}
 	if (event.indexOf(' ') !== -1) {
 		var eve = event;
 		while(eve.indexOf(' ') !== -1) {
@@ -200,7 +223,7 @@ Zam.prototype.html = function(e, html) {
 	}
 
 	html = html.replace(/(?:\r\n|\r|\n)/g, '');
-	
+
 	if(typeof(e) === 'object') {
 		e.innerHTML = html;
 	} else {
