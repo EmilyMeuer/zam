@@ -209,6 +209,21 @@ Function 'callback' -> required
 
 Returns nothing
 
+### .router(routes)
+
+Object 'routes' -> required
+
+Example routes
+
+```
+var routes = {
+ 	'someID1':{view: '.someClass1', display:'flex'},
+  'someID2':{view: '.someClass2', display:'block'},
+  'someID3':{view: '#someID31', display:'flex'},
+  'someID4':{view: '#someID32', display:'flex'}
+}
+```
+
 ## Example
 
 ```javascript
