@@ -65,6 +65,8 @@ Zam is 6.74 times faster than jQuery.
 
 ### Setting CSS
 
+jsPerf findings https://jsperf.com/zam-vs-jquery
+
 With 2,500 div tags setting all divs to font-size: 40px.
 
 Zam is 1.47 times faster than jQuery.
