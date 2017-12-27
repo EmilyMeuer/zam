@@ -218,7 +218,7 @@ z.on('mousedown', 'div', (e) => {
     
 z.on('mouseup', 'div', (mouseup1 = () => { //zam tracks event handlers/methods, so give it a name (mouseup1)!
   z.css({'color': ''}));
-});
+}));
     
 z.addStyle('@keyframes example {from {background-color: red;}to {background-color: yellow;}}', 'newStyleId');
 z.css({'animation': 'example 3s'}, 'div:nth-of-type(1)');
