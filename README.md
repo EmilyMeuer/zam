@@ -17,7 +17,7 @@ This library was created with one goal in mind — to stay close to vanilla.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.2/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.3/zam.min.js"></script>
 ```
 ```
 npm install node-zam
@@ -127,11 +127,11 @@ DOMElement 'element' -> required
 
 Returns index
 
-### .html(selector, html)
-
-String or DOMElement 'selector' -> optional | If undefined then last used selector (String) is used.
+### .html(html, selector)
 
 String 'html' -> required
+
+String or DOMElement 'selector' -> optional | If undefined then last used selector (String) is used.
 
 Returns nothing
 
@@ -182,22 +182,6 @@ Returns nothing
 ### .removeStyle(id)
 
 String 'id' -> required
-
-Returns nothing
-
-### .fadeIn(selector, time)
-
-String 'selector' -> optional | If undefined then last used selector is used.
-
-String 'value' -> required
-
-Returns nothing
-
-### .fadeOut(selector, time)
-
-String 'selector' -> optional | If undefined then last used selector is used.
-
-String 'value' -> required
 
 Returns nothing
 

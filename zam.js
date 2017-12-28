@@ -165,34 +165,6 @@ Zam.prototype.css = function(props, e) {
 	}
 }
 
-Zam.prototype.fadeIn = function(e, value) {
-	if(value === undefined) {
-		value = e;
-		e = this.self;
-	}
-	if (value === undefined) {
-		value = '1s';
-	}
-	this.css({'transition': 'opacity ' + value}, e);
-	setTimeout(() => {
-		this.css({'opacity': '1.0'}, e);
-	},1);
-}
-
-Zam.prototype.fadeOut = function(e, value) {
-	if(value === undefined) {
-		value = e;
-		e = this.self;
-	}
-	if (value === undefined) {
-		value = '1s';
-	}
-	this.css({'transition': 'opacity ' + value}, e);
-	setTimeout(() => {
-		this.css({'opacity': '0.0'}, e);
-	},1);
-}
-
 Zam.prototype.each = function(e, func) {
 	if(typeof e === "function") {
 		func = e;
@@ -204,7 +176,7 @@ Zam.prototype.each = function(e, func) {
 	});
 }
 
-Zam.prototype.addStyle = function(val, id) {
+Zam.prototype.addStyle = function(id, val) {
 	var newStyle = document.createElement("style");
 	newStyle.innerHTML = val;
 	newStyle.id = id;
@@ -216,10 +188,9 @@ Zam.prototype.removeStyle = function(id) {
 	elem.parentNode.removeChild(elem);
 }
 
-Zam.prototype.html = function(e, html) {
+Zam.prototype.html = function(html, e) {
 
-	if(html === undefined) {
-		html = e;
+	if(e === undefined) {
 		e = this.self;
 	}
 
