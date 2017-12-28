@@ -189,8 +189,6 @@ Returns nothing
 
 Object 'options' -> required
 
-Function 'callback' -> required
-
 Returns Promise
 
 ### .router(routes)
