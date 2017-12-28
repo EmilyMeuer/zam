@@ -17,7 +17,7 @@ This library was created with one goal in mind — to stay close to vanilla.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.3/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.4/zam.min.js"></script>
 ```
 ```
 npm install node-zam
@@ -185,13 +185,13 @@ String 'id' -> required
 
 Returns nothing
 
-### .ajax(options, callback)
+### .ajax(options)
 
 Object 'options' -> required
 
 Function 'callback' -> required
 
-Returns nothing
+Returns Promise
 
 ### .router(routes)
 

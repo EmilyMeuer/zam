@@ -251,7 +251,8 @@ Zam.prototype.router = function(routes) {
 	});
 }
 
-Zam.prototype.ajax = function(obj, func) {
+Zam.prototype.ajax = function(obj) {
+	
 	if(obj.method === undefined) {
 		obj.method = 'GET';
 	}
@@ -261,26 +262,29 @@ Zam.prototype.ajax = function(obj, func) {
 	if(obj.headers === undefined) {
 		obj.headers = {'Accept':'application/json'};
 	}
-	if (obj.headers.Accept === 'application/json' && obj.data !== undefined) {
-		obj.data = JSON.stringify(obj.data);
-	}
-	var xhttp = new XMLHttpRequest();
-	xhttp.onload = function() {
-		if(obj.headers.Accept === 'application/json') {
-			func(JSON.parse(this.response), this.status, this.statusText);
-		} else {
-			func(this.response, this.status, this.statusText);
+	
+	return new Promise(function (resolve, reject) {
+		var xhr = new XMLHttpRequest();
+		xhr.open(obj.method, obj.url, true);
+		for (var prop in obj.headers) {
+			if(obj.headers.hasOwnProperty(prop)) {
+				xhr.setRequestHeader(prop, obj.headers[prop]);
+			}
 		}
-	}
-	xhttp.onerror = function () {
-		func(this.response, this.status, this.statusText);
-		console.log(xhttp.statusText);
-	};
-	xhttp.open(obj.method, obj.url, true);
-	for (var prop in obj.headers) {
-        if(obj.headers.hasOwnProperty(prop)) {
-        	xhttp.setRequestHeader(prop, obj.headers[prop]);
-        }
-    }
-	xhttp.send(obj.data);
+		xhr.onload = function(e) {
+			if (xhr.status === 200) {
+				if(obj.headers['Accept'] === 'appliction/json') {
+					resolve(JSON.parse(xhr.responseText));
+				} else {
+					resolve(xhr.responseText);
+				}
+			} else {
+				reject(Error('ajax failed - error code:' + xhr.statusText));
+			}
+		},
+		xhr.onerror = function(e) {
+			reject(Error('ajax failed - error code:' + xhr.statusText));
+		},
+		xhr.send(obj.data);
+	});
 }
