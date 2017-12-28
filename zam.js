@@ -296,12 +296,13 @@ Zam.prototype.ajax = function(obj, func) {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onload = function() {
 		if(obj.headers.Accept === 'application/json') {
-			func(JSON.parse(this.response));
+			func(JSON.parse(this.response), this.status, this.statusText);
 		} else {
-			func(this.response);
+			func(this.response, this.status, this.statusText);
 		}
 	}
 	xhttp.onerror = function () {
+		func(this.response, this.status, this.statusText);
 		console.log(xhttp.statusText);
 	};
 	xhttp.open(obj.method, obj.url, true);
