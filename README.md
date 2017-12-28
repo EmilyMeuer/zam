@@ -139,7 +139,7 @@ Returns nothing
 
 String 'events' -> required
 
-String 'selector' -> required
+String or DOMElement 'selector' -> required
 
 Function or String 'func' -> required
 
@@ -149,7 +149,7 @@ Returns nothing
 
 String 'events' -> required
 
-String 'selector' -> required
+String or DOMElement 'selector' -> required
 
 Function or String 'func' -> required
 
