@@ -266,7 +266,7 @@ For more examples visit http://zamjs.com/examples
 <script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.0/zam.js"></script>
 <script>
 zam.router({
-    'home-tab': {view: '#home', 'display': 'flex'},
+    'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/
     'stuff-tab': {view: '#stuff', 'display': 'flex'},
     'about-tab': {view: '#about', 'display': 'flex'}
 })
