@@ -235,9 +235,6 @@ Zam.prototype.html = function(e, html) {
 		}
 	}
 }
-// var = {
-// 	'tab-bar-overview':{view: '.overview', display:'flex'}
-// }
 
 Zam.prototype.updateURL = function(path) {
 	if (history.pushState) {
@@ -253,6 +250,11 @@ Zam.prototype.setContent = function() {
 			} else {
 				this.css({'display': 'none'}, this.routes[key].view);
 			}
+		}
+	} else {
+		for(var key in this.routes) {
+			this.css({'display': this.routes[key].display}, this.routes[key].view);
+			break;
 		}
 	}
 }
