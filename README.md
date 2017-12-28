@@ -236,14 +236,13 @@ For more examples visit http://zamjs.com/examples
     </div>
   </div>
   <div class="section" id="home">
-      ... some content ...
-    </div>
-    <div class="section" id="stuff">
-      ... some content ...
-    </div>
-    <div class="section" id="about">
-      ... some content ...
-    </div>
+    ... some content ...
+  </div>
+  <div class="section" id="stuff">
+    ... some content ...
+  </div>
+  <div class="section" id="about">
+    ... some content ...
   </div>
 <script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.1/zam.js"></script>
 <script>
