@@ -17,7 +17,7 @@ This library was created with one goal in mind — to stay close to vanilla.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.0/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.1/zam.min.js"></script>
 ```
 ```
 npm install node-zam
@@ -263,7 +263,7 @@ For more examples visit http://zamjs.com/examples
       ... some content ...
     </div>
   </div>
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.0/zam.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.1/zam.js"></script>
 <script>
 zam.router({
     'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/
