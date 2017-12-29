@@ -173,9 +173,9 @@ Function 'callback' -> required
 
 Returns nothing
 
-### .addStyle(innerHTML, id)
+### .addStyle(ruleSet, id)
 
-String 'innerHTML' -> required
+String 'ruleSet' -> required
 
 String 'id' -> required
 
