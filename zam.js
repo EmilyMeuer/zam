@@ -43,12 +43,14 @@ Zam.prototype.bind = function(event, e, func) {
 		var x = document.querySelectorAll(e);
 		var len = x.length;
 		for(var i=0;i<len; i++) {
+			x[i].removeEventListener(event, func);
 			x[i].addEventListener(event, func);
 		}
 		if(func.name !== 'anonymous') {
 			this.functions[func.name] = func;
 		}
 	} else {
+		e.removeEventListener(event, func);
 		e.addEventListener(event, func);
 		if(func.name !== 'anonymous') {
 			this.functions[func.name] = func;
