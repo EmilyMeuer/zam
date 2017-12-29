@@ -209,7 +209,7 @@ For more examples visit http://zamjs.com/examples
     <style>
       .section {
         position: absolute;
-        left 0;
+        left: 0;
         top: 60px;
         width:100%
         height: calc(100vh - 60px);
