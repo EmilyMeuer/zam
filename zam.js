@@ -91,10 +91,13 @@ Zam.prototype.cssSelector = function(props, e) {
 }
 
 Zam.prototype.cssAddValue = function(x, key, value) {
-	if(x.style[key].indexOf(value.slice(0, value.indexOf(' '))) === -1) {
+	var val1 = value.slice(0, value.indexOf(' '));
+	var match;
+	if((match = x.style[key].match(new RegExp(`(^${val1}|, ${val1})`, 'g'))) === null) {
 		x.style[key] += (',' + value);
 	} else {
-		var start = x.style[key].indexOf(value.slice(0, value.indexOf(' ')));
+		var start = x.style[key].indexOf(match[0]);
+		(match[0].indexOf(',') > -1) ? start += 2 : '';
 		var before = x.style[key].slice(0, start);
 		var middle = value;
 		var end = "";
