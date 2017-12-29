@@ -17,7 +17,7 @@ This library was created with one goal in mind — to stay close to vanilla.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.8/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.9/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -147,6 +147,26 @@ Function or String 'func' -> required
 
 Returns nothing
 
+Note:
+
+    zam.on('click', '#myButton', function myFunc() {
+      console.log('Hello World!');
+    });
+    zam.on('click', '#myButton', 'myFunc');
+    zam.on('click', '#myButton', 'myFunc');
+    
+When you click '#myButton' the console outputs...
+
+    Hello World!
+    
+NOT
+
+    Hello World!
+    Hello World!
+    Hello World!
+    
+i.e. if you try and bind a given function to an elements event more than once, the previous bindings are lost.
+
 ### .off(events, selector, func)
 
 String 'events' -> required
@@ -246,7 +266,7 @@ For more examples visit http://zamjs.com/examples
   <div class="section" id="about">
     ... some content ...
   </div>
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.8/zam.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.9/zam.js"></script>
 <script>
 var zam = new Zam();
 zam.router({
