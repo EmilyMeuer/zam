@@ -17,7 +17,7 @@ This library was created with one goal in mind — to stay close to vanilla.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.6/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.7/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -133,7 +133,7 @@ Returns index
 
 String 'html' -> required
 
-String or DOMElement 'selector' -> optional | If undefined then last used selector (String) is used.
+String or DOMElement 'selector' -> required
 
 Returns nothing
 
@@ -161,13 +161,13 @@ Returns nothing
 
 String 'declarations' -> required
 
-String or DOMElement 'selector' -> optional | If undefined then last used selector (String) is used.
+String or DOMElement 'selector' -> required
 
 Returns nothing
 
 ### .each(selector, callback)
 
-String 'selector' -> optional | If undefined then last used selector is used.
+String 'selector' -> required
 
 Function 'callback' -> required
 

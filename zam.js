@@ -1,14 +1,9 @@
 function Zam() {
-	this.self = 'html';
 	this.functions = {};
 	this.routes = {};
 }
 
 Zam.prototype.e = function(e) {
-	if(e === undefined) {
-		e = this.self;
-	}
-	this.self = e;
 	return document.querySelectorAll(e);
 }
 
@@ -23,8 +18,7 @@ Zam.prototype.index = function(elem) {
 	return i;
 }
 
-Zam.prototype.d = function(event, e, func) {
-
+Zam.prototype.unbind = function(event, e, func) {
 	if(typeof(func) === 'string') {
 		func = this.functions[func];
 	}
@@ -40,8 +34,7 @@ Zam.prototype.d = function(event, e, func) {
 	}
 }
 
-Zam.prototype.c = function(event, e, func) {
-
+Zam.prototype.bind = function(event, e, func) {
 	if(typeof(func) === 'string') {
 		func = this.functions[func];
 	}
@@ -64,46 +57,40 @@ Zam.prototype.c = function(event, e, func) {
 }
 
 Zam.prototype.on = function(event, e, func) {
-	if(typeof(e) !== 'object') {
-		this.self = e;
-	}
 	if (event.indexOf(' ') !== -1) {
 		var eve = event;
 		while(eve.indexOf(' ') !== -1) {
-			this.c(eve.slice(0, eve.indexOf(' ')), e, func);
+			this.bind(eve.slice(0, eve.indexOf(' ')), e, func);
 			eve = eve.slice(eve.indexOf(' ') + 1);
 		}
-		this.c(eve, e, func);
+		this.bind(eve, e, func);
 	} else {
-		this.c(event, e, func);
+		this.bind(event, e, func);
 	}
 }
 
 Zam.prototype.off = function(event, e, func) {
-	if(typeof(e) !== 'object') {
-		this.self = e;
-	}
 	if (event.indexOf(' ') !== -1) {
 		var eve = event;
 		while(eve.indexOf(' ') !== -1) {
-			this.d(eve.slice(0, eve.indexOf(' ')), e, func);
+			this.unbind(eve.slice(0, eve.indexOf(' ')), e, func);
 			eve = eve.slice(eve.indexOf(' ') + 1);
 		}
-		this.d(eve, e, func);
+		this.unbind(eve, e, func);
 	} else {
-		this.d(event, e, func);
+		this.unbind(event, e, func);
 	}
 }
 
-Zam.prototype.a = function(props, e) {
+Zam.prototype.cssSelector = function(props, e) {
 	var x = document.querySelectorAll(e);
 	var len = x.length;
 	for(var i=0;i<len; i++) {
-		this.b(props, x[i]);
+		this.cssObject(props, x[i]);
 	}
 }
 
-Zam.prototype.g = function(x, key, value) {
+Zam.prototype.cssAddValue = function(x, key, value) {
 	if(x.style[key].indexOf(value.slice(0, value.indexOf(' '))) === -1) {
 		x.style[key] += (',' + value);
 	} else {
@@ -119,7 +106,7 @@ Zam.prototype.g = function(x, key, value) {
 	}
 }
 
-Zam.prototype.b = function(props, x) {
+Zam.prototype.cssObject = function(props, x) {
 	for (var key in props) {
 		if (props.hasOwnProperty(key)) {
 			if(key.indexOf('-') !== -1) {
@@ -129,19 +116,17 @@ Zam.prototype.b = function(props, x) {
 				x.style[key] = val;
 			} else {
 				if(key === 'transition' || key === 'animation') {
-					if (props[key] === '') {
-						x.style[key] = props[key];
-					} else if (x.style[key] === '') {
+					if (props[key] === '' || x.style[key] === '') {
 						x.style[key] = props[key];
 					} else {
 						var stack = props[key];
 						var value = "";
 						while(stack.indexOf(',') !== -1) {
 							value = stack.slice(0, stack.indexOf(',')).trim();
-							this.g(x, key, value);
+							this.cssAddValue(x, key, value);
 							stack = stack.slice(stack.indexOf(',') + 1).trim();
 						}
-						this.g(x, key, stack);
+						this.cssAddValue(x, key, stack);
 					}
 				} else {
 					x.style[key] = props[key];
@@ -152,24 +137,14 @@ Zam.prototype.b = function(props, x) {
 }
 
 Zam.prototype.css = function(props, e) {
-
-	if(e === undefined) {
-		e = this.self;
-		this.a(props, e);
+	if(typeof(e) === 'object') {
+		this.cssObject(props, e);
 	} else {
-		if(typeof(e) === 'object') {
-			this.b(props, e);
-		} else {
-			this.a(props, e);
-		}
+		this.cssSelector(props, e);
 	}
 }
 
 Zam.prototype.each = function(e, func) {
-	if(typeof e === "function") {
-		func = e;
-		e = this.self
-	}
 	var elems = document.querySelectorAll(e);
 	Array.prototype.forEach.call(elems, function(elem, i) {
 		func(elem, i);
@@ -189,10 +164,6 @@ Zam.prototype.removeStyle = function(id) {
 }
 
 Zam.prototype.html = function(html, e) {
-
-	if(e === undefined) {
-		e = this.self;
-	}
 
 	html = html.replace(/(?:\r\n|\r|\n)/g, '');
 
@@ -231,7 +202,6 @@ Zam.prototype.setContent = function() {
 }
 
 Zam.prototype.router = function(routes) {
-
 	this.routes = JSON.parse(JSON.stringify(routes));
 
 	this.setContent();
@@ -255,7 +225,6 @@ Zam.prototype.router = function(routes) {
 }
 
 Zam.prototype.ajax = function(obj) {
-
 	if(obj.method === undefined) {
 		obj.method = 'GET';
 	}
