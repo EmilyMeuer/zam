@@ -246,7 +246,7 @@ For more examples visit http://zamjs.com/examples
   <div class="section" id="about">
     ... some content ...
   </div>
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.6/zam.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.7/zam.js"></script>
 <script>
 var zam = new Zam();
 zam.router({
