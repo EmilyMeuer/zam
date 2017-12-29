@@ -242,17 +242,19 @@ Zam.prototype.router = function(routes) {
 
 	var ids = '';
 	for(var key in this.routes) {
-		ids += ('#' + key + ',');
+		var event = 'click';
+		if(key.event !== undefined) {
+			event = key.event;
+		}
+		this.on(event, '#' + key, (e) => {
+			this.updateURL('/' + this.routes[e.target.id].view.slice(1));
+			this.setContent();
+		});
 	}
-	ids = ids.slice(0, ids.length - 1);
-	this.on('click', ids, (e) => {
-		this.updateURL('/' + this.routes[e.target.id].view.slice(1));
-		this.setContent();
-	});
 }
 
 Zam.prototype.ajax = function(obj) {
-	
+
 	if(obj.method === undefined) {
 		obj.method = 'GET';
 	}
@@ -262,7 +264,7 @@ Zam.prototype.ajax = function(obj) {
 	if(obj.headers === undefined) {
 		obj.headers = {'Accept':'application/json'};
 	}
-	
+
 	return new Promise(function (resolve, reject) {
 		var xhr = new XMLHttpRequest();
 		xhr.open(obj.method, obj.url, true);
