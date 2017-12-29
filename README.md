@@ -165,7 +165,7 @@ NOT
     Hello World!
     Hello World!
     
-i.e. if you try and bind a given function to an elements event more than once, the previous bindings are lost.
+i.e. If you try and bind a given function to an element's event more than once, the previous bindings are lost.
 
 ### .off(events, selector, func)
 
