@@ -236,7 +236,7 @@ Zam.prototype.router = function(routes) {
 
 	this.setContent();
 
-	window.addEventListener('popstate', function (event) {
+	this.on('popstate', window, () => {
 		this.setContent();
 	});
 
@@ -246,6 +246,7 @@ Zam.prototype.router = function(routes) {
 		if(key.event !== undefined) {
 			event = key.event;
 		}
+
 		this.on(event, '#' + key, (e) => {
 			this.updateURL('/' + this.routes[e.target.id].view.slice(1));
 			this.setContent();

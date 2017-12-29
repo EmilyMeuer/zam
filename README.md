@@ -17,7 +17,7 @@ This library was created with one goal in mind — to stay close to vanilla.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.5/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.6/zam.min.js"></script>
 ```
 ```
 npm install zamjs
