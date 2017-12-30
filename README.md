@@ -42,8 +42,11 @@ This library was created with one goal in mind — to stay close to vanilla.
 
 Note:
 
-* z:event default value is 'click'
-  
+* z:event default value is 'click'.
+
+* z:link="master" links to parent element.
+
+
 ## Import
 
 ```html
