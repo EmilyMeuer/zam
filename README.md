@@ -24,7 +24,7 @@ This library was created with one goal in mind — to stay close to vanilla.
 	  Hover over me!
     </div>
   </div>
-  <script src="file:///Users/fairy-slipper/eclipseworkspace/probe/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/roecrew/zam@1.0/zam.min.js"></script>
   <script>
 	var zam = new Zam({
 	  myData:
