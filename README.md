@@ -296,8 +296,8 @@ For more examples visit http://zamjs.com/examples
   <div class="section" id="about">
     ... some content ...
   </div>
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@1.1/zam.min.js"></script>
-<script>
+<script type="module">
+import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.1/zam.min.js";
 var zam = new Zam();
 zam.router({
     'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/
