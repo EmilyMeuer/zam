@@ -12,19 +12,46 @@ Zam.prototype.runEngine = function() {
 
 	var engine = function(e) {
 		var bound = document.querySelectorAll('#'+e.target.getAttribute('z:link'))[0];
+		var element = bound;
 		var oldHTML = bound.innerHTML;
 		if(bound.getAttribute('z:data').indexOf('}}') > -1) {
 			if (_this.data[e.target.getAttribute('z:link')] !== undefined) {
 				bound.innerHTML = _this.data[e.target.getAttribute('z:link')];
 				_this.data[e.target.getAttribute('z:link')] = oldHTML;
 			} else {
-				var dataName = bound.getAttribute('z:data').slice(2, bound.getAttribute('z:data').indexOf('}}'))
-				bound.innerHTML = _this.data[dataName];
-				_this.data[e.target.getAttribute('z:link')] = oldHTML;
+				var dataName = bound.getAttribute('z:data').slice(2, bound.getAttribute('z:data').indexOf('}}'));
+				if (bound.hasAttribute('z:append')) {
+					var newElem = document.createElement('div');
+					newElem.innerHTML = _this.data[dataName];
+					bound.appendChild(newElem);
+					element = newElem;
+				} else if(bound.hasAttribute('z:prepend')) {
+					var newElem = document.createElement('div');
+					newElem.innerHTML = _this.data[dataName];
+					bound.insertBefore(newElem, bound.firstChild);
+					element = newElem;
+				} else {
+					bound.innerHTML = _this.data[dataName];
+					_this.data[e.target.getAttribute('z:link')] = oldHTML;
+				}
 			}
 		} else {
-			bound.innerHTML = bound.getAttribute('z:data');
-			bound.setAttribute('z:data', oldHTML);
+			if(bound.hasAttribute('z:append')) {
+				var newElem = document.createElement('div');
+				newElem.innerHTML = bound.getAttribute('z:data');
+				bound.appendChild(newElem);
+				bound.setAttribute('z:data', oldHTML);
+				element = newElem;
+			} else if(bound.hasAttribute('z:prepend')) {
+				var newElem = document.createElement('div');
+				newElem.innerHTML = bound.getAttribute('z:data');
+				bound.insertBefore(newElem, bound.firstChild);
+				bound.setAttribute('z:data', oldHTML);
+				element = newElem;
+			} else {
+				bound.innerHTML = bound.getAttribute('z:data');
+				bound.setAttribute('z:data', oldHTML);
+			}
 		}
 		var a = bound.querySelectorAll('*');
 		for (var i=0;i<a.length; i++) {
@@ -33,7 +60,7 @@ Zam.prototype.runEngine = function() {
 			}
 		}
 		cycle();
-		(_this.ran !== undefined) ? _this.ran() : '';
+		(_this.ran !== undefined) ? _this.ran(element) : '';
 	}
 
 	var cycle = function() {
