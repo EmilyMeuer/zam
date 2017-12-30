@@ -1,6 +1,54 @@
-function Zam() {
+function Zam(obj, ran) {
 	this.functions = {};
 	this.routes = {};
+	this.components = [];
+	this.data = (obj === undefined) ? {} : obj;
+	this.ran = ran;
+	this.runEngine();
+}
+
+Zam.prototype.runEngine = function() {
+	var _this = this;
+
+	var engine = function(e) {
+		var bound = document.querySelectorAll('#'+e.target.getAttribute('z:link'))[0];
+		var oldHTML = bound.innerHTML;
+		if(bound.getAttribute('z:data').indexOf('}}') > -1) {
+			if (_this.data[e.target.getAttribute('z:link')] !== undefined) {
+				bound.innerHTML = _this.data[e.target.getAttribute('z:link')];
+				_this.data[e.target.getAttribute('z:link')] = oldHTML;
+			} else {
+				var dataName = bound.getAttribute('z:data').slice(2, bound.getAttribute('z:data').indexOf('}}'))
+				bound.innerHTML = _this.data[dataName];
+				_this.data[e.target.getAttribute('z:link')] = oldHTML;
+			}
+		} else {
+			bound.innerHTML = bound.getAttribute('z:data');
+			bound.setAttribute('z:data', oldHTML);
+		}
+		var a = bound.querySelectorAll('*');
+		for (var i=0;i<a.length; i++) {
+			if(a[i].getAttribute('z:link') === 'master') {
+				a[i].setAttribute('z:link', e.target.getAttribute('z:link'));
+			}
+		}
+		cycle();
+		(_this.ran !== undefined) ? _this.ran(e) : '';
+	}
+
+	var cycle = function() {
+		var y = document.querySelectorAll('*');
+		for(var j=0;j<y.length; j++) {
+			if(y[j].getAttribute('z:link')) {
+				var event = 'click';
+				if (y[j].getAttribute('z:event')) {
+					event = y[j].getAttribute('z:event');
+				}
+				_this.on(event, y[j], engine);
+			}
+		}
+	}
+	cycle();
 }
 
 Zam.prototype.e = function(e) {
@@ -43,14 +91,12 @@ Zam.prototype.bind = function(event, e, func) {
 		var x = document.querySelectorAll(e);
 		var len = x.length;
 		for(var i=0;i<len; i++) {
-			x[i].removeEventListener(event, func);
 			x[i].addEventListener(event, func);
 		}
 		if(func.name !== 'anonymous') {
 			this.functions[func.name] = func;
 		}
 	} else {
-		e.removeEventListener(event, func);
 		e.addEventListener(event, func);
 		if(func.name !== 'anonymous') {
 			this.functions[func.name] = func;

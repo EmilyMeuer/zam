@@ -17,7 +17,7 @@ This library was created with one goal in mind — to stay close to vanilla.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.9/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@1.0/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -266,7 +266,7 @@ For more examples visit http://zamjs.com/examples
   <div class="section" id="about">
     ... some content ...
   </div>
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@0.4.9/zam.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@1.0/zam.min.js"></script>
 <script>
 var zam = new Zam();
 zam.router({
