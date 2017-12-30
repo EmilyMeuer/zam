@@ -29,11 +29,11 @@ This library was created with one goal in mind — to stay close to vanilla.
     var zam = new Zam({
 		myData:
 		`
-		<div z:link="master" z:event="mouseleave" id="someID">
+		<div z:link="master" z:event="mouseleave">
 		  Nice Job!
 		</div>`
-    }, () => {
-      zam.css({'background-color':'yellow'}, '#someID');
+    }, (e) => {
+      zam.css({'background-color':'yellow'}, e);
     });
   </script>
 </body>
