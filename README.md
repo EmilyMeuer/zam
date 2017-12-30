@@ -14,6 +14,33 @@ A small toolset that simplifies DOM traversal, event handling, and Ajax.
 
 This library was created with one goal in mind — to stay close to vanilla.
 
+## Quickstart
+
+```html
+<html>
+<body>
+  <div z:data="{{myData}}" id="myComp1">
+    <div z:link="myComp1" z:event="mouseover">
+	  Hover over me!
+    </div>
+  </div>
+  <script src="file:///Users/fairy-slipper/eclipseworkspace/probe/main.js"></script>
+  <script>
+	var zam = new Zam({
+	  myData:
+	  `<div z:link="master" z:event="mouseleave" id="someID">
+	     Nice Job!
+	   </div>`
+	}, () => {
+	  zam.css({'background-color':'yellow'}, '#someID');
+	});
+  </script>
+</body>
+</html>
+```
+
+Note: z:event default value is 'click'
+  
 ## Import
 
 ```html
