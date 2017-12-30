@@ -21,19 +21,20 @@ This library was created with one goal in mind — to stay close to vanilla.
 <body>
   <div z:data="{{myData}}" id="myComp1">
     <div z:link="myComp1" z:event="mouseover">
-	  Hover over me!
+      Hover over me!
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/gh/roecrew/zam@1.1/zam.min.js"></script>
-  <script>
-	var zam = new Zam({
-	  myData:
-	  `<div z:link="master" z:event="mouseleave" id="someID">
-	     Nice Job!
-	   </div>`
-	}, () => {
-	  zam.css({'background-color':'yellow'}, '#someID');
-	});
+  <script type="module">
+    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.1/zam.min.js";
+    var zam = new Zam({
+		myData:
+		`
+		<div z:link="master" z:event="mouseleave" id="someID">
+		  Nice Job!
+		</div>`
+    }, () => {
+      zam.css({'background-color':'yellow'}, '#someID');
+    });
   </script>
 </body>
 </html>
