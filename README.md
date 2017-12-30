@@ -49,13 +49,8 @@ Note:
 
 ## Import
 
-<<<<<<< HEAD
 ```html
 <script src="https://cdn.jsdelivr.net/gh/roecrew/zam@1.2/zam.min.js"></script>
-=======
-```js
-import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.1/zam.min.js";
->>>>>>> 66d6b983006037b52742a4002006080f0be073f8
 ```
 ```
 npm install zamjs
