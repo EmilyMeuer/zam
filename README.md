@@ -39,7 +39,9 @@ This library was created with one goal in mind — to stay close to vanilla.
 </html>
 ```
 
-Note: z:event default value is 'click'
+Note:
+
+* z:event default value is 'click'
   
 ## Import
 
