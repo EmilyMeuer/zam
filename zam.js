@@ -1,9 +1,8 @@
-function Zam(obj, ran) {
+function Zam(obj, cycled) {
 	this.functions = {};
 	this.routes = {};
-	this.components = [];
 	this.data = (obj === undefined) ? {} : obj;
-	this.ran = ran;
+	this.cycled = cycled;
 	this.runEngine();
 }
 
@@ -60,7 +59,7 @@ Zam.prototype.runEngine = function() {
 			}
 		}
 		cycle();
-		(_this.ran !== undefined) ? _this.ran(element) : '';
+		(_this.cycled !== undefined) ? _this.cycled(element, e) : '';
 	}
 
 	var cycle = function() {
