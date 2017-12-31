@@ -21,12 +21,20 @@ Zam.prototype.runEngine = function() {
 				var dataName = bound.getAttribute('z-data').slice(2, bound.getAttribute('z-data').indexOf('}}'));
 				if (bound.hasAttribute('z-append')) {
 					var newElem = document.createElement('div');
-					newElem.innerHTML = _this.data[dataName];
+					if(typeof(_this.data[dataName]) === 'object') {
+						newElem.innerHTML = _this.data[dataName]();
+					} else {
+						newElem.innerHTML = _this.data[dataName];
+					}
 					bound.appendChild(newElem);
 					element = newElem;
 				} else if(bound.hasAttribute('z-prepend')) {
 					var newElem = document.createElement('div');
-					newElem.innerHTML = _this.data[dataName];
+					if(typeof(_this.data[dataName]) === 'object') {
+						newElem.innerHTML = _this.data[dataName]();
+					} else {
+						newElem.innerHTML = _this.data[dataName];
+					}
 					bound.insertBefore(newElem, bound.firstChild);
 					element = newElem;
 				} else {
