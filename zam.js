@@ -63,7 +63,6 @@ Zam.prototype.runEngine = function() {
 	var cycle = function() {
 		var y = document.querySelectorAll('[z-link]');
 		for(var j=0;j<y.length; j++) {
-			console.log(y[j]);
 			var event = 'click';
 			if (y[j].getAttribute('z-event')) {
 				event = y[j].getAttribute('z-event');
