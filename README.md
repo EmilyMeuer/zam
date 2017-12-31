@@ -19,13 +19,13 @@ This library was created with one goal in mind — to stay close to vanilla.
 ```html
 <html>
 <body>
-  <div z-data="{{myData}}" id="myComp1">
+  <div z-data="myData" id="myComp1">
     <div z-link="myComp1" z-event="mouseover">
       Hover over me!
     </div>
   </div>
   <script type="module">
-    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.7/zam.min.js";
+    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.8/zam.min.js";
     var zam = new Zam({
 		myData:
 		`
@@ -42,15 +42,15 @@ This library was created with one goal in mind — to stay close to vanilla.
 
 Note:
 
-* z:event default value is 'click'.
+* z-event default value is 'click'.
 
-* z:link="master" links to parent element.
+* z-link="master" links to parent element.
 
 
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@1.7/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@1.8/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -180,26 +180,6 @@ Function or String 'func' -> required
 
 Returns nothing
 
-Note:
-
-    zam.on('click', '#myButton', function myFunc() {
-      console.log('Hello World!');
-    });
-    zam.on('click', '#myButton', 'myFunc');
-    zam.on('click', '#myButton', 'myFunc');
-    
-When you click '#myButton' the console outputs...
-
-    Hello World!
-    
-NOT
-
-    Hello World!
-    Hello World!
-    Hello World!
-    
-i.e. If you try and bind a given function to an element's event more than once, the previous bindings are lost.
-
 ### .off(events, selector, func)
 
 String 'events' -> required
@@ -300,7 +280,7 @@ For more examples visit http://zamjs.com/examples
     ... some content ...
   </div>
 <script type="module">
-import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.7/zam.min.js";
+import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.8/zam.min.js";
 var zam = new Zam();
 zam.router({
     'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/
