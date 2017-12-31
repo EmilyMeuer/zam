@@ -10,68 +10,65 @@ Zam.prototype.runEngine = function() {
 	var _this = this;
 
 	var engine = function(e) {
-		var bound = document.querySelectorAll('#'+e.target.getAttribute('z:link'))[0];
+		var bound = document.querySelectorAll('#'+e.target.getAttribute('z-link'))[0];
 		var element = bound;
 		var oldHTML = bound.innerHTML;
-		if(bound.getAttribute('z:data').indexOf('}}') > -1) {
-			if (_this.data[e.target.getAttribute('z:link')] !== undefined) {
-				bound.innerHTML = _this.data[e.target.getAttribute('z:link')];
-				_this.data[e.target.getAttribute('z:link')] = oldHTML;
+		if(bound.getAttribute('z-data').indexOf('}}') > -1) {
+			if (_this.data[e.target.getAttribute('z-link')] !== undefined) {
+				bound.innerHTML = _this.data[e.target.getAttribute('z-link')];
+				_this.data[e.target.getAttribute('z-link')] = oldHTML;
 			} else {
-				var dataName = bound.getAttribute('z:data').slice(2, bound.getAttribute('z:data').indexOf('}}'));
-				if (bound.hasAttribute('z:append')) {
+				var dataName = bound.getAttribute('z-data').slice(2, bound.getAttribute('z-data').indexOf('}}'));
+				if (bound.hasAttribute('z-append')) {
 					var newElem = document.createElement('div');
 					newElem.innerHTML = _this.data[dataName];
 					bound.appendChild(newElem);
 					element = newElem;
-				} else if(bound.hasAttribute('z:prepend')) {
+				} else if(bound.hasAttribute('z-prepend')) {
 					var newElem = document.createElement('div');
 					newElem.innerHTML = _this.data[dataName];
 					bound.insertBefore(newElem, bound.firstChild);
 					element = newElem;
 				} else {
 					bound.innerHTML = _this.data[dataName];
-					_this.data[e.target.getAttribute('z:link')] = oldHTML;
+					_this.data[e.target.getAttribute('z-link')] = oldHTML;
 				}
 			}
 		} else {
-			if(bound.hasAttribute('z:append')) {
+			if(bound.hasAttribute('z-append')) {
 				var newElem = document.createElement('div');
-				newElem.innerHTML = bound.getAttribute('z:data');
+				newElem.innerHTML = bound.getAttribute('z-data');
 				bound.appendChild(newElem);
-				bound.setAttribute('z:data', oldHTML);
+				bound.setAttribute('z-data', oldHTML);
 				element = newElem;
-			} else if(bound.hasAttribute('z:prepend')) {
+			} else if(bound.hasAttribute('z-prepend')) {
 				var newElem = document.createElement('div');
-				newElem.innerHTML = bound.getAttribute('z:data');
+				newElem.innerHTML = bound.getAttribute('z-data');
 				bound.insertBefore(newElem, bound.firstChild);
-				bound.setAttribute('z:data', oldHTML);
+				bound.setAttribute('z-data', oldHTML);
 				element = newElem;
 			} else {
-				bound.innerHTML = bound.getAttribute('z:data');
-				bound.setAttribute('z:data', oldHTML);
+				bound.innerHTML = bound.getAttribute('z-data');
+				bound.setAttribute('z-data', oldHTML);
 			}
 		}
-		var a = bound.querySelectorAll('*');
+		var a = bound.querySelectorAll('[z-link=master]');
 		for (var i=0;i<a.length; i++) {
-			if(a[i].getAttribute('z:link') === 'master') {
-				a[i].setAttribute('z:link', e.target.getAttribute('z:link'));
-			}
+			a[i].setAttribute('z-link', e.target.getAttribute('z-link'));
 		}
 		cycle();
 		(_this.cycled !== undefined) ? _this.cycled(element, e) : '';
 	}
 
 	var cycle = function() {
-		var y = document.querySelectorAll('*');
+		var y = document.querySelectorAll('[z-link]');
 		for(var j=0;j<y.length; j++) {
-			if(y[j].getAttribute('z:link')) {
-				var event = 'click';
-				if (y[j].getAttribute('z:event')) {
-					event = y[j].getAttribute('z:event');
-				}
-				_this.on(event, y[j], engine);
+			console.log(y[j]);
+			var event = 'click';
+			if (y[j].getAttribute('z-event')) {
+				event = y[j].getAttribute('z-event');
 			}
+			_this.on(event, y[j], engine);
 		}
 	}
 	cycle();
