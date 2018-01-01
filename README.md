@@ -176,7 +176,7 @@ Consider the following code...
 </html>
 ```
 
-I'm not going to go in-depth on this example. I highly recommend copying running this html on your browser. This example shows just how powerful the Zam Event Engine can be.
+I'm not going to go in-depth on this example. I highly recommend running this html on your browser. This example shows just how powerful the Zam Event Engine can be.
 
 To see this example live, visit http://zamjs.com/examples.
 
