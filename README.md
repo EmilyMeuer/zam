@@ -86,7 +86,7 @@ Consider the following code...
     </div>
   </div>
   <script>
-    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.8/zam.min.js";
+    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@2.0/zam.min.js";
     var zam = new Zam({
       someData:`
         <div z-link="master">
@@ -149,7 +149,7 @@ Consider the following code...
     </div>
   </div>
   <script type="module">
-    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.8/zam.min.js";
+    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@2.0/zam.min.js";
     var i = 0;
     var createComment = function() {
       return `
