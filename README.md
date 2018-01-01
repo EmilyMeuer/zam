@@ -25,7 +25,7 @@ This library was created with one goal in mind — to stay close to vanilla.
     </div>
   </div>
   <script type="module">
-    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.8/zam.min.js";
+    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@2.0/zam.min.js";
     var zam = new Zam({
 		myData:
 		`
@@ -50,7 +50,7 @@ Note:
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@1.8/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@2.0/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -280,7 +280,7 @@ For more examples visit http://zamjs.com/examples
     ... some content ...
   </div>
 <script type="module">
-import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@1.8/zam.min.js";
+import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@2.0/zam.min.js";
 var zam = new Zam();
 zam.router({
     'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/
