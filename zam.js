@@ -17,9 +17,13 @@ Zam.prototype.runEngine = function() {
 		var oldHTML;
 		if(e.target.getAttribute('z-link')) {
 			if(e.target.getAttribute('z-link') === 'self') {
-				e.target.setAttribute('id', 'a' + _this.idCounter);
-				e.target.setAttribute('z-link', 'a' + _this.idCounter);
-				_this.idCounter++;
+				if (e.target.getAttribute('id') === null) {
+					e.target.setAttribute('id', 'a' + _this.idCounter);
+					e.target.setAttribute('z-link', 'a' + _this.idCounter);
+					_this.idCounter++;
+				} else {
+					e.target.setAttribute('z-link', e.target.getAttribute('id'));
+				}
 			}
 			bound = document.querySelectorAll('#'+e.target.getAttribute('z-link'))[0];
 			element = bound;
@@ -73,7 +77,7 @@ Zam.prototype.runEngine = function() {
 	}
 
 	var cycle = function() {
-		var y = document.querySelectorAll('[z-link], [z-pre], [z-post]');
+		var y = document.querySelectorAll('[z-link]');
 		for(var j=0;j<y.length; j++) {
 			var event = 'click';
 			if (y[j].getAttribute('z-event')) {
