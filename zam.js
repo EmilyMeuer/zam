@@ -15,61 +15,59 @@ Zam.prototype.runEngine = function() {
 		var bound;
 		var element;
 		var oldHTML;
-		if(e.target.getAttribute('z-link')) {
-			if(e.target.getAttribute('z-link') === 'self') {
-				if (e.target.getAttribute('id') === null) {
-					e.target.setAttribute('id', 'a' + _this.idCounter);
-					e.target.setAttribute('z-link', 'a' + _this.idCounter);
-					_this.idCounter++;
+		if(e.target.getAttribute('z-link') === null) {
+			if (e.target.getAttribute('id') === null) {
+				e.target.setAttribute('id', 'a' + _this.idCounter);
+				e.target.setAttribute('z-link', 'a' + _this.idCounter);
+				_this.idCounter++;
+			} else {
+				e.target.setAttribute('z-link', e.target.getAttribute('id'));
+			}
+		}
+		bound = document.querySelectorAll('#'+e.target.getAttribute('z-link'))[0];
+		element = bound;
+		oldHTML = bound.innerHTML;
+		if(e.target.getAttribute('z-pre')) {
+			var funcs = e.target.getAttribute('z-pre').trim();
+			while(funcs.indexOf(' ') !== -1) {
+				_this.data[funcs.slice(0, funcs.indexOf(' '))]();
+				funcs = funcs.slice(funcs.indexOf(' ') + 1);
+			}
+			_this.data[funcs](element, e);
+		}
+		if (bound.getAttribute('z-data')) {
+			if (_this.data[e.target.getAttribute('z-link')] !== undefined) {
+				bound.innerHTML = _this.data[e.target.getAttribute('z-link')];
+				_this.data[e.target.getAttribute('z-link')] = oldHTML;
+			} else {
+				var dataName = bound.getAttribute('z-data');
+				if (bound.hasAttribute('z-append')) {
+					var newElem = document.createElement('div');
+					newElem.innerHTML = _this.data[dataName];
+					bound.appendChild(newElem);
+					element = newElem;
+				} else if(bound.hasAttribute('z-prepend')) {
+					var newElem = document.createElement('div');
+					newElem.innerHTML = _this.data[dataName];
+					bound.insertBefore(newElem, bound.firstChild);
+					element = newElem;
 				} else {
-					e.target.setAttribute('z-link', e.target.getAttribute('id'));
-				}
-			}
-			bound = document.querySelectorAll('#'+e.target.getAttribute('z-link'))[0];
-			element = bound;
-			oldHTML = bound.innerHTML;
-			if(e.target.getAttribute('z-pre')) {
-				var funcs = e.target.getAttribute('z-pre').trim();
-				while(funcs.indexOf(' ') !== -1) {
-					_this.data[funcs.slice(0, funcs.indexOf(' '))]();
-					funcs = funcs.slice(funcs.indexOf(' ') + 1);
-				}
-				_this.data[funcs](element, e);
-			}
-			if (bound.getAttribute('z-data')) {
-				if (_this.data[e.target.getAttribute('z-link')] !== undefined) {
-					bound.innerHTML = _this.data[e.target.getAttribute('z-link')];
+					bound.innerHTML = _this.data[dataName];
 					_this.data[e.target.getAttribute('z-link')] = oldHTML;
-				} else {
-					var dataName = bound.getAttribute('z-data');
-					if (bound.hasAttribute('z-append')) {
-						var newElem = document.createElement('div');
-						newElem.innerHTML = _this.data[dataName];
-						bound.appendChild(newElem);
-						element = newElem;
-					} else if(bound.hasAttribute('z-prepend')) {
-						var newElem = document.createElement('div');
-						newElem.innerHTML = _this.data[dataName];
-						bound.insertBefore(newElem, bound.firstChild);
-						element = newElem;
-					} else {
-						bound.innerHTML = _this.data[dataName];
-						_this.data[e.target.getAttribute('z-link')] = oldHTML;
-					}
-				}
-				var a = bound.querySelectorAll('[z-link=master]');
-				for (var i=0;i<a.length; i++) {
-					a[i].setAttribute('z-link', e.target.getAttribute('z-link'));
 				}
 			}
-			if(e.target.getAttribute('z-post')) {
-				var funcs = e.target.getAttribute('z-post').trim();
-				while(funcs.indexOf(' ') !== -1) {
-					_this.data[funcs.slice(0, funcs.indexOf(' '))]();
-					funcs = funcs.slice(funcs.indexOf(' ') + 1);
-				}
-				_this.data[funcs](element, e);
+			var a = bound.querySelectorAll('[z-link=master]');
+			for (var i=0;i<a.length; i++) {
+				a[i].setAttribute('z-link', e.target.getAttribute('z-link'));
 			}
+		}
+		if(e.target.getAttribute('z-post')) {
+			var funcs = e.target.getAttribute('z-post').trim();
+			while(funcs.indexOf(' ') !== -1) {
+				_this.data[funcs.slice(0, funcs.indexOf(' '))]();
+				funcs = funcs.slice(funcs.indexOf(' ') + 1);
+			}
+			_this.data[funcs](element, e);
 		}
 
 		cycle();
@@ -77,7 +75,7 @@ Zam.prototype.runEngine = function() {
 	}
 
 	var cycle = function() {
-		var y = document.querySelectorAll('[z-link]');
+		var y = document.querySelectorAll('[z-link], [z-pre], [z-post]');
 		for(var j=0;j<y.length; j++) {
 			var event = 'click';
 			if (y[j].getAttribute('z-event')) {
