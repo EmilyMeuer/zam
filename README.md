@@ -14,178 +14,10 @@ A small toolset that simplifies DOM traversal, event handling, and Ajax.
 
 This library was created with one goal in mind — to stay close to vanilla.
 
-## Quickstart
-
-```html
-<html>
-<body>
-  <div z-data="myData" id="myComp1">
-    <div z-link="myComp1" z-event="mouseover">
-      Hover over me!
-    </div>
-  </div>
-  <script type="module">
-    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@2.2/zam.min.js";
-    var zam = new Zam({
-		myData:
-		`
-		<div z-link="master" z-event="mouseleave">
-		  Nice Job!
-		</div>`
-    }, (e) => {
-      zam.css({'background-color':'yellow'}, e);
-    });
-  </script>
-</body>
-</html>
-```
-
-Note:
-
-* z-event default value is 'click'.
-
-* z-link="master" links to parent element.
-
-## Event Engine Lifecycle
-
-### What is the Event Engine?
-
-The Event Engine is a really just a loop function that detects new Engine Attributes, and creates an event listener according to those attributes.
-
-### What are Engine Attributes?
-
-They are custom element attributes used to create an event listener.
-
-* z-link : Its value is an id attribute of a element.
-
-* z-data : Its value corresponds to a key in a Zam instance's .data object.
-
-* z-event : It's value corresponds to a event type ('mouseover', 'mouseleave', etc). If the z-event attribute isn't declared, then the event type defaults to 'click'.
-
-* z-append : Its value is nothing. It acts as a flag to tell the Event Engine to append z-data to the given element's innerHTML.
-
-* z-prepend : Its value is nothing. It acts as a flag to tell the Event Engine to prepend z-data to the given element's innerHTML..
-
-* Note : If z-append or z-prepend are not declared on an element. Then z-data's value will replace the innerHTML with z-data's value
-
-### Event Engine Example 1
-
-Consider the following code...
-
-```html
-<html>
-<body>
-  <div z-data="someData" id="someID1">
-    <div z-link="someID1">
-      Click Me
-    </div>
-  </div>
-  <div z-data="someData" id="someID2">
-    <div z-link="someID2">
-      Click Me
-    </div>
-  </div>
-  <script>
-    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@2.2/zam.min.js";
-    var zam = new Zam({
-      someData:`
-        <div z-link="master">
-  	  Click me again!
-        </div>`
-    }, (element, event) => {
-  
-    });
-  </script>
-</body>
-</html>
-```
-First. Notice that \<div z-link="someID1"\>Click Me\</div\> links to \<div z-data="someData" id="someID1"\>...\</div\>
-
-Since no z-event attribute is declared on \<div z-link="someID1"\>Click Me\</div\>, then it defaults to event type 'click'.
-
-So basically, when we click \<div z-link="someID1"\>Click Me\</div\>, then \<div z-data="someData" id="someID1"\>...\</div\> will have it's innerHTML replaced with "someData".
-
-In this example, "someData" is defined as string \`\<div z-link="master"\>Click me again!\</div\>\`.
-
-You are probably asking yourself -- What is z-link="master"?
-
-z-link="master" will inherit the z-link value of the element that was just replaced. So in this case, z-link="master" will be transformed by the Event Engine to z-link="someID1".
-
-Everything we just stated applies to \<div z-data="someData" id="someID2"\>\<div z-link="someID2"\>Click Me\</div\>\</div\> as well.
-
-##
-
-We literally just created a toggle button.
-
-If we click "Click Me", then "Click Me Again!" will appear.
-
-And if we click "Click Me Again!", then "Click Me" will reappear.
-
-##
-
-Now you may be wondering, "What is that arrow function with the parameters 'element' and 'event'"?
-
-That arrow function is the Event Engine's callback. Everytime the engine cycles (an Engine's assigned event triggers) the callback will execute.
-
-* 'element' is the DOMElement of the html (from 'someData') that was just injected. In this case it's \<div z-link="master"\>...\</div\>.
-
-* 'event' is the DOM Event object that has occured.
-
-##
-
-### Event Engine Example 2
-
-Consider the following code...
-
-```html
-<html>
-<body>
-  <div class="commentForm">
-    <input type="text" placeholder="Enter your comment..." id="commentInput" />
-    <div z-link="comments" class="addComment">
-      Add Comment
-    </div>
-    <div z-data="newComment" z-append id="comments">
-    </div>
-  </div>
-  <script type="module">
-    import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@2.1/zam.min.js";
-    var i = 0;
-    var createComment = function() {
-      return `
-        <div z-data="deleteComment" class="comment" id="comment-${i}">
-          <span></span>
-          <div z-link="comment-${i}" class="deleteComment">
-            Delete
-          </div>
-        </div>`
-    }
-    var zam = new Zam({
-      newComment:createComment(),
-      deleteComment: ``
-    }, (elem, event) => {
-      if(event.target.className === 'addComment') {
-        elem.querySelectorAll('span')[0].innerHTML = zam.e('#commentInput')[0].value;
-        zam.e('#commentInput')[0].value = '';
-        i++;
-        zam.data['newComment'] = createComment();
-      }
-    });
-  </script>
-</body>
-</html>
-```
-
-I'm not going to go in-depth on this example. I highly recommend running this html on your browser. This example shows just how powerful the Zam Event Engine can be.
-
-To see this example live, visit http://zamjs.com/examples.
-
-##
-
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@2.2/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@3.0/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -415,7 +247,7 @@ For more examples visit http://zamjs.com/examples
     ... some content ...
   </div>
 <script type="module">
-import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@2.2/zam.min.js";
+import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@3.0/zam.min.js";
 var zam = new Zam();
 zam.router({
     'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/

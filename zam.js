@@ -1,90 +1,37 @@
 function Zam(obj, cycled) {
-	this.functions = {};
 	this.routes = {};
-	this.data = (obj === undefined) ? {} : obj;
-	this.cycled = cycled;
-	this.runEngine();
 	this.idCounter = 0;
+	var __this = this;
+	getId = function() {
+		return __this.idCounter++;
+	}
 }
 
-Zam.prototype.runEngine = function() {
-
+Zam.component = function() {
 	var _this = this;
-
-	var engine = function(e) {
-		var bound;
-		var element;
-		var oldHTML;
-		if(e.target.getAttribute('z-link') === null) {
-			if (e.target.getAttribute('id') === null) {
-				e.target.setAttribute('id', 'a' + _this.idCounter);
-				e.target.setAttribute('z-link', 'a' + _this.idCounter);
-				_this.idCounter++;
-			} else {
-				e.target.setAttribute('z-link', e.target.getAttribute('id'));
-			}
-		}
-		bound = document.querySelectorAll('#'+e.target.getAttribute('z-link'))[0];
-		element = bound;
-		oldHTML = bound.innerHTML;
-		if(e.target.getAttribute('z-pre')) {
-			var funcs = e.target.getAttribute('z-pre').trim();
-			while(funcs.indexOf(' ') !== -1) {
-				_this.data[funcs.slice(0, funcs.indexOf(' '))]();
-				funcs = funcs.slice(funcs.indexOf(' ') + 1);
-			}
-			_this.data[funcs](element, e);
-		}
-		if (bound.getAttribute('z-data')) {
-			if (_this.data[e.target.getAttribute('z-link')] !== undefined) {
-				bound.innerHTML = _this.data[e.target.getAttribute('z-link')];
-				_this.data[e.target.getAttribute('z-link')] = oldHTML;
-			} else {
-				var dataName = bound.getAttribute('z-data');
-				if (bound.hasAttribute('z-append')) {
-					var newElem = document.createElement('div');
-					newElem.innerHTML = _this.data[dataName];
-					bound.appendChild(newElem);
-					element = newElem;
-				} else if(bound.hasAttribute('z-prepend')) {
-					var newElem = document.createElement('div');
-					newElem.innerHTML = _this.data[dataName];
-					bound.insertBefore(newElem, bound.firstChild);
-					element = newElem;
-				} else {
-					bound.innerHTML = _this.data[dataName];
-					_this.data[e.target.getAttribute('z-link')] = oldHTML;
-				}
-			}
-			var a = bound.querySelectorAll('[z-link=master]');
-			for (var i=0;i<a.length; i++) {
-				a[i].setAttribute('z-link', e.target.getAttribute('z-link'));
-			}
-		}
-		if(e.target.getAttribute('z-post')) {
-			var funcs = e.target.getAttribute('z-post').trim();
-			while(funcs.indexOf(' ') !== -1) {
-				_this.data[funcs.slice(0, funcs.indexOf(' '))]();
-				funcs = funcs.slice(funcs.indexOf(' ') + 1);
-			}
-			_this.data[funcs](element, e);
-		}
-
-		cycle();
-		(_this.cycled !== undefined) ? _this.cycled(element, e) : '';
+	this.id = 'a' + getId();
+	this.children = {};
+	this.setHTML = function(html) {
+		var elem = document.createElement('div');
+		elem.id = _this.id;
+		elem.innerHTML = html;
+		_this.node = elem;
+		_this.html = _this.node.outerHTML;
 	}
-
-	var cycle = function() {
-		var y = document.querySelectorAll('[z-link], [z-pre], [z-post]');
-		for(var j=0;j<y.length; j++) {
-			var event = 'click';
-			if (y[j].getAttribute('z-event')) {
-				event = y[j].getAttribute('z-event');
-			}
-			_this.on(event, y[j], engine);
+	this.mount = function() {
+		_this.node = document.querySelectorAll('#' + _this.id)[0];
+		_this.content = _this.node.children[0];
+		for (var key in _this.children) {
+			_this.children[key].mount();
 		}
+		_this.mounted();
 	}
-	cycle();
+}
+
+Zam.prototype.replace = function(event, element, target, html) {
+	this.on(event, element, () => {
+		target.innerHTML = html;
+	});
 }
 
 Zam.prototype.e = function(e) {
@@ -103,9 +50,6 @@ Zam.prototype.index = function(elem) {
 }
 
 Zam.prototype.unbind = function(event, e, func) {
-	if(typeof(func) === 'string') {
-		func = this.functions[func];
-	}
 
 	if(typeof(e) !== 'object') {
 		var x = document.querySelectorAll(e);
@@ -119,9 +63,6 @@ Zam.prototype.unbind = function(event, e, func) {
 }
 
 Zam.prototype.bind = function(event, e, func) {
-	if(typeof(func) === 'string') {
-		func = this.functions[func];
-	}
 
 	if(typeof(e) !== 'object') {
 		var x = document.querySelectorAll(e);
@@ -129,14 +70,8 @@ Zam.prototype.bind = function(event, e, func) {
 		for(var i=0;i<len; i++) {
 			x[i].addEventListener(event, func);
 		}
-		if(func.name !== 'anonymous') {
-			this.functions[func.name] = func;
-		}
 	} else {
 		e.addEventListener(event, func);
-		if(func.name !== 'anonymous') {
-			this.functions[func.name] = func;
-		}
 	}
 }
 
@@ -349,3 +284,42 @@ Zam.prototype.ajax = function(obj) {
 }
 
 export default Zam;
+
+/*
+
+Zam.prototype.compiler = function() {
+	var str = document.querySelectorAll('#zam')[0].innerHTML;
+	var newStr = '';
+	var sub = str;
+	while((sub.indexOf('$') > -1 || sub.indexOf('=') > -1 || sub.indexOf('super(') > -1) && sub.indexOf(';') > -1 && sub.indexOf('<') > -1) {
+		while(sub.indexOf(';') < sub.indexOf('<') && sub.indexOf(';') < sub.indexOf('$') && sub.indexOf(';') < sub.indexOf('super(')) {
+			newStr += sub.slice(0, sub.indexOf(';') + 1);
+			sub = sub.slice(sub.indexOf(';') + 1); 
+		}
+
+		if(sub.indexOf(')') > sub.indexOf('super(') && sub.indexOf('<') < sub.indexOf(')') && sub.indexOf('(') > -1 && sub.indexOf(')') > -1) {
+			newStr += sub.slice(0, sub.indexOf('<')) + '`' + sub.slice(sub.indexOf('<'), sub.indexOf(');')) + '`);';
+			sub = sub.slice(sub.indexOf(');') + 2);
+		} else if(sub.indexOf('<') > sub.indexOf('=') && (sub.indexOf('<') < sub.indexOf('$') || sub.indexOf('$') === -1)  && sub.indexOf(';') > -1 && sub.indexOf('=') > -1) {
+			newStr += sub.slice(0, sub.indexOf('<')) + '`' + sub.slice(sub.indexOf('<'), sub.indexOf(';')) + '`;';
+			sub = sub.slice(sub.indexOf(';') + 1);
+		} else if(sub.indexOf('$') > sub.indexOf('=') && sub.indexOf(';') > -1 && sub.indexOf('=') > -1) {
+			newStr += sub.slice(0, sub.indexOf('$')) + '`' + sub.slice(sub.indexOf('$'), sub.indexOf(';')) + '`;';
+			sub = sub.slice(sub.indexOf(';') + 1);
+		}
+	}
+	newStr += sub;
+	//console.log(newStr);
+	var script = document.createElement('script');
+	script.innerHTML = newStr;
+	document.querySelectorAll('body')[0].appendChild(script);
+	var zamScript = document.querySelectorAll('#zam')[0];
+	zamScript.parentNode.removeChild(zamScript);
+	var zamCompilerScript = document.querySelectorAll('#zamCompiler')[0];
+	zamCompilerScript.parentNode.removeChild(zamCompilerScript);
+	var DOMContentLoadedEvent = document.createEvent('Event');
+  	DOMContentLoadedEvent.initEvent('DOMContentLoaded', true, true);
+  	document.dispatchEvent(DOMContentLoadedEvent);
+}
+
+*/
