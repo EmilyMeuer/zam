@@ -1,4 +1,4 @@
-function Zam(obj, cycled) {
+export default function Zam(obj, cycled) {
 	this.routes = {};
 	this.idCounter = 0;
 }
@@ -282,8 +282,6 @@ Zam.prototype.ajax = function(obj) {
 		xhr.send(obj.data);
 	});
 }
-
-export default Zam;
 
 /*
 
