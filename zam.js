@@ -1,15 +1,15 @@
 function Zam(obj, cycled) {
 	this.routes = {};
 	this.idCounter = 0;
-	var __this = this;
-	getId = function() {
-		return __this.idCounter++;
-	}
+}
+
+Zam.getId = function() {
+	return this.idCounter++;
 }
 
 Zam.component = function() {
 	var _this = this;
-	this.id = 'a' + getId();
+	this.id = 'a' + Zam.getId();
 	this.children = {};
 	this.setHTML = function(html) {
 		var elem = document.createElement('div');
