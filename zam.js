@@ -1,10 +1,10 @@
 export default function Zam(obj, cycled) {
 	this.routes = {};
-	this.idCounter = 0;
+	Zam.idCounter = 0;
 }
 
 Zam.getId = function() {
-	return this.idCounter++;
+	return Zam.idCounter++;
 }
 
 Zam.component = function() {
