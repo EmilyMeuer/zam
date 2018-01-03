@@ -1,4 +1,4 @@
-function Zam() {}
+export default function Zam() {}
 
 Zam.idCounter = 0;
 
