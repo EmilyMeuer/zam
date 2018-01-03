@@ -246,26 +246,6 @@ returns nothing
 
 ## Class Methods
 
-### Zam.e(selector)
-
-String 'selector' -> optional | If undefined then last used selector is used.
-
-Returns static NodeList
-
-### Zam.index(element)
-
-DOMElement 'element' -> required
-
-Returns index
-
-### Zam.html(html, selector)
-
-String 'html' -> required
-
-String or DOMElement 'selector' -> required
-
-Returns nothing
-
 ### Zam.on(events, selector, func)
 
 String 'events' -> required
@@ -294,35 +274,13 @@ String or DOMElement 'selector' -> required
 
 Returns nothing
 
-### Zam.each(selector, callback)
-
-String 'selector' -> required
-
-Function 'callback' -> required
-
-Returns nothing
-
-### Zam.addStyle(ruleSet, id)
-
-String 'ruleSet' -> required
-
-String 'id' -> required
-
-Returns nothing
-
-### Zam.removeStyle(id)
-
-String 'id' -> required
-
-Returns nothing
-
-### Zqm.ajax(options)
+### Zam.ajax(options)
 
 Object 'options' -> required
 
 Returns Promise
 
-### Zam.router(routes)
+## Zam.router(routes) - Object
 
 Object 'routes' -> required
 
