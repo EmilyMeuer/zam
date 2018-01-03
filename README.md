@@ -37,7 +37,6 @@ When we update a component's innerHTML, we call this.mount(). Then, all of the g
 class Item extends Zam.component {
   constructor() {
     super();
-    this.children.switch = new UISwitch();
     this.setHTML(`
       <div class="item">This is an item. Click me!</div>
     `);
