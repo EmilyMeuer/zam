@@ -16,13 +16,18 @@ Zam.component = function() {
 		elem.id = _this.id;
 		elem.innerHTML = html;
 		_this.node = elem;
+		_this.element = elem.children[0];
 		_this.html = _this.node.outerHTML;
 	}
 	this.mount = function() {
 		_this.node = document.querySelectorAll('#' + _this.id)[0];
-		_this.content = _this.node.children[0];
+		_this.element = _this.node.children[0];
 		for (var key in _this.children) {
-			_this.children[key].mount();
+			if(document.querySelectorAll('#' + _this.children[key].id)[0] !== undefined) {
+				_this.children[key].mount();
+			} else {
+				delete _this.children[key];
+			}
 		}
 		_this.mounted();
 	}
