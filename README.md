@@ -180,7 +180,71 @@ jQuery errors out. Zam doesn't.
 
 <img src="https://i.imgur.com/qET0osb.png" />
 
-## Methods
+## Zam.component - Properties
+
+### anchor
+
+The anchor is a DOMElement
+
+Say we created a Zam.component with the following structure
+
+```
+this.setHTML(`
+    <div>Hello World - 1!<div>
+    <div>Hello World - 2!<div>
+    <div>Hello World - 3!<div>
+`)
+```
+
+This Component would be rendered to the following HTML
+
+```
+<div id="a0">
+    <div>Hello World - 1!<div>
+    <div>Hello World - 2!<div>
+    <div>Hello World - 3!<div>
+</div>
+```
+
+The anchor is the DOMElement for
+
+```
+<div id="a0">...</div>
+```
+
+### html
+
+This property is just the outerHTML of a component's anchor DOMElement
+
+## Zam.component - Methods
+
+### setHTML(string)
+
+returns nothing
+
+### cache(Zam.component, string)
+
+caches Zam.component with specified key 'string'
+
+returns Zam.component
+
+### cache(string)
+
+returns Zam.component associated with key 'string'
+
+### mount(void)
+
+initiates recursive refresh/rendering. All cached descendents 'mounted()' method will be called
+
+returns nothing
+
+### mounted(void)
+
+See 'mount(void)'
+
+returns nothing
+
+## Class Methods
 
 ### Zam.e(selector)
 
