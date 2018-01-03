@@ -31,7 +31,7 @@ Zam.component = function() {
 		this.anchor = document.getElementById(this.id);
 		this.html = this.anchor.outerHTML;
 		for (var key in this.children) {
-			if(document.getElementById(this.children[key].id) !== undefined) {
+			if(document.getElementById(this.children[key].id) !== null) {
 				this.children[key].mount();
 			} else {
 				delete this.children[key];
@@ -39,12 +39,6 @@ Zam.component = function() {
 		}
 		this.mounted();
 	}.bind(this);
-}
-
-Zam.replace = function(event, element, target, html) {
-	this.on(event, element, () => {
-		target.innerHTML = html;
-	});
 }
 
 Zam.on = function(event, e, func) {

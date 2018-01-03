@@ -82,7 +82,7 @@ class Items extends Zam.component {
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@4.0/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@4.1/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -334,7 +334,7 @@ For more examples visit http://zamjs.com/examples
     ... some content ...
   </div>
 <script type="module">
-import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@4.0/zam.min.js";
+import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@4.1/zam.min.js";
 new Zam.router({
     'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/
     'stuff-tab': {view: '#stuff', 'display': 'flex'},
