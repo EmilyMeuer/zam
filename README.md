@@ -69,8 +69,8 @@ class Items extends Zam.component {
 
     createItem() {
         var item = new Item();
-        this.cache(item, ('b' + this.itemCnt++));
-        this.node.appendChild(item.anchor);
+        this.cache(item, ('item' + this.itemCnt++));
+        this.anchor.children[0].appendChild(item.anchor);
         item.mount();
     }
 
@@ -82,7 +82,7 @@ class Items extends Zam.component {
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@3.8/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@3.9/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -376,7 +376,7 @@ For more examples visit http://zamjs.com/examples
     ... some content ...
   </div>
 <script type="module">
-import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@3.8/zam.min.js";
+import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@3.9/zam.min.js";
 new Zam.router({
     'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/
     'stuff-tab': {view: '#stuff', 'display': 'flex'},

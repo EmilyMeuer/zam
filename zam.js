@@ -17,7 +17,6 @@ Zam.component = function() {
 		elem.id = this.id;
 		elem.innerHTML = html;
 		this.anchor = elem;
-		this.node = elem.children[0];
 		this.html = this.anchor.outerHTML;
 	}.bind(this);
 	this.cache = function(elem, key) {
@@ -30,7 +29,7 @@ Zam.component = function() {
 	}.bind(this);
 	this.mount = function() {
 		this.anchor = document.getElementById(this.id);
-		this.node = this.anchor.children[0];
+		this.html = this.anchor.outerHTML;
 		for (var key in this.children) {
 			if(document.getElementById(this.children[key].id) !== undefined) {
 				this.children[key].mount();
