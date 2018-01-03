@@ -1,4 +1,4 @@
-function Zam(obj, cycled) {
+export default function Zam(obj, cycled) {
 	this.routes = {};
 	Zam.idCounter = 0;
 }
