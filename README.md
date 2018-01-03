@@ -40,18 +40,15 @@ class Item extends Zam.component {
     this.setHTML(`
       <div class="item">This is an item. Click me!</div>
     `);
-    this.clicked = (() => {
-      this.unboundClick();
-    }).bind(this);
   }
 
-  unboundClick() {
+  clicked() {
     console.log("You clicked an item.");
   }
 
   mounted() {
     console.log("Item mounted. Let's add a click event listener.")
-    zam.on('click', this.node, this.clicked);
+    zam.on('click', this.node, this.clicked.bind(this));
   }
 }
 
