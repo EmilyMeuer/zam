@@ -1,7 +1,8 @@
-export default function Zam(obj, cycled) {
-	this.routes = {};
-	Zam.idCounter = 0;
-}
+function Zam() {}
+
+Zam.idCounter = 0;
+
+Zam.routes = {};
 
 Zam.getId = function() {
 	return Zam.idCounter++;
@@ -28,10 +29,10 @@ Zam.component = function() {
 		}
 	}.bind(this);
 	this.mount = function() {
-		this.anchor = document.querySelectorAll('#' + this.id)[0];
+		this.anchor = document.getElementById(this.id);
 		this.node = this.anchor.children[0];
 		for (var key in this.children) {
-			if(document.querySelectorAll('#' + this.children[key].id)[0] !== undefined) {
+			if(document.getElementById(this.children[key].id) !== undefined) {
 				this.children[key].mount();
 			} else {
 				delete this.children[key];
@@ -41,17 +42,17 @@ Zam.component = function() {
 	}.bind(this);
 }
 
-Zam.prototype.replace = function(event, element, target, html) {
+Zam.replace = function(event, element, target, html) {
 	this.on(event, element, () => {
 		target.innerHTML = html;
 	});
 }
 
-Zam.prototype.e = function(e) {
+Zam.e = function(e) {
 	return document.querySelectorAll(e);
 }
 
-Zam.prototype.index = function(elem) {
+Zam.index = function(elem) {
 	var i = 0;
 	var a = elem;
 	while((a = a.previousElementSibling) != null) {
@@ -62,143 +63,141 @@ Zam.prototype.index = function(elem) {
 	return i;
 }
 
-Zam.prototype.unbind = function(event, e, func) {
-
-	if(typeof(e) !== 'object') {
-		var x = document.querySelectorAll(e);
-		var len = x.length;
-		for(var i=0;i<len; i++) {
-			x[i].removeEventListener(event, func);
+Zam.on = function(event, e, func) {
+	var bind = function(event, e, func) {
+		if(typeof(e) !== 'object') {
+			var x = document.querySelectorAll(e);
+			var len = x.length;
+			for(var i=0;i<len; i++) {
+				x[i].addEventListener(event, func);
+			}
+		} else {
+			e.addEventListener(event, func);
 		}
-	} else {
-		e.removeEventListener(event, func);
 	}
-}
 
-Zam.prototype.bind = function(event, e, func) {
-
-	if(typeof(e) !== 'object') {
-		var x = document.querySelectorAll(e);
-		var len = x.length;
-		for(var i=0;i<len; i++) {
-			x[i].addEventListener(event, func);
-		}
-	} else {
-		e.addEventListener(event, func);
-	}
-}
-
-Zam.prototype.on = function(event, e, func) {
 	if (event.indexOf(' ') !== -1) {
 		var eve = event;
 		while(eve.indexOf(' ') !== -1) {
-			this.bind(eve.slice(0, eve.indexOf(' ')), e, func);
+			bind(eve.slice(0, eve.indexOf(' ')), e, func);
 			eve = eve.slice(eve.indexOf(' ') + 1);
 		}
-		this.bind(eve, e, func);
+		bind(eve, e, func);
 	} else {
-		this.bind(event, e, func);
+		bind(event, e, func);
 	}
 }
 
-Zam.prototype.off = function(event, e, func) {
+Zam.off = function(event, e, func) {
+	var unbind = function(event, e, func) {
+		if(typeof(e) !== 'object') {
+			var x = document.querySelectorAll(e);
+			var len = x.length;
+			for(var i=0;i<len; i++) {
+				x[i].removeEventListener(event, func);
+			}
+		} else {
+			e.removeEventListener(event, func);
+		}
+	}
+
 	if (event.indexOf(' ') !== -1) {
 		var eve = event;
 		while(eve.indexOf(' ') !== -1) {
-			this.unbind(eve.slice(0, eve.indexOf(' ')), e, func);
+			unbind(eve.slice(0, eve.indexOf(' ')), e, func);
 			eve = eve.slice(eve.indexOf(' ') + 1);
 		}
-		this.unbind(eve, e, func);
+		unbind(eve, e, func);
 	} else {
-		this.unbind(event, e, func);
+		unbind(event, e, func);
 	}
 }
 
-Zam.prototype.cssSelector = function(props, e) {
-	var x = document.querySelectorAll(e);
-	var len = x.length;
-	for(var i=0;i<len; i++) {
-		this.cssObject(props, x[i]);
-	}
-}
-
-Zam.prototype.cssAddValue = function(x, key, value) {
-	var val1 = value.slice(0, value.indexOf(' '));
-	var match;
-	if((match = x.style[key].match(new RegExp(`(^${val1}|, ${val1})`, 'g'))) === null) {
-		x.style[key] += (',' + value);
-	} else {
-		var start = x.style[key].indexOf(match[0]);
-		(match[0].indexOf(',') > -1) ? start += 2 : '';
-		var before = x.style[key].slice(0, start);
-		var middle = value;
-		var end = "";
-		var after = x.style[key].slice(start).indexOf(',');
-		if(after !== -1) {
-			end = x.style[key].slice(x.style[key].slice(start).indexOf(',')); 
+Zam.css = function(props, e) {
+	var cssAddValue = function(x, key, value) {
+		var val1 = value.slice(0, value.indexOf(' '));
+		var match;
+		if((match = x.style[key].match(new RegExp(`(^${val1}|, ${val1})`, 'g'))) === null) {
+			x.style[key] += (',' + value);
+		} else {
+			var start = x.style[key].indexOf(match[0]);
+			(match[0].indexOf(',') > -1) ? start += 2 : '';
+			var before = x.style[key].slice(0, start);
+			var middle = value;
+			var end = "";
+			var after = x.style[key].slice(start).indexOf(',');
+			if(after !== -1) {
+				end = x.style[key].slice(x.style[key].slice(start).indexOf(',')); 
+			}
+			x.style[key] = before + middle + end;
 		}
-		x.style[key] = before + middle + end;
 	}
-}
 
-Zam.prototype.cssObject = function(props, x) {
-	for (var key in props) {
-		if (props.hasOwnProperty(key)) {
-			if(key.indexOf('-') !== -1) {
-				var val = props[key];
-				var idx = key.indexOf('-') + 1;
-				key = key.slice(0, idx - 1) + key[idx].toUpperCase() + key.slice(idx+1);
-				x.style[key] = val;
-			} else {
-				if(key === 'transition' || key === 'animation') {
-					if (props[key] === '' || x.style[key] === '') {
-						x.style[key] = props[key];
-					} else {
-						var stack = props[key];
-						var value = "";
-						while(stack.indexOf(',') !== -1) {
-							value = stack.slice(0, stack.indexOf(',')).trim();
-							this.cssAddValue(x, key, value);
-							stack = stack.slice(stack.indexOf(',') + 1).trim();
-						}
-						this.cssAddValue(x, key, stack);
-					}
+	var cssObject = function(props, x) {
+		for (var key in props) {
+			if (props.hasOwnProperty(key)) {
+				if(key.indexOf('-') !== -1) {
+					var val = props[key];
+					var idx = key.indexOf('-') + 1;
+					key = key.slice(0, idx - 1) + key[idx].toUpperCase() + key.slice(idx+1);
+					x.style[key] = val;
 				} else {
-					x.style[key] = props[key];
+					if(key === 'transition' || key === 'animation') {
+						if (props[key] === '' || x.style[key] === '') {
+							x.style[key] = props[key];
+						} else {
+							var stack = props[key];
+							var value = "";
+							while(stack.indexOf(',') !== -1) {
+								value = stack.slice(0, stack.indexOf(',')).trim();
+								cssAddValue(x, key, value);
+								stack = stack.slice(stack.indexOf(',') + 1).trim();
+							}
+							cssAddValue(x, key, stack);
+						}
+					} else {
+						x.style[key] = props[key];
+					}
 				}
 			}
 		}
 	}
-}
 
-Zam.prototype.css = function(props, e) {
+	var cssSelector = function(props, e) {
+		var x = document.querySelectorAll(e);
+		var len = x.length;
+		for(var i=0;i<len; i++) {
+			cssObject(props, x[i]);
+		}
+	}
+
 	if(typeof(e) === 'object') {
-		this.cssObject(props, e);
+		cssObject(props, e);
 	} else {
-		this.cssSelector(props, e);
+		cssSelector(props, e);
 	}
 }
 
-Zam.prototype.each = function(e, func) {
+Zam.each = function(e, func) {
 	var elems = document.querySelectorAll(e);
 	Array.prototype.forEach.call(elems, function(elem, i) {
 		func(elem, i);
 	});
 }
 
-Zam.prototype.addStyle = function(id, val) {
+Zam.addStyle = function(id, val) {
 	var newStyle = document.createElement("style");
 	newStyle.innerHTML = val;
 	newStyle.id = id;
 	document.getElementsByTagName("head")[0].appendChild(newStyle);
 }
 
-Zam.prototype.removeStyle = function(id) {
+Zam.removeStyle = function(id) {
 	var elem = document.querySelector('#'+id);
 	elem.parentNode.removeChild(elem);
 }
 
-Zam.prototype.html = function(html, e) {
+Zam.html = function(html, e) {
 
 	html = html.replace(/(?:\r\n|\r|\n)/g, '');
 
@@ -213,36 +212,39 @@ Zam.prototype.html = function(html, e) {
 	}
 }
 
-Zam.prototype.updateURL = function(path) {
-	if (history.pushState) {
-		window.history.pushState({path:path},'', path);
-	}
-}
+Zam.router = function(routes) {
 
-Zam.prototype.setContent = function() {
-	if(window.location.href.lastIndexOf('/') !== window.location.href.length - 1) {
-		for(var key in this.routes) {
-			if(window.location.href.indexOf('/' + this.routes[key].view.slice(1)) !== -1) {
-				this.css({'display': this.routes[key].display}, this.routes[key].view);
-			} else {
-				this.css({'display': 'none'}, this.routes[key].view);
+	this.routes = {};
+
+	var updateURL = function(path) {
+		if (history.pushState) {
+			window.history.pushState({path:path},'', path);
+		}
+	}
+
+	var setContent = function() {
+		if(window.location.href.lastIndexOf('/') !== window.location.href.length - 1) {
+			for(var key in this.routes) {
+				if(window.location.href.indexOf('/' + this.routes[key].view.slice(1)) !== -1) {
+					Zam.css({'display': this.routes[key].display}, this.routes[key].view);
+				} else {
+					Zam.css({'display': 'none'}, this.routes[key].view);
+				}
+			}
+		} else {
+			for(var key in this.routes) {
+				Zam.css({'display': this.routes[key].display}, this.routes[key].view);
+				break;
 			}
 		}
-	} else {
-		for(var key in this.routes) {
-			this.css({'display': this.routes[key].display}, this.routes[key].view);
-			break;
-		}
-	}
-}
+	}.bind(this);
 
-Zam.prototype.router = function(routes) {
 	this.routes = JSON.parse(JSON.stringify(routes));
 
-	this.setContent();
+	setContent();
 
-	this.on('popstate', window, () => {
-		this.setContent();
+	Zam.on('popstate', window, () => {
+		setContent();
 	});
 
 	var ids = '';
@@ -252,14 +254,14 @@ Zam.prototype.router = function(routes) {
 			event = key.event;
 		}
 
-		this.on(event, '#' + key, (e) => {
-			this.updateURL('/' + this.routes[e.target.id].view.slice(1));
-			this.setContent();
+		Zam.on(event, '#' + key, (e) => {
+			updateURL('/' + this.routes[e.target.id].view.slice(1));
+			setContent();
 		});
 	}
 }
 
-Zam.prototype.ajax = function(obj) {
+Zam.ajax = function(obj) {
 	if(obj.method === undefined) {
 		obj.method = 'GET';
 	}
@@ -295,42 +297,3 @@ Zam.prototype.ajax = function(obj) {
 		xhr.send(obj.data);
 	});
 }
-
-/*
-
-Zam.prototype.compiler = function() {
-	var str = document.querySelectorAll('#zam')[0].innerHTML;
-	var newStr = '';
-	var sub = str;
-	while((sub.indexOf('$') > -1 || sub.indexOf('=') > -1 || sub.indexOf('super(') > -1) && sub.indexOf(';') > -1 && sub.indexOf('<') > -1) {
-		while(sub.indexOf(';') < sub.indexOf('<') && sub.indexOf(';') < sub.indexOf('$') && sub.indexOf(';') < sub.indexOf('super(')) {
-			newStr += sub.slice(0, sub.indexOf(';') + 1);
-			sub = sub.slice(sub.indexOf(';') + 1); 
-		}
-
-		if(sub.indexOf(')') > sub.indexOf('super(') && sub.indexOf('<') < sub.indexOf(')') && sub.indexOf('(') > -1 && sub.indexOf(')') > -1) {
-			newStr += sub.slice(0, sub.indexOf('<')) + '`' + sub.slice(sub.indexOf('<'), sub.indexOf(');')) + '`);';
-			sub = sub.slice(sub.indexOf(');') + 2);
-		} else if(sub.indexOf('<') > sub.indexOf('=') && (sub.indexOf('<') < sub.indexOf('$') || sub.indexOf('$') === -1)  && sub.indexOf(';') > -1 && sub.indexOf('=') > -1) {
-			newStr += sub.slice(0, sub.indexOf('<')) + '`' + sub.slice(sub.indexOf('<'), sub.indexOf(';')) + '`;';
-			sub = sub.slice(sub.indexOf(';') + 1);
-		} else if(sub.indexOf('$') > sub.indexOf('=') && sub.indexOf(';') > -1 && sub.indexOf('=') > -1) {
-			newStr += sub.slice(0, sub.indexOf('$')) + '`' + sub.slice(sub.indexOf('$'), sub.indexOf(';')) + '`;';
-			sub = sub.slice(sub.indexOf(';') + 1);
-		}
-	}
-	newStr += sub;
-	//console.log(newStr);
-	var script = document.createElement('script');
-	script.innerHTML = newStr;
-	document.querySelectorAll('body')[0].appendChild(script);
-	var zamScript = document.querySelectorAll('#zam')[0];
-	zamScript.parentNode.removeChild(zamScript);
-	var zamCompilerScript = document.querySelectorAll('#zamCompiler')[0];
-	zamCompilerScript.parentNode.removeChild(zamCompilerScript);
-	var DOMContentLoadedEvent = document.createEvent('Event');
-  	DOMContentLoadedEvent.initEvent('DOMContentLoaded', true, true);
-  	document.dispatchEvent(DOMContentLoadedEvent);
-}
-
-*/

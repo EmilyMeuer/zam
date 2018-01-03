@@ -80,7 +80,7 @@ class Items extends Zam.component {
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@3.6/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@3.7/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -180,19 +180,19 @@ jQuery errors out. Zam doesn't.
 
 ## Methods
 
-### .e(selector)
+### Zam.e(selector)
 
 String 'selector' -> optional | If undefined then last used selector is used.
 
 Returns static NodeList
 
-### .index(element)
+### Zam.index(element)
 
 DOMElement 'element' -> required
 
 Returns index
 
-### .html(html, selector)
+### Zam.html(html, selector)
 
 String 'html' -> required
 
@@ -200,7 +200,7 @@ String or DOMElement 'selector' -> required
 
 Returns nothing
 
-### .on(events, selector, func)
+### Zam.on(events, selector, func)
 
 String 'events' -> required
 
@@ -210,7 +210,7 @@ Function or String 'func' -> required
 
 Returns nothing
 
-### .off(events, selector, func)
+### Zam.off(events, selector, func)
 
 String 'events' -> required
 
@@ -220,7 +220,7 @@ Function or String 'func' -> required
 
 Returns nothing
 
-### .css(declarations, selector)
+### Zam.css(declarations, selector)
 
 String 'declarations' -> required
 
@@ -228,7 +228,7 @@ String or DOMElement 'selector' -> required
 
 Returns nothing
 
-### .each(selector, callback)
+### Zam.each(selector, callback)
 
 String 'selector' -> required
 
@@ -236,7 +236,7 @@ Function 'callback' -> required
 
 Returns nothing
 
-### .addStyle(ruleSet, id)
+### Zam.addStyle(ruleSet, id)
 
 String 'ruleSet' -> required
 
@@ -244,19 +244,19 @@ String 'id' -> required
 
 Returns nothing
 
-### .removeStyle(id)
+### Zam.removeStyle(id)
 
 String 'id' -> required
 
 Returns nothing
 
-### .ajax(options)
+### Zqm.ajax(options)
 
 Object 'options' -> required
 
 Returns Promise
 
-### .router(routes)
+### Zam.router(routes)
 
 Object 'routes' -> required
 
@@ -310,9 +310,8 @@ For more examples visit http://zamjs.com/examples
     ... some content ...
   </div>
 <script type="module">
-import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@3.6/zam.min.js";
-var zam = new Zam();
-zam.router({
+import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@3.7/zam.min.js";
+new Zam.router({
     'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/
     'stuff-tab': {view: '#stuff', 'display': 'flex'},
     'about-tab': {view: '#about', 'display': 'flex'}
