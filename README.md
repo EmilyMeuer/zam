@@ -31,7 +31,7 @@ class Foo extends Zam.component {
 }
 ```
 
-When we update a components innerHTML, we call this.mount(). Then, all of the given element's descendents are re-rendered and mounted (that's why we have the mounted function - so we know when a component has successfully mounted).
+When we update a component's innerHTML, we call this.mount(). Then, all of the given element's descendents are re-rendered and mounted (that's why we have the mounted function - so we know when a component has successfully mounted).
 
 ```javascript
 class Item extends Zam.component {
