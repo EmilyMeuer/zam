@@ -47,21 +47,6 @@ Zam.replace = function(event, element, target, html) {
 	});
 }
 
-Zam.e = function(e) {
-	return document.querySelectorAll(e);
-}
-
-Zam.index = function(elem) {
-	var i = 0;
-	var a = elem;
-	while((a = a.previousElementSibling) != null) {
-		if(a.tagName.toLowerCase() === elem.target.tagName.toLowerCase()) {
-			i++;
-		}
-	}
-	return i;
-}
-
 Zam.on = function(event, e, func) {
 	var bind = function(event, e, func) {
 		if(typeof(e) !== 'object') {
@@ -174,40 +159,6 @@ Zam.css = function(props, e) {
 		cssObject(props, e);
 	} else {
 		cssSelector(props, e);
-	}
-}
-
-Zam.each = function(e, func) {
-	var elems = document.querySelectorAll(e);
-	Array.prototype.forEach.call(elems, function(elem, i) {
-		func(elem, i);
-	});
-}
-
-Zam.addStyle = function(id, val) {
-	var newStyle = document.createElement("style");
-	newStyle.innerHTML = val;
-	newStyle.id = id;
-	document.getElementsByTagName("head")[0].appendChild(newStyle);
-}
-
-Zam.removeStyle = function(id) {
-	var elem = document.querySelector('#'+id);
-	elem.parentNode.removeChild(elem);
-}
-
-Zam.html = function(html, e) {
-
-	html = html.replace(/(?:\r\n|\r|\n)/g, '');
-
-	if(typeof(e) === 'object') {
-		e.innerHTML = html;
-	} else {
-		var x = document.querySelectorAll(e);
-		var len = x.length;
-		for(var i=0;i<len; i++) {
-			x[i].innerHTML = html;
-		}
 	}
 }
 
