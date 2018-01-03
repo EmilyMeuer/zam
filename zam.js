@@ -1,4 +1,4 @@
-export default function Zam(obj, cycled) {
+function Zam(obj, cycled) {
 	this.routes = {};
 	Zam.idCounter = 0;
 }
@@ -8,29 +8,37 @@ Zam.getId = function() {
 }
 
 Zam.component = function() {
-	var _this = this;
 	this.id = 'a' + Zam.getId();
+	this.childrenCount = 0;
 	this.children = {};
 	this.setHTML = function(html) {
 		var elem = document.createElement('div');
-		elem.id = _this.id;
+		elem.id = this.id;
 		elem.innerHTML = html;
-		_this.node = elem;
-		_this.element = elem.children[0];
-		_this.html = _this.node.outerHTML;
-	}
+		this.anchor = elem;
+		this.node = elem.children[0];
+		this.html = this.anchor.outerHTML;
+	}.bind(this);
+	this.cache = function(elem, key) {
+		if(key) {
+			this.children[key] = elem;
+			return elem;
+		} else {
+			return this.children[elem];
+		}
+	}.bind(this);
 	this.mount = function() {
-		_this.node = document.querySelectorAll('#' + _this.id)[0];
-		_this.element = _this.node.children[0];
-		for (var key in _this.children) {
-			if(document.querySelectorAll('#' + _this.children[key].id)[0] !== undefined) {
-				_this.children[key].mount();
+		this.anchor = document.querySelectorAll('#' + this.id)[0];
+		this.node = this.anchor.children[0];
+		for (var key in this.children) {
+			if(document.querySelectorAll('#' + this.children[key].id)[0] !== undefined) {
+				this.children[key].mount();
 			} else {
-				delete _this.children[key];
+				delete this.children[key];
 			}
 		}
-		_this.mounted();
-	}
+		this.mounted();
+	}.bind(this);
 }
 
 Zam.prototype.replace = function(event, element, target, html) {

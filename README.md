@@ -35,41 +35,44 @@ When we update a component's innerHTML, we call this.mount(). Then, all of the g
 
 ```javascript
 class Item extends Zam.component {
-  constructor() {
-    super();
-    this.setHTML(`
-      <div class="item">This is an item. Click me!</div>
-    `);
-  }
+    constructor() {
+        super();
+        this.cache(new UISwitch(), 'switch');
+        this.cache(new DeleteItemButton(), 'deleteButton');
+        this.setHTML(`
+				<div class="item">
+            		${this.cache('switch').html}
+  	        		<br/>
+  	        		<br/>
+  	        		${this.cache('deleteButton').html}
+  	        		<div class="moreInfo">
+  	            		More Info
+  	        		</div>
+  	    		</div>
+  	    	`);
+    }
 
-  clicked() {
-    console.log("You clicked an item.");
-  }
-
-  mounted() {
-    console.log("Item mounted. Let's add a click event listener.")
-    zam.on('click', this.node, this.clicked.bind(this));
-  }
+    mounted() {}
 }
 
 class Items extends Zam.component {
-  constructor() {
-    super();
-    this.itemCount = 0;
-    this.setHTML(`
-      <div class="items" id="items">
-      </div>
-    `);
-  }
+    constructor() {
+        super();
+        this.itemCnt = 0;
+        this.setHTML(`
+				<div class="items" id="items">
+				</div>
+			`);
+    }
 
-  createItem() {
-    var item = new Item();
-    this.children['item-' + this.itemCount++] = item;
-    this.element.querySelectorAll('.items')[0].appendChild(item.node);
-    this.mount();
-  }
+    createItem() {
+        var item = new Item();
+        this.cache(item, ('b' + this.itemCnt++));
+        this.node.appendChild(item.anchor);
+        item.mount();
+    }
 
-  mounted() {}
+    mounted() {}
 }
 ```
 
@@ -77,7 +80,7 @@ class Items extends Zam.component {
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@3.4/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@3.5/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -307,7 +310,7 @@ For more examples visit http://zamjs.com/examples
     ... some content ...
   </div>
 <script type="module">
-import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@3.4/zam.min.js";
+import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@3.5/zam.min.js";
 var zam = new Zam();
 zam.router({
     'home-tab': {view: '#home', 'display': 'flex'}, //the first route will always be the root route. i.e www.somesite.com/
