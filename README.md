@@ -68,7 +68,7 @@ class Items extends Zam.component {
   createItem() {
     var item = new Item();
     this.children['item-' + this.itemCount++] = item;
-    this.node.querySelectorAll('.items')[0].appendChild(item.node);
+    this.element.querySelectorAll('.items')[0].appendChild(item.node);
     this.mount();
   }
 
