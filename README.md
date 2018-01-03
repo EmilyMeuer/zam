@@ -40,19 +40,21 @@ class Item extends Zam.component {
         this.cache(new UISwitch(), 'switch');
         this.cache(new DeleteItemButton(), 'deleteButton');
         this.setHTML(`
-				<div class="item">
-            		${this.cache('switch').html}
-  	        		<br/>
-  	        		<br/>
-  	        		${this.cache('deleteButton').html}
-  	        		<div class="moreInfo">
-  	            		More Info
-  	        		</div>
-  	    		</div>
-  	    	`);
+	    <div class="item">
+                ${this.cache('switch').html}
+                <br/>
+                <br/>
+                ${this.cache('deleteButton').html}
+                <div class="moreInfo">
+                    More Info
+                </div>
+            </div>
+        `);
     }
-
-    mounted() {}
+    mounted() {
+        console.log("Item mounted");
+        // ...do stuff like add event listeners here
+    }
 }
 
 class Items extends Zam.component {
@@ -60,9 +62,9 @@ class Items extends Zam.component {
         super();
         this.itemCnt = 0;
         this.setHTML(`
-				<div class="items" id="items">
-				</div>
-			`);
+            <div class="items" id="items">
+            </div>
+        `);
     }
 
     createItem() {
