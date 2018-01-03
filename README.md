@@ -10,9 +10,73 @@ http://zamjs.com
 
 ## Overview/Philosophy
 
-A small toolset that simplifies DOM traversal, event handling, and Ajax.
+Simplifies DOM traversal, event handling, Ajax, and encourages single-page applications.
 
 This library was created with one goal in mind — to stay close to vanilla.
+
+## Quickstart
+
+Zam is component based. A component represents a DOMElement or node.
+
+```javascript
+class Foo extends Zam.component {
+  constructor() {
+    super()
+    this.setHTML(`
+      <div>Hello</div>
+      <div>Universe!</div>
+    `);
+  }
+  mounted {}
+}
+```
+
+When we update a component's innerHTML, we call this.mount(). Then, all of the given element's descendents are re-rendered and mounted (that's why we have the mounted function - so we know when a component has successfully mounted).
+
+```javascript
+class Item extends Zam.component {
+  constructor() {
+    super();
+    this.children.switch = new UISwitch();
+    this.setHTML(`
+      <div class="item">This is an item. Click me!</div>
+    `);
+    this.clicked = (() => {
+      this.unboundClick();
+    }).bind(this);
+  }
+
+  unboundClick() {
+    console.log("You clicked an item.");
+  }
+
+  mounted() {
+    console.log("Item mounted. Let's add a click event listener.")
+    zam.on('click', this.node, this.clicked);
+  }
+}
+
+class Items extends Zam.component {
+  constructor() {
+    super();
+    this.itemCount = 0;
+    this.setHTML(`
+      <div class="items" id="items">
+      </div>
+    `);
+  }
+
+  createItem() {
+    var item = new Item();
+    this.children['item-' + this.itemCount++] = item;
+    this.node.querySelectorAll('.items')[0].appendChild(item.node);
+    this.mount();
+  }
+
+  mounted() {}
+}
+```
+
 
 ## Import
 
