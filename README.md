@@ -148,8 +148,7 @@ app.get('/main.css', function(req, res) {
 });
 
 app.get('/zam.min.js', function(req, res) {
-  res.sendFile(__dirname + "/zam.min.js
-");
+  res.sendFile(__dirname + "/zam.min.js");
 });
 
 app.get('/components.js', function(req, res) {
