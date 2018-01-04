@@ -15,6 +15,10 @@ Zam.component = function() {
 		elem.innerHTML = html;
 		this.anchor = elem;
 		this.html = elem.outerHTML;
+		if(this.constructor.name === 'Root') {
+			document.querySelectorAll('body')[0].innerHTML = this.html;
+			this.mount();
+		}
 	}
 	this.cache = function(component, key) {
 		if(key) {
@@ -90,5 +94,4 @@ Zam.component = function() {
 			removeListener(event, func);
 		}
 	}
-
 }

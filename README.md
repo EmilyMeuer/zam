@@ -8,11 +8,9 @@
 http://zamjs.com
 </p>
 
-## Overview/Philosophy
+## Overview
 
 A component based micro-library that encourages single-page applications.
-
-This library was created with one goal in mind — to stay close to vanilla.
 
 ## Quickstart
 
@@ -21,7 +19,7 @@ Zam is component based.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@5.2/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@5.3/zam.min.js"></script>
 ```
 ```
 npm install zamjs
