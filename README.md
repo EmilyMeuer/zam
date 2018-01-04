@@ -12,6 +12,15 @@ http://zamjs.com
 
 A component based micro-library that encourages single-page applications.
 
+## Import
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@6.1/zam.min.js"></script>
+```
+```
+npm install zamjs
+```
+
 ## Quickstart
 
 Zam is component based.
@@ -337,13 +346,4 @@ export class UISwitch extends Zam {
 	-o-transition: left 0.1s ease-out;
 	transition: left 0.1s ease-out;
 }
-```
-
-## Import
-
-```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@6.1/zam.min.js"></script>
-```
-```
-npm install zamjs
 ```
