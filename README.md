@@ -19,7 +19,7 @@ Zam is component based.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@6.0/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@6.1/zam.min.js"></script>
 ```
 ```
 npm install zamjs

@@ -1,40 +1,42 @@
 export default class Zam {
 	constructor(html) {
-		this.children = {};
 		this.html = html;
 		this.e = document.createElement('div');
 		this.e.innerHTML = html
 		this.node = this.e.children[0];
 		if(this.constructor.name === 'Root') {
+			this.key = 'root';
 			document.querySelectorAll('body')[0].appendChild(this.e);
 		}
 	}
 
-	append(component, key) {
+	append(component, key, callback) {
+		callback !== undefined ? component.callback = callback : undefined;
+		component.key = key;
 		component.parent = this;
-		this.children[key] = component;
+		this[key] = component;
 		this.e.children[0].appendChild(component.e);
 	}
 
-	prepend(component, key) {
+	prepend(component, key, callback) {
+		callback !== undefined ? component.callback = callback : undefined;
+		component.key = key;
 		component.parent = this;
+		this[key] = component;
 		this.e.children[0].insertBefore(component.e, this.e.children[0].firstChild);
-		this.children[key] = component;
 	}
 
-	replace(component, key) {
+	replace(component, key, callback) {
+		callback !== undefined ? component.callback = callback : undefined;
 		component.parent = this.parent;
-		this.parent.children[key] = component;
+		this.parent[key] = component;
 		this.e.replaceWith(component.e);
-		for(var key in this.parent.children) {
-			if(this.parent.children[key] === this) {
-				delete this.parent.children[key];
-			}
-		}
+		delete this.parent[this.key];
 	}
 
 	remove(component) {
 		this.e.parentNode.removeChild(this.e);
+		delete this.parent[this.key];
 	}
 
 	setInnerHTML(html) {
