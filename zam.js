@@ -2,10 +2,10 @@ export default class Zam {
 	constructor(html) {
 		this.html = html;
 		this.e = this._generator(this.html);
-		if(this.constructor.name === 'Root') {
-			this.key = 'root';
-			document.querySelectorAll('body')[0].appendChild(this.e);
-		}
+	}
+
+	mount(selector) {
+		document.querySelectorAll(selector)[0].firstChild.replaceWith(this.e);
 	}
 
 	_generator(html) {
@@ -62,31 +62,39 @@ export default class Zam {
 		return this.e.innerHTML;
 	}
 
-	style(props) {
-		if (typeof(props) === 'object') {
-			this._cssObject(props, this.e);
-		} else {
-			if(props.indexOf('-') !== -1) {
-				var idx = props.indexOf('-') + 1;
-				props = props.slice(0, idx - 1) + props.slice(idx, idx + 1).toUpperCase() + props.slice(idx+1);
-			}
-			return this.e.style[props];
-		}
+	setCSS(props) {
+		Zam._cssObject(props, this.e);
 	}
 
-	static style(props, selector) {
+	getCSS(property) {
+		if(props.indexOf('-') !== -1) {
+			var idx = props.indexOf('-') + 1;
+			props = props.slice(0, idx - 1) + props.slice(idx, idx + 1).toUpperCase() + props.slice(idx+1);
+		}
+		return this.e.style[props];
+	}
+
+	static setCSS(props, selector) {
 		if (typeof(selector) === 'object') {
-			this._cssObject(props, selector);
+			Zam._cssObject(props, selector);
 		} else {
 			var elems = document.querySelectorAll(selector);
 			var len = elems.length;
 			for(var i=0; i<len; i++) {
-				this._cssObject(props, elem[i]);
+				Zam._cssObject(props, elems[i]);
 			}
 		}
 	}
 
-	_cssAddValue(x, key, value) {
+	static getCSS(property, selector) {
+		if (typeof(selector) === 'object') {
+			return selector.e.style[property];
+		} else {
+			return document.querySelectorAll(selector)[0].style[property];
+		}
+	}
+
+	static _cssAddValue(x, key, value) {
 		var val1 = value.slice(0, value.indexOf(' '));
 		var match;
 		if((match = x.style[key].match(new RegExp(`(^${val1}|, ${val1})`, 'g'))) === null) {
@@ -105,7 +113,7 @@ export default class Zam {
 		}
 	}
 
-	_cssObject(props, x) {
+	static _cssObject(props, x) {
 		for (var key in props) {
 			if (props.hasOwnProperty(key)) {
 				if(key.indexOf('-') !== -1) {
@@ -122,10 +130,10 @@ export default class Zam {
 							var value = "";
 							while(stack.indexOf(',') !== -1) {
 								value = stack.slice(0, stack.indexOf(',')).trim();
-								this._cssAddValue(x, key, value);
+								Zam._cssAddValue(x, key, value);
 								stack = stack.slice(stack.indexOf(',') + 1).trim();
 							}
-							this._cssAddValue(x, key, stack);
+							Zam._cssAddValue(x, key, stack);
 						}
 					} else {
 						x.style[key] = props[key];
