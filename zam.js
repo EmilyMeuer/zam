@@ -68,10 +68,10 @@ export default class Zam {
 
 	getCSS(property) {
 		if(props.indexOf('-') !== -1) {
-			var idx = props.indexOf('-') + 1;
-			props = props.slice(0, idx - 1) + props.slice(idx, idx + 1).toUpperCase() + props.slice(idx+1);
+			var idx = property.indexOf('-') + 1;
+			property = property.slice(0, idx - 1) + property.slice(idx, idx + 1).toUpperCase() + property.slice(idx+1);
 		}
-		return this.e.style[props];
+		return this.e.style[property];
 	}
 
 	static setCSS(props, selector) {
