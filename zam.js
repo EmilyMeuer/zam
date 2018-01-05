@@ -1,4 +1,4 @@
-class Zam {
+export default class Zam {
 	constructor(html) {
 		this.html = html;
 		this.e = this._generator(this.html);
