@@ -103,17 +103,27 @@ Here we introduced Zam.append().
 
 Before we go into the next example let's talk about all of Zam's methods.
 
-* Zam.append(component, key, callback) - We already used this one.
+* <strong>Zam.append(component, key, callback)</strong> - We already used this one.
 
-* Zam.prepend(component, key, callback) - literally the same as append except we are prepending.
+* <strong>Zam.prepend(component, key, callback)</strong> - literally the same as append except we are prepending.
 
-* Zam.replace(component, key, callback) - again the same as the last two, but instead we are replacing components.
+* <strong>Zam.replace(component, key, callback)</strong> - again the same as the last two, but instead we are replacing components.
 
-* Zam.remove() - removes component.
+* <strong>Zam.remove()</strong> - removes component.
 
-* Zam.on(events, function) - pretty similar to jQuery's .on().
+* <strong>Zam.on(events, function)</strong> - pretty similar to jQuery's .on().
 
-* Zam.off(events, function) - pretty similar to jQuery's .off().
+* <strong>Zam.off(events, function)</strong> - pretty similar to jQuery's .off().
+
+* <strong>Zam.css(value)</strong>
+
+* Example for setting style properties - someComponent.css({'color':'red'})
+
+* Example for fetching style property - someComponent.css('color')
+
+* <strong>Zam.setInnerHTML(value)</strong>
+
+* <strong>Zam.getInnerHTML()</strong>
 
 ##
 
