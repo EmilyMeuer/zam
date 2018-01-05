@@ -15,7 +15,7 @@ A component based micro-library that encourages single-page applications.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@6.5/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@7.0/zam.min.js"></script>
 ```
 ```
 npm install zamjs
