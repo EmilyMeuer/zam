@@ -37,7 +37,7 @@ Example - Hello World!
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@6.2/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@7.2/zam.min.js";
 
         export class Root extends Zam {
             constructor() {
@@ -70,7 +70,7 @@ Now we will expand on the Hello World Example.
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@7.2/zam.min.js";
 
         export class Root extends Zam {
             constructor() {
