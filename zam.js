@@ -1,4 +1,4 @@
-export default class Zam {
+class Zam {
 	constructor(html) {
 		this.html = html;
 		this.e = this._generator(this.html);
@@ -39,7 +39,7 @@ export default class Zam {
 		component.key = key;
 		component.parent = this;
 		this[key] = component;
-		this.e.insertBefore(component.e, this.e.children[0].firstChild);
+		this.e.insertBefore(component.e, this.e.firstChild);
 	}
 
 	replace(component, key) {
