@@ -15,7 +15,7 @@ A component based micro-library that encourages single-page applications.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@6.1/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@6.2/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -39,7 +39,7 @@ Example - Hello World!
 </head>
 <body>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@6.1/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@6.2/zam.min.js";
 
         export class Root extends Zam {
             constructor() {
@@ -91,23 +91,21 @@ Now we will expand on the Hello World Example.
 
 Here we introduced Zam.append().
 
-<strong>Zam.append(component, key, callback)</strong>
+<strong>Zam.append(component, key)</strong>
 
 <strong>component</strong> is a Zam instance.
 
 <strong>key</strong> is... well... what we want to name the component we are appending.
 
-<strong>callback</strong> is just a regular callback function. This is optional. The above example doesn't use it. We will see it in a later example.
-
 ##
 
 Before we go into the next example let's talk about all of Zam's methods.
 
-* <strong>Zam.append(component, key, callback)</strong> - We already used this one.
+* <strong>Zam.append(component, key)</strong> - We already used this one.
 
-* <strong>Zam.prepend(component, key, callback)</strong> - literally the same as append except we are prepending.
+* <strong>Zam.prepend(component, key)</strong> - literally the same as append except we are prepending.
 
-* <strong>Zam.replace(component, key, callback)</strong> - again the same as the last two, but instead we are replacing components.
+* <strong>Zam.replace(component, key)</strong> - again the same as the last two, but instead we are replacing components.
 
 * <strong>Zam.remove()</strong> - removes component.
 
@@ -228,16 +226,16 @@ export class Item extends Zam {
 	constructor() {
 		super(`<div class="item"></div>`);
 
-        /* Notice we are using .append()'s callback here */
-		this.append(new UISwitch(), 'switch', function() {
-			this.style('background-color') === '' ? this.style({'background-color':'#d0d2d3'}) : this.style({'background-color':''}); 
-		}.bind(this));
-
+		this.append(new UISwitch(), 'switch');
 		this.append(new Zam(`<div id="deleteItem">Delete</div>`), 'delete-item-button');
 
 		this['delete-item-button'].on('click', function() {
 			this.remove();
 		}.bind(this));
+		
+		this['switch']['circle'].on('click', (function() {
+			this.style('background-color') === '' ? this.style({'background-color':'#d0d2d3'}) : this.style({'background-color':''}); 
+		}.bind(this)));
 	}
 }
 ```
@@ -266,8 +264,6 @@ export class UISwitch extends Zam {
 
 			var switchCur = this.style('background-color');
 			this.style({'background-color': switchCur === "" ? '#4cda63' : ""});
-
-			this.callback();
 
 		}.bind(this)));
 	}
