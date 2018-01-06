@@ -7,7 +7,6 @@ index.js
 main.js
 dist
 .project
-.travis.yml
 LICENSE
 components/*
 components.js
