@@ -39,14 +39,14 @@ Example - Hello World!
     <script type="module">
         import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@7.2/zam.min.js";
 
-        export class Root extends Zam {
+        export class Foo extends Zam {
             constructor() {
                 super(`<div>Hello World!</div>`);
             }
         }
         
-        var root = new Root();
-	root.mount('#root');
+        var foo = new Foo();
+	foo.mount('#root'); // We mount our 'Foo' instance to the element with id attribute 'root'.
     </script>
 </body>
 </html>
@@ -104,6 +104,8 @@ Here we introduced Zam.append().
 Before we go into the next example let's talk about all of Zam's methods.
 
 ## Instance Methods
+
+* <strong>.mount(selector)</strong> - We already used this one. It replaces the first child of 'selector' with the given component.
 
 * <strong>.append(component, key)</strong> - We already used this one.
 
