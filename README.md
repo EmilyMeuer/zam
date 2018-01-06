@@ -14,6 +14,8 @@ A component based micro-library that encourages single-page applications.
 
 ## Import
 
+### Current Stable Build is 8.0
+
 ```html
 <script src="https://cdn.jsdelivr.net/gh/roecrew/zam@8.0/zam.min.js"></script>
 ```
