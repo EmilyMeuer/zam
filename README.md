@@ -15,7 +15,7 @@ A component based micro-library that encourages single-page applications.
 ## Import
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@7.2/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@8.0/zam.min.js"></script>
 ```
 ```
 npm install zamjs
@@ -37,7 +37,7 @@ Example - Hello World!
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@7.2/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.0/zam.min.js";
 
         export class Foo extends Zam {
             constructor() {
@@ -70,7 +70,7 @@ Now we will expand on the Hello World Example.
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@7.2/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.0/zam.min.js";
 
         export class Root extends Zam {
             constructor() {

@@ -67,7 +67,7 @@ export default class Zam {
 	}
 
 	getCSS(property) {
-		if(property.indexOf('-') !== -1) {
+		if(property.indexOf('-') > -1) {
 			var idx = property.indexOf('-') + 1;
 			property = property.slice(0, idx - 1) + property.slice(idx, idx + 1).toUpperCase() + property.slice(idx+1);
 		}
