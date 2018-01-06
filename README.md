@@ -20,7 +20,7 @@ A component based micro-library that encourages single-page applications.
 <script src="https://cdn.jsdelivr.net/gh/roecrew/zam@8.0/zam.min.js"></script>
 ```
 ```
-npm install zamjs
+npm install zamjs@8.0.0
 ```
 
 ## Quickstart
