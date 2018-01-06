@@ -8,6 +8,8 @@
 http://zamjs.com
 </p>
 
+<p align="center"><img src="https://travis-ci.org/roecrew/zam.svg?branch=master" /></p>
+
 ## Overview
 
 A component based micro-library that encourages single-page applications.
