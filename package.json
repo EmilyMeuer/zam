@@ -8,7 +8,7 @@
     "url": "git://github.com/roecrew/zam.git"
   },
   "scripts": {
-    "test": "karma start /tests/my.conf.js"
+    "test": "karma start ./tests/my.conf.js"
   },
   "keywords": [
     "JavaScript",
