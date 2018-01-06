@@ -89,7 +89,7 @@
 
 		import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.0/zam.min.js";
 
-		class UISwitch extends Zam {
+		export class UISwitch extends Zam {
 			constructor() {
 				super(`<div class="ui-switch"></div>`);
 				this.append(new Zam(`<input type="checkbox" />`), 'checkBox');
@@ -103,10 +103,10 @@
 
 					var textCur = this['text'].getInnerHTML();
 					textCur === "Off" ? (this['text'].setInnerHTML("On")) : (this['text'].setInnerHTML("Off"));
-					
+
 					var circleCur =  this['circle'].getCSS('left');
 					this['circle'].setCSS({'left': circleCur === "" ? '45px' : ""});
-					
+
 					var switchCur = this.getCSS('background-color');
 					this.setCSS({'background-color': switchCur === "" ? '#4cda63' : ""});
 
@@ -114,7 +114,7 @@
 			}
 		}
 
-		class Item extends Zam {
+		export class Item extends Zam {
 			constructor() {
 				super(`<div class="item"></div>`);
 				this.append(new UISwitch(), 'switch');
@@ -126,7 +126,7 @@
 			}
 		}
 
-		class Root extends Zam {
+		export class Root extends Zam {
 			constructor() {
 				super(`<div></div>`);
 				this.itemCount = 0;
@@ -139,8 +139,39 @@
 		}
 
 		var root = new Root();
-		root.mount('#root');
 
+		describe("create-item-button", function () {
+			it("create-item-button should be a child of root", function () {
+				expect(root['create-item-button'] !== undefined).toBe(true);
+			});
+		});
+		describe("items", function () {
+			it("items should be a child of Root", function () {
+				expect(root['items'] !== undefined).toBe(true);
+			});
+		});
+		root['create-item-button'].e.click();
+		describe("item-0", function () {
+			it("item-0 should be a child of items", function () {
+				expect(root['items']['item-0'] !== undefined).toBe(true);
+			});
+		});
+		describe("switch", function () {
+			it("switch should be a child of item-0", function () {
+				expect(root['items']['item-0']['switch'] !== undefined).toBe(true);
+			});
+		});
+		describe("circle", function () {
+			it("circle should be a child of switch", function () {
+				expect(root['items']['item-0']['switch']['circle'] !== undefined).toBe(true);
+			});
+		});
+		root['items']['item-0']['switch']['circle'].e.click();
+		describe("circle-style-left-value", function () {
+			it("circle's style left value should be 45px", function () {
+				expect(root['items']['item-0']['switch']['circle'].getCSS('left') === '45px').toBe(true);
+			});
+		});
 	</script>
 </body>
 </html>
