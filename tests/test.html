@@ -1,177 +1,87 @@
-<html>
-<head>
-	<style>
-	* {
-		font-family: sans-serif;
-		font-weight: 200;
+<script type="module">
+import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.0/zam.min.js";
+
+export class UISwitch extends Zam {
+	constructor() {
+		super(`<div class="ui-switch"></div>`);
+		this.append(new Zam(`<input type="checkbox" />`), 'checkBox');
+		this.append(new Zam(`<span class="ui-switch-text">Off</span>`), 'text');
+		this.append(new Zam(`<div class="ui-switch-circle"></div>`), 'circle');
+
+		this['circle'].on('click', (function() {
+
+			var textCur =  this['text'].getCSS('left');
+			this['text'].setCSS({'left': textCur === "" ? '10px' : ""});
+
+			var textCur = this['text'].getInnerHTML();
+			textCur === "Off" ? (this['text'].setInnerHTML("On")) : (this['text'].setInnerHTML("Off"));
+
+			var circleCur =  this['circle'].getCSS('left');
+			this['circle'].setCSS({'left': circleCur === "" ? '45px' : ""});
+
+			var switchCur = this.getCSS('background-color');
+			this.setCSS({'background-color': switchCur === "" ? '#4cda63' : ""});
+
+		}.bind(this)));
 	}
+}
 
-	.items-header {
-		padding: 15px;
-		margin: 10px 0;
-		height: 40px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		box-shadow: 0 0 1px 0 rgba(0,0,0,.25), 0 4px 11px 0 rgba(0,0,0,.08), -1px 3px 3px 0 rgba(0,0,0,.14);
+export class Item extends Zam {
+	constructor() {
+		super(`<div class="item"></div>`);
+		this.append(new UISwitch(), 'switch');
+		this.append(new Zam(`<div id="deleteItem">Delete</div>`), 'delete-item-button');
+
+		this['delete-item-button'].on('click', function() {
+			this.remove();
+		}.bind(this));
 	}
+}
 
-	.item {
-		padding: 15px;
-		margin: 10px 0;
-		box-shadow: 0 0 1px 0 rgba(0,0,0,.25), 0 4px 11px 0 rgba(0,0,0,.08), -1px 3px 3px 0 rgba(0,0,0,.14);
+export class Root extends Zam {
+	constructor() {
+		super(`<div></div>`);
+		this.itemCount = 0;
+		this.append(new Zam(`<div class="create-item-button">Create Item</div>`), 'create-item-button');
+		this.append(new Zam(`<div class="items" id="items"></div>`), 'items');
+		this['create-item-button'].on('click', (function() {
+			this['items'].prepend(new Item(), 'item-' + this.itemCount++);
+		}).bind(this));
 	}
+}
 
-	.create-item-button {
-		margin: 10px 0;
-		height: 30px;
-		padding: 15px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		box-shadow: 0 0 1px 0 rgba(0,0,0,.25), 0 4px 11px 0 rgba(0,0,0,.08), -1px 3px 3px 0 rgba(0,0,0,.14);
-	}
+var root = new Root();
 
-	.ui-switch {
-		position: relative;
-		background-color: #d0d2d3;
-		margin: 50px;
-		padding: 10px;
-		width: 60px;
-		height:20px;
-		border: 1px solid clear;
-		border-radius: 50px;
-		text-align: right;
-		-webkit-transition: background-color 0.1s ease-out;
-		-moz-transition: background-color 0.1s ease-out;
-		-ms-transition: background-color 0.1s ease-out;
-		-o-transition: background-color 0.1s ease-out;
-		transition: background-color 0.1s ease-out;
-	}
-
-	.ui-switch input[type=checkbox] {
-		display: none;
-	}
-
-	.ui-switch-circle {
-		position: absolute;
-		left: 5px;
-		top: 5px;
-		width: 30px;
-		height: 30px;
-		background-color: white;
-		border: 1px solid clear;
-		border-radius: 50px;
-		box-shadow: 0 0 1px 0 rgba(0,0,0,.25), 0 4px 11px 0 rgba(0,0,0,.08), -1px 3px 3px 0 rgba(0,0,0,.14);
-		-webkit-transition: left 0.1s ease-out;
-		-moz-transition: left 0.1s ease-out;
-		-ms-transition: left 0.1s ease-out;
-		-o-transition: left 0.1s ease-out;
-		transition: left 0.1s ease-out;
-	}
-
-	.ui-switch-text {
-		position: absolute;
-		top: 11px;
-		left: 45px;
-		-webkit-transition: left 0.1s ease-out;
-		-moz-transition: left 0.1s ease-out;
-		-ms-transition: left 0.1s ease-out;
-		-o-transition: left 0.1s ease-out;
-		transition: left 0.1s ease-out;
-	}
-</style>
-</head>
-<body>
-	<div id="root">
-	</div>
-	<script type="module" type="application/javascript">
-
-		import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.0/zam.min.js";
-
-		export class UISwitch extends Zam {
-			constructor() {
-				super(`<div class="ui-switch"></div>`);
-				this.append(new Zam(`<input type="checkbox" />`), 'checkBox');
-				this.append(new Zam(`<span class="ui-switch-text">Off</span>`), 'text');
-				this.append(new Zam(`<div class="ui-switch-circle"></div>`), 'circle');
-
-				this['circle'].on('click', (function() {
-
-					var textCur =  this['text'].getCSS('left');
-					this['text'].setCSS({'left': textCur === "" ? '10px' : ""});
-
-					var textCur = this['text'].getInnerHTML();
-					textCur === "Off" ? (this['text'].setInnerHTML("On")) : (this['text'].setInnerHTML("Off"));
-
-					var circleCur =  this['circle'].getCSS('left');
-					this['circle'].setCSS({'left': circleCur === "" ? '45px' : ""});
-
-					var switchCur = this.getCSS('background-color');
-					this.setCSS({'background-color': switchCur === "" ? '#4cda63' : ""});
-
-				}.bind(this)));
-			}
-		}
-
-		export class Item extends Zam {
-			constructor() {
-				super(`<div class="item"></div>`);
-				this.append(new UISwitch(), 'switch');
-				this.append(new Zam(`<div id="deleteItem">Delete</div>`), 'delete-item-button');
-
-				this['delete-item-button'].on('click', function() {
-					this.remove();
-				}.bind(this));
-			}
-		}
-
-		export class Root extends Zam {
-			constructor() {
-				super(`<div></div>`);
-				this.itemCount = 0;
-				this.append(new Zam(`<div class="create-item-button">Create Item</div>`), 'create-item-button');
-				this.append(new Zam(`<div class="items" id="items"></div>`), 'items');
-				this['create-item-button'].on('click', (function() {
-					this['items'].prepend(new Item(), 'item-' + this.itemCount++);
-				}).bind(this));
-			}
-		}
-
-		var root = new Root();
-
-		describe("create-item-button", function () {
-			it("create-item-button should be a child of root", function () {
-				expect(root['create-item-button'] !== undefined).toBe(true);
-			});
-		});
-		describe("items", function () {
-			it("items should be a child of Root", function () {
-				expect(root['items'] !== undefined).toBe(true);
-			});
-		});
-		root['create-item-button'].e.click();
-		describe("item-0", function () {
-			it("item-0 should be a child of items", function () {
-				expect(root['items']['item-0'] !== undefined).toBe(true);
-			});
-		});
-		describe("switch", function () {
-			it("switch should be a child of item-0", function () {
-				expect(root['items']['item-0']['switch'] !== undefined).toBe(true);
-			});
-		});
-		describe("circle", function () {
-			it("circle should be a child of switch", function () {
-				expect(root['items']['item-0']['switch']['circle'] !== undefined).toBe(true);
-			});
-		});
-		root['items']['item-0']['switch']['circle'].e.click();
-		describe("circle-style-left-value", function () {
-			it("circle's style left value should be 45px", function () {
-				expect(root['items']['item-0']['switch']['circle'].getCSS('left') === '45px').toBe(true);
-			});
-		});
-	</script>
-</body>
-</html>
+describe("create-item-button", function () {
+	it("create-item-button should be a child of root", function () {
+		expect(root['create-item-button'] !== undefined).toBe(true);
+	});
+});
+describe("items", function () {
+	it("items should be a child of Root", function () {
+		expect(root['items'] !== undefined).toBe(true);
+	});
+});
+root['create-item-button'].e.click();
+describe("item-0", function () {
+	it("item-0 should be a child of items", function () {
+		expect(root['items']['item-0'] !== undefined).toBe(true);
+	});
+});
+describe("switch", function () {
+	it("switch should be a child of item-0", function () {
+		expect(root['items']['item-0']['switch'] !== undefined).toBe(true);
+	});
+});
+describe("circle", function () {
+	it("circle should be a child of switch", function () {
+		expect(root['items']['item-0']['switch']['circle'] !== undefined).toBe(true);
+	});
+});
+root['items']['item-0']['switch']['circle'].e.click();
+describe("circle-style-left-value", function () {
+	it("circle's style left value should be 45px", function () {
+		expect(root['items']['item-0']['switch']['circle'].getCSS('left') === '45px').toBe(true);
+	});
+});
+</script>
