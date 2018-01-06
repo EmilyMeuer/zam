@@ -22,10 +22,6 @@
   },
   "homepage": "https://github.com/roecrew/zam#readme",
   "devDependencies": {
-    "concat-files": "^0.1.1",
-    "express": "^4.16.2",
-    "gulp": "^3.9.1",
-    "gulp-minify": "^2.1.0",
     "jasmine-core": "^2.8.0",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
