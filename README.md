@@ -135,6 +135,6 @@ Before we go into the next example let's talk about all of Zam's methods.
 
 * <strong>Zam.off(events, selector, function)</strong>
 
-* <strong>Zam.setCSS(property)</strong>
+* <strong>Zam.setCSS(properties-object, selector)</strong>
 
-* <strong>Zam.getCSS(property)</strong>
+* <strong>Zam.getCSS(property, selector)</strong>
