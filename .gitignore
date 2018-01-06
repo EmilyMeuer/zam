@@ -1,9 +1,14 @@
 *.json
 node_modules
-*.html
+/*.html
+*.css
 gulpfile.js
 index.js
 main.js
 dist
 .project
+.travis.yml
 LICENSE
+components/*
+components.js
+server.js
