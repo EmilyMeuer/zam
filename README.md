@@ -20,7 +20,7 @@ By confining/compartmentalizing the DOM elements that make up a structure to a Z
 
 ##
 
-Basically Zam builds this.
+Basically Zam can build this.
 
 <img src="https://i.imgur.com/zf4gIMp.png" width="auto" height="75px" />
 
