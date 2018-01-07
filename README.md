@@ -181,25 +181,25 @@ http://zamjs.com/examples
 
 ## Instance Methods
 
-* <strong>.mount(selector)</strong> - We already used this one. It replaces the first child of 'selector' with the given component.
+* <strong>.mount(selector)</strong>
 
-* <strong>.append(component, key)</strong> - We already used this one.
+* <strong>.append(component, key)</strong>
 
-* <strong>.prepend(component, key)</strong> - literally the same as append except we are prepending.
+* <strong>.prepend(component, key)</strong>
 
-* <strong>.replace(component, key)</strong> - again the same as the last two, but instead we are replacing components.
+* <strong>.replace(component, key)</strong>
 
-* <strong>.remove()</strong> - removes component.
+* <strong>.remove()</strong>
 
-* <strong>.on(events, function)</strong> - pretty similar to jQuery's .on().
+* <strong>.on(events, function)</strong>
 
-* <strong>.off(events, function)</strong> - pretty similar to jQuery's .off().
+* <strong>.off(events, function)</strong>
 
-* <strong>.setCSS(properties-object)</strong> pretty similar to jQuery's .css().
+* <strong>.setCSS(properties-object)</strong>
 
 * <strong>.getCSS(property)</strong>
 
-* <strong>.toggleCSS(property, value1, value2)</strong> - if property !== value1, then property = value1, else property = value2
+* <strong>.toggleCSS(property, value1, value2)</strong>
 
 * <strong>.setInnerHTML(value)</strong>
 
