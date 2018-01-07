@@ -26,8 +26,6 @@ Basically Zam can build this.
 
 By doing this.
 ```javascript
-import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.4/zam.min.js"
-import { UISwitch } from "components.js"
 var uiSwitch = new UISwitch();
 uiSwitch.mount('someSelector');
 ```
