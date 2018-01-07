@@ -183,34 +183,96 @@ http://zamjs.com/examples
 
 * <strong>.mount(selector)</strong>
 
+
+
 * <strong>.append(component, key)</strong>
+
+  * Example: someComponent.append(new Zam(`<div>Hello World</div>`), 'hello-world');
+  
+  * Returns: Component that was appended.
 
 * <strong>.prepend(component, key)</strong>
 
+  * Example: someComponent.prepend(new Zam(`<div>Hello World</div>`), 'hello-world');
+  
+  * Returns: Component that was prepended.
+
 * <strong>.replace(component, key)</strong>
+
+  * Example: someComponent.replace(new Zam(`<div>Hello World</div>`), 'hello-world');
+  
+  * Returns: Component that replaced old component.
 
 * <strong>.remove()</strong>
 
+  * Example: someComponent.remove();
+  
+  * Returns: Nothing.
+
 * <strong>.on(events, function)</strong>
+
+  * Example: someComponent.on('mousedown', someFunction);
+  
+  * Returns: Nothing.
 
 * <strong>.off(events, function)</strong>
 
+  * Example: someComponent.off('mousedown', someFunction);
+  
+  * Returns: Nothing.
+
 * <strong>.setCSS(properties-object)</strong>
+
+  * Example: someComponent.setCSS({'background-color':'red', 'color':'blue'});
+  
+  * Returns: Nothing.
 
 * <strong>.getCSS(property)</strong>
 
+  * Example: someComponent.getCSS('background-color');
+  
+  * Returns: String.
+
 * <strong>.toggleCSS(property, value1, value2)</strong>
+
+  * Example: someComponent.toggleCSS('background-color', 'red', '');
+  
+  * Returns: Nothing.
 
 * <strong>.setInnerHTML(value)</strong>
 
+  * Example: someComponent.setInnerHTML('Hello World!');
+  
+  * Returns: Nothing.
+
 * <strong>.getInnerHTML()</strong>
+
+  * Example: someComponent.getInnerHTML();
+  
+  * Returns: String.
 
 ## Class Methods
 
 * <strong>Zam.on(events, selector, function)</strong>
 
+  * Example: Zam.on('mouseover', 'someSelector', someFunction);
+  
+  * Returns: Nothing.
+
 * <strong>Zam.off(events, selector, function)</strong>
+
+  * Example: Zam.off('mouseover', 'someSelector', someFunction);
+
+  * Returns: Nothing.
 
 * <strong>Zam.setCSS(properties-object, selector)</strong>
 
+  * Example: Zam.setCSS({'background-color':'red', 'color':'blue'}, 'someSelector');
+
+  * Returns: Nothing.
+
 * <strong>Zam.getCSS(property, selector)</strong>
+
+  * Example: Zam.getCSS('background-color', 'someSelector');
+
+  * Returns: String.
