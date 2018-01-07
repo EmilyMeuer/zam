@@ -123,7 +123,7 @@ for(var i=0; i<len; i++) {
 ### Current Stable Build is 8.1
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@8.0/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@8.1/zam.min.js"></script>
 ```
 ```
 npm install zamjs@8.1.0
