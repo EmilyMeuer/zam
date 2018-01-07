@@ -102,7 +102,7 @@ Instead of this...
 </div>
 ```
 ```javascript
-var circles = document.querySelector('.ui-switch-circle');
+var circles = document.querySelectorAll('.ui-switch-circle');
 var len = circles.length;
 for(var i=0; i<len; i++) {
   circles[i].addEventListener('click', function(e) {
