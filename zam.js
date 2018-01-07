@@ -5,7 +5,12 @@ export default class Zam {
 	}
 
 	mount(selector) {
-		document.querySelectorAll(selector)[0].firstChild.replaceWith(this.e);
+		if(this.e.attachShadow) {
+			var shadow = document.querySelectorAll(selector)[0].attachShadow({mode: 'open'});
+			shadow.innerHTML = this.e.outerHTML;
+		} else {
+			document.querySelectorAll(selector)[0].firstChild.replaceWith(this.e);
+		}
 	}
 
 	_generator(html) {
