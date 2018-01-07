@@ -33,6 +33,7 @@ export default class Zam {
 		component.parent = this;
 		this[key] = component;
 		this.e.appendChild(component.e);
+		return component;
 	}
 
 	prepend(component, key) {
@@ -40,6 +41,7 @@ export default class Zam {
 		component.parent = this;
 		this[key] = component;
 		this.e.insertBefore(component.e, this.e.firstChild);
+		return component;
 	}
 
 	replace(component, key) {
@@ -47,6 +49,7 @@ export default class Zam {
 		this.parent[key] = component;
 		this.e.replaceWith(component.e);
 		delete this.parent[this.key];
+		return component;
 	}
 
 	remove(component) {
