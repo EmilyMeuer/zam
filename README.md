@@ -20,8 +20,11 @@ By confining/compartmentalizing the DOM elements that make up a structure to a Z
 
 ##
 
-Basically Zam does this... 
+Basically Zam builds this.
 
+<img src="https://i.imgur.com/zf4gIMp.png" width="auto" height="75px" />
+
+By doing this.
 ```javascript
 import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.4/zam.min.js"
 import { UISwitch } from "components.js"
@@ -29,7 +32,7 @@ var uiSwitch = new UISwitch();
 uiSwitch.mount('someSelector');
 ```
 
-Instead of this...
+Instead of doing this...
 
 ```css
 .ui-switch {
