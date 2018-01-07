@@ -12,7 +12,11 @@ http://zamjs.com
 
 ## Overview
 
-A component based micro-library that encourages single-page applications.
+Zam is a component-based micro-library (about 3KBs).
+
+Zam objects can be thought of as components or modules. These components generate a specified structure of elements, which are mounted to the DOM.
+
+By confining/compartmentalizing the DOM elements that make up a structure to a Zam component, we create a cleaner coding environment. Through the process of abstraction, a Zam component hides all but the relevant data — in order to reduce complexity and increase efficiency.
 
 ## Import
 
