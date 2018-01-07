@@ -8,7 +8,7 @@
 http://zamjs.com
 </p>
 
-<p align="center"><img src="https://travis-ci.org/roecrew/zam.svg?branch=master" /></p>
+<p align="center"><img src="https://travis-ci.org/roecrew/zam.svg?branch=master" /> <a class="badge-align" href="https://www.codacy.com/app/roecrew/zam?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=roecrew/zam&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/b47e18bf79834015842bf7e65ff7d565"/></a></p>
 
 ## Overview
 
