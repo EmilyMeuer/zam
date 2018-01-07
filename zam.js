@@ -77,6 +77,10 @@ export default class Zam {
 		return this.e.style[property];
 	}
 
+	toggleCSS(property, valOn, valOff) {
+		this.setCSS({property: this.getCSS(property) !== valOn ? valOn : valOff});
+	}
+
 	static setCSS(props, selector) {
 		if (typeof(selector) === 'object') {
 			Zam._cssObject(props, selector);

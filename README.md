@@ -20,13 +20,13 @@ By confining/compartmentalizing the DOM elements that make up a structure to a Z
 
 ## Import
 
-### Current Stable Build is 8.1
+### Current Stable Build is 8.2
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@8.1/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@8.2/zam.min.js"></script>
 ```
 ```
-npm install zamjs@8.1.0
+npm install zamjs@8.2.0
 ```
 
 ## Quickstart
@@ -45,7 +45,7 @@ Example - Hello World!
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.1/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.2/zam.min.js";
 
         export class Foo extends Zam {
             constructor() {
@@ -78,7 +78,7 @@ Now we will expand on the Hello World Example.
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.1/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.2/zam.min.js";
 
         export class Root extends Zam {
             constructor() {
