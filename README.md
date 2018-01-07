@@ -183,7 +183,9 @@ http://zamjs.com/examples
 
 * <strong>.mount(selector)</strong>
 
-
+  * Example: someComponent.mount('someSelector');
+  
+  * Returns: Nothing.
 
 * <strong>.append(component, key)</strong>
 
