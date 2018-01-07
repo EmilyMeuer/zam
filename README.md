@@ -37,7 +37,8 @@ export class UISwitch extends Zam {
   }
 
   constructor() {
-    super(`<div></div>`).setCSS(this.switchCSS());
+    super(`<div></div>`)
+    this.setCSS(this.switchCSS());
     this.append(new Zam(`<span>Off</span>`), 'text').setCSS(this.textCSS());
     this.append(new Zam(`<div></div>`), 'circle').setCSS(this.circleCSS());
     this['circle'].on('click', (function() {
