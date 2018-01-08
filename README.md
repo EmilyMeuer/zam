@@ -268,7 +268,7 @@ http://zamjs.com/examples
 
 * <strong>Zam.createShadow(selector, html, options)</strong>
 
-  * Example: Zam.createShadow(selector, '<div>...<\/div><script>...<\/script>');
+  * Example: Zam.createShadow(selector, `<div>...<\/div><script>...<\/script>`);
   
   * Returns Nothing.
 
