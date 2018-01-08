@@ -4,12 +4,21 @@ export default class Zam {
 		this.e = this._generator(this.html);
 	}
 
-	mount(selector) {
-		if(this.e.attachShadow) {
-			var shadow = document.querySelectorAll(selector)[0].attachShadow({mode: 'open'});
-			shadow.innerHTML = this.e.outerHTML;
+	mount(selector, shadowSelector) {
+		if (shadowSelector) {
+			document.querySelectorAll(selector)[0].shadowRoot.querySelectorAll(shadowSelector)[0].appendChild(this.e)
 		} else {
-			document.querySelectorAll(selector)[0].firstChild.replaceWith(this.e);
+			document.querySelectorAll(selector)[0].appendChild(this.e);
+		}
+	}
+
+	mountPrepend(selector, shadowSelector) {
+		if (shadowSelector) {
+			var elem = document.querySelectorAll(selector)[0].shadowRoot.querySelectorAll(shadowSelector)[0];
+			elem.insertBefore(this.e, elem.firstChild);
+		} else {
+			var elem = document.querySelectorAll(selector)[0];
+			elem.insertBefore(this.e, elem.firstChild);
 		}
 	}
 
@@ -232,5 +241,15 @@ export default class Zam {
 		} else {
 			removeListener(event, selector, func);
 		}
+	}
+
+	static createShadow(selector, html, options) {
+		if (options === undefined) {
+			options = {mode: 'open'};
+		}
+		var div = document.createElement('template');
+		div.innerHTML = html;
+		var shadowElem = document.querySelectorAll(selector)[0].attachShadow(options);
+		shadowElem.appendChild(document.importNode(div.content, true));
 	}
 }

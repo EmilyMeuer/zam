@@ -97,13 +97,13 @@ for(var i=0; i<len; i++) {
 
 ## Import
 
-### Current Stable Build is 8.4
+### Current Stable Build is 9.0
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@8.4/zam.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@9.0/zam.min.js"></script>
 ```
 ```
-npm install zamjs@8.4.0
+npm install zamjs@9.0.0
 ```
 
 ## Quickstart
@@ -122,7 +122,7 @@ Example - Hello World!
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.4/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@9.0/zam.min.js";
 
         export class Foo extends Zam {
             constructor() {
@@ -182,9 +182,19 @@ http://zamjs.com/examples
 
 ## Instance Methods
 
-* <strong>.mount(selector)</strong>
+* <strong>.mount(selector, shadowSelector)</strong>
 
   * Example: someComponent.mount('someSelector');
+  
+  * shadowSelector is optional (you only use it if it's in a shadow)
+  
+  * Returns: Nothing.
+  
+* <strong>.mountPrepend(selector, shadowSelector)</strong>
+
+  * Example: someComponent.mountPrepend('someSelector');
+  
+  * shadowSelector is optional (you only use it if it's in a shadow)
   
   * Returns: Nothing.
 
@@ -255,6 +265,12 @@ http://zamjs.com/examples
   * Returns: String.
 
 ## Class Methods
+
+* <strong>Zam.createShadow(selector, html, options)</strong>
+
+  * Example: Zam.createShadow(selector, '<div>...<\/div><script>...<\/script>');
+  
+  * Returns Nothing.
 
 * <strong>Zam.on(events, selector, function)</strong>
 
