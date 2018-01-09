@@ -99,8 +99,8 @@ for(var i=0; i<len; i++) {
 
 ### Current Stable Build is 9.0
 
-```html
-<script src="https://cdn.jsdelivr.net/gh/roecrew/zam@9.0/zam.min.js"></script>
+```javascript
+inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.0.0/zam.min.js"
 ```
 ```
 npm install zamjs@9.0.0
@@ -122,7 +122,7 @@ Example - Hello World!
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@9.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.0.0/zam.min.js";
 
         export class Foo extends Zam {
             constructor() {
@@ -155,7 +155,7 @@ Now we will expand on the Hello World Example.
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@9.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.0.0/zam.min.js";
 
         export class Root extends Zam {
             constructor() {
