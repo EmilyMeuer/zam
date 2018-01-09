@@ -180,6 +180,14 @@ Now we will expand on the Hello World Example.
 
 http://zamjs.com/examples
 
+## Instance Properties
+
+* <strong>.e</strong>
+
+  * This is a given components actual DOMElement.
+
+  *  Example: someComponent.e.className
+
 ## Instance Methods
 
 * <strong>.mount(selector, shadowSelector)</strong>
@@ -295,3 +303,69 @@ http://zamjs.com/examples
   * Example: Zam.getCSS('background-color', 'someSelector');
 
   * Returns: String.
+  
+## Helper Sub-Classes
+
+```javascript
+class H1 extends Zam {
+    constructor(text) {
+        super(`<h1>${text}</h1>`);
+    }
+}
+
+class H2 extends Zam {
+    constructor(text) {
+	super(`<h2>${text}</h2>`);
+    }
+}
+
+class H3 extends Zam {
+    constructor(text) {
+	super(`<h3>${text}</h3>`);
+    }
+}
+
+class H4 extends Zam {
+    constructor(text) {
+	super(`<h4>${text}</h4>`);
+    }
+}
+
+class H5 extends Zam {
+    constructor(text) {
+	super(`<h5>${text}</h5>`);
+    }
+}
+
+class P extends Zam {
+    constructor(text) {
+	super(`<p>${text}</p>`);
+    }
+}
+
+class SPAN extends Zam {
+    constructor(text) {
+	super(`<span>${text}</span>`);
+    }
+}
+
+class A extends Zam {
+    constructor(text, href) {
+	super(`<a href="${href}">${text}</a>`);
+    }
+}
+
+class IMG extends Zam {
+    constructor(text, src, width, height) {
+	if (!width) {width = 'auto';}
+	if (!height) {height = 'auto';}
+	super(`<img src="${src}" width="${width}" height="${height}">${text}</img>`);
+    }
+}
+
+class DIV extends Zam {
+    constructor(text) {
+        super(`<div>${text}</div>`);
+    }
+}
+```
