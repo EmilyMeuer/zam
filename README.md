@@ -184,7 +184,7 @@ http://zamjs.com/examples
 
 * <strong>.e</strong>
 
-  * This is a given components actual DOMElement.
+  * This is a given component's actual DOMElement.
 
   *  Example: someComponent.e.className
 
