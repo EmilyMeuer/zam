@@ -1,12 +1,14 @@
 export default class Zam {
 	constructor(html) {
 		this.html = html;
-		this.e = this._generator(this.html);
+		var elem = document.createElement('div');
+		elem.innerHTML = html;
+		this.e = elem.children[0].cloneNode(true);
 	}
 
 	mount(selector, shadowSelector) {
 		if (shadowSelector) {
-			document.querySelectorAll(selector)[0].shadowRoot.querySelectorAll(shadowSelector)[0].appendChild(this.e)
+			document.querySelectorAll(selector)[0].shadowRoot.querySelectorAll(shadowSelector)[0].appendChild(this.e);
 		} else {
 			document.querySelectorAll(selector)[0].appendChild(this.e);
 		}
@@ -73,6 +75,7 @@ export default class Zam {
 
 	setInnerHTML(html) {
 		this.e.innerHTML = html;
+		return this;
 	}
 
 	getInnerHTML() {
@@ -81,6 +84,7 @@ export default class Zam {
 
 	setCSS(props) {
 		Zam._cssObject(props, this.e);
+		return this;
 	}
 
 	getCSS(property) {
@@ -94,7 +98,7 @@ export default class Zam {
 	toggleCSS(property, valOn, valOff) {
 		var prop = {}
 		prop[property] = this.getCSS(property) !== valOn ? valOn : valOff;
-		this.setCSS(prop);
+		return this.setCSS(prop);
 	}
 
 	static setCSS(props, selector) {
@@ -182,6 +186,7 @@ export default class Zam {
 		} else {
 			addListener(event, func);
 		}
+		return this;
 	}
 
 	static on(event, selector, func) {
@@ -220,6 +225,7 @@ export default class Zam {
 		} else {
 			removeListener(event, func);
 		}
+		return this;
 	}
 
 	static off(event, selector, func) {
@@ -249,7 +255,11 @@ export default class Zam {
 		}
 		var div = document.createElement('template');
 		div.innerHTML = html;
-		var shadowElem = document.querySelectorAll(selector)[0].attachShadow(options);
-		shadowElem.appendChild(document.importNode(div.content, true));
+		var elem = document.querySelectorAll(selector);
+		var len = elem.length;
+		for(var i=0; i<len; i++) {
+			var shadowElem = document.querySelectorAll(selector)[i].attachShadow(options);
+			shadowElem.appendChild(document.importNode(div.content, true));
+		}
 	}
 }

@@ -97,13 +97,13 @@ for(var i=0; i<len; i++) {
 
 ## Import
 
-### Current Stable Build is 9.0
+### Current Stable Build is 9.1
 
 ```javascript
-inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.0.0/zam.min.js"
+inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.1.0/zam.min.js"
 ```
 ```
-npm install zamjs@9.0.0
+npm install zamjs@9.1.0
 ```
 
 ## Quickstart
@@ -122,7 +122,7 @@ Example - Hello World!
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.0.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.1.0/zam.min.js";
 
         export class Foo extends Zam {
             constructor() {
@@ -155,7 +155,7 @@ Now we will expand on the Hello World Example.
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.0.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.1.0/zam.min.js";
 
         export class Root extends Zam {
             constructor() {
@@ -234,19 +234,19 @@ http://zamjs.com/examples
 
   * Example: someComponent.on('mousedown', someFunction);
   
-  * Returns: Nothing.
+  * Returns: component that called .on().
 
 * <strong>.off(events, function)</strong>
 
   * Example: someComponent.off('mousedown', someFunction);
   
-  * Returns: Nothing.
+  * Returns: component that called .off().
 
 * <strong>.setCSS(properties-object)</strong>
 
   * Example: someComponent.setCSS({'background-color':'red', 'color':'blue'});
   
-  * Returns: Nothing.
+  * Returns: component that called .setCSS().
 
 * <strong>.getCSS(property)</strong>
 
@@ -258,13 +258,13 @@ http://zamjs.com/examples
 
   * Example: someComponent.toggleCSS('background-color', 'red', '');
   
-  * Returns: Nothing.
+  * Returns: component that called .toggleCSS().
 
 * <strong>.setInnerHTML(value)</strong>
 
   * Example: someComponent.setInnerHTML('Hello World!');
   
-  * Returns: Nothing.
+  * Returns: component that called .setInnerHTML().
 
 * <strong>.getInnerHTML()</strong>
 
