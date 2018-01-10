@@ -283,24 +283,18 @@ http://zamjs.com/examples
   * Example: someComponent.dispatchEvent('some-event');
   
   * Returns: Nothing.
-  
-* <strong>.getInnerHTML()</strong>
-
-  * Example: someComponent.getInnerHTML();
-  
-  * Returns: String.
 
 ## Class Methods
 
 * <strong>SubClass.render()</strong>
 
-  * Example: MyComponent.render(); it renders all <mycomponent> elements.
+  * Example: MyComponent.render(); it renders all <mycomponent> tags.
   
   * Returns: Nothing.
   
 * <strong>SubClass.shadowRender()</strong>
 
-  * Example: MyComponent.shadowRender(); it shadowRenders all <mycomponent> elements.
+  * Example: MyComponent.shadowRender(); it shadowRenders all <mycomponent> tags.
   
   * Returns: Nothing.
 
