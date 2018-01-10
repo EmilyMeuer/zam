@@ -26,8 +26,7 @@ Basically Zam can build this.
 
 By doing this.
 ```javascript
-var uiSwitch = new UISwitch();
-uiSwitch.mount('someSelector');
+UISwitch.render();
 ```
 
 Instead of doing this...
