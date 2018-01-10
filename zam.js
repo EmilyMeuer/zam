@@ -11,7 +11,7 @@ export default class Zam {
 		var len = elems.length;
 		for(var i=0; i<elems.length; i++) {
 			var instance = new this(...arguments);
-			elems[i].appendChild(instance.e.cloneNode(true));
+			elems[i].appendChild(instance.e);
 		}
 	}
 

@@ -97,13 +97,13 @@ for(var i=0; i<len; i++) {
 
 ## Import
 
-### Current Stable Build is 10.0
+### Current Stable Build is 10.1
 
 ```javascript
-inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.0.0/zam.min.js"
+inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.1.0/zam.min.js"
 ```
 ```
-npm install zamjs@10.0.0
+npm install zamjs@10.1.0
 ```
 
 ## Quickstart
@@ -122,7 +122,7 @@ Example - Hello World!
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.0.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.1.0/zam.min.js";
 
         export class Foo extends Zam {
             constructor() {
