@@ -145,32 +145,24 @@ In this case, instance 'root' manages DOM Element...
 
 ##
 
-Now we will expand on the Hello World Example.
+Now we will expand on the Hello World Example, and utilyze the shadow DOM and introduce shadowRender().
 
 ```html
 <html>
 <head>
 </head>
 <body>
-    <div id="root">
-    </div>
+    <helloworld>
+    </helloworld>
     <script type="module">
         import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.0.0/zam.min.js";
 
-        export class Root extends Zam {
+        export class HelloWorld extends Zam {
             constructor() {
-            super(`<div></div>`);
-
-            for(var x = 1; x < 11; x++) {
-                this.append(new Zam(`<div>${x}</div>`), `num-${x}`);
-                    /* Notice how we reference a child component... this['somekey'] */
-                    console.log(this[`num-${x}`]);
-                }
-            }
+            super(`<div>Hello World!</div>`);
         }
-
-        var root = new Root();
-	root.mount('#root');
+	
+	HelloWorld.shadowRender();
     </script>
 </body>
 </html>
