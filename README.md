@@ -25,6 +25,10 @@ Basically Zam can build this.
 <img src="https://i.imgur.com/zf4gIMp.png" width="auto" height="75px" />
 
 By doing this.
+```html
+<uiswitch>
+</uiswitch>
+```
 ```javascript
 UISwitch.render();
 ```
