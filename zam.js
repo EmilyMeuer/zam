@@ -6,6 +6,38 @@ export default class Zam {
 		this.e = elem.children[0].cloneNode(true);
 	}
 
+	static render() {
+		var elems = document.querySelectorAll(this.name.toLowerCase());
+		var len = elems.length;
+		for(var i=0; i<elems.length; i++) {
+			var instance = new this(...arguments);
+			elems[i].appendChild(instance.e.cloneNode(true));
+		}
+	}
+
+	static shadowRender() {
+		var elems = document.querySelectorAll(this.name.toLowerCase());
+		var len = elems.length;
+		for(var i=0; i<len; i++) {
+			var instance = new this(...arguments);
+			var div = document.createElement('div');
+			var shadowElem = div.attachShadow({mode: 'open'});
+			shadowElem.appendChild(instance.e);
+			elems[i].appendChild(div);
+		}
+	}
+
+	customEvent(event) {
+		this[event] = new CustomEvent(event, {
+			bubbles: true,
+			cancelable: false
+		});
+	}
+
+	dispatchEvent(event) {
+		this.e.dispatchEvent(this[event]);
+	}
+
 	mount(selector, shadowSelector) {
 		if (shadowSelector) {
 			document.querySelectorAll(selector)[0].shadowRoot.querySelectorAll(shadowSelector)[0].appendChild(this.e);
@@ -22,26 +54,6 @@ export default class Zam {
 			var elem = document.querySelectorAll(selector)[0];
 			elem.insertBefore(this.e, elem.firstChild);
 		}
-	}
-
-	_generator(html) {
-
-		var tag = html.match(/<[A-Za-z0-9]*(\ |\/|>)/g)[0];
-		tag = tag.slice(1, tag.length - 1);
-		var elem = document.createElement(tag);
-
-		var attr = html.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g);
-		if(attr !== null) {
-			var len = attr.length;
-			for(var i=0; i<len; i++) {
-				elem.setAttribute(attr[i].slice(0, attr[i].indexOf('=')), attr[i].slice(attr[i].indexOf('"') + 1, attr[i].length - 1));
-			}
-		}
-		var start = html.slice(html.indexOf('>') + 1);
-		if(start.indexOf('<') > -1) {
-			elem.innerHTML = start.slice(0, start.indexOf('<'));
-		}
-		return elem;
 	}
 
 	append(component, key) {
@@ -194,7 +206,11 @@ export default class Zam {
 			var elems = document.querySelectorAll(selector);
 			var len = elems.length;
 			for(var i=0; i<len; i++) {
-				elems[i].addEventListener(event, func);
+				if (elems[i].shadowRoot) {
+					elems[i].shadowRoot.addEventListener(event, func);
+				} else {
+					elems[i].addEventListener(event, func);
+				}
 			}
 		}
 
@@ -233,7 +249,11 @@ export default class Zam {
 			var elems = document.querySelectorAll(selector);
 			var len = elems.length;
 			for(var i=0; i<len; i++) {
-				elems[i].removeEventListener(event, func);
+				if (elems[i].shadowRoot) {
+					elems[i].shadowRoot.removeEventListener(event, func);
+				} else {
+					elems[i].removeEventListener(event, func);
+				}
 			}
 		}
 
@@ -246,20 +266,6 @@ export default class Zam {
 			removeListener(eve, selector, func);
 		} else {
 			removeListener(event, selector, func);
-		}
-	}
-
-	static createShadow(selector, html, options) {
-		if (options === undefined) {
-			options = {mode: 'open'};
-		}
-		var div = document.createElement('template');
-		div.innerHTML = html;
-		var elem = document.querySelectorAll(selector);
-		var len = elem.length;
-		for(var i=0; i<len; i++) {
-			var shadowElem = document.querySelectorAll(selector)[i].attachShadow(options);
-			shadowElem.appendChild(document.importNode(div.content, true));
 		}
 	}
 }

@@ -97,13 +97,13 @@ for(var i=0; i<len; i++) {
 
 ## Import
 
-### Current Stable Build is 9.1
+### Current Stable Build is 10.0
 
 ```javascript
-inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.1.0/zam.min.js"
+inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.0.0/zam.min.js"
 ```
 ```
-npm install zamjs@9.1.0
+npm install zamjs@10.0.0
 ```
 
 ## Quickstart
@@ -122,7 +122,7 @@ Example - Hello World!
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.1.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.0.0/zam.min.js";
 
         export class Foo extends Zam {
             constructor() {
@@ -155,7 +155,7 @@ Now we will expand on the Hello World Example.
     <div id="root">
     </div>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@9.1.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.0.0/zam.min.js";
 
         export class Root extends Zam {
             constructor() {
@@ -271,14 +271,38 @@ http://zamjs.com/examples
   * Example: someComponent.getInnerHTML();
   
   * Returns: String.
+  
+* <strong>.customEvent(event)</strong>
+
+  * Example: someComponent.customEvent('some-event');
+  
+  * Returns: Nothing.
+  
+* <strong>.dispatchEvent(event)</strong>
+
+  * Example: someComponent.dispatchEvent('some-event');
+  
+  * Returns: Nothing.
+  
+* <strong>.getInnerHTML()</strong>
+
+  * Example: someComponent.getInnerHTML();
+  
+  * Returns: String.
 
 ## Class Methods
 
-* <strong>Zam.createShadow(selector, html, options)</strong>
+* <strong>SubClass.render()</strong>
 
-  * Example: Zam.createShadow(selector, `<div>...<\/div><script>...<\/script>`);
+  * Example: MyComponent.render(); it renders all <mycomponent> elements.
   
-  * Returns Nothing.
+  * Returns: Nothing.
+  
+* <strong>SubClass.shadowRender()</strong>
+
+  * Example: MyComponent.shadowRender(); it shadowRenders all <mycomponent> elements.
+  
+  * Returns: Nothing.
 
 * <strong>Zam.on(events, selector, function)</strong>
 
