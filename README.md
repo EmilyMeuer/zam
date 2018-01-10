@@ -160,7 +160,7 @@ Now we will expand on the Hello World Example, and utilyze the shadow DOM and in
         export class HelloWorld extends Zam {
             constructor() {
                 super(`<div>Hello World!</div>`);
-	    }
+            }
         }
 	
 	HelloWorld.shadowRender();
