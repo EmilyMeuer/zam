@@ -155,7 +155,7 @@ Now we will expand on the Hello World Example, and utilyze the shadow DOM and in
     <helloworld>
     </helloworld>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.0.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.1.0/zam.min.js";
 
         export class HelloWorld extends Zam {
             constructor() {
