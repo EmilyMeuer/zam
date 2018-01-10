@@ -119,8 +119,8 @@ Example - Hello World!
 <head>
 </head>
 <body>
-    <div id="root">
-    </div>
+    <foo>
+    </foo>
     <script type="module">
         import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.1.0/zam.min.js";
 
@@ -130,8 +130,7 @@ Example - Hello World!
             }
         }
         
-        var foo = new Foo();
-	foo.mount('#root'); // We mount our 'Foo' instance to the element with id attribute 'root'.
+        Foo.render();
     </script>
 </body>
 </html>
