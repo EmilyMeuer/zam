@@ -3,35 +3,10 @@ import Zam from "https://cdn.jsdelivr.net/gh/roecrew/zam@8.1/zam.min.js";
 
 export class UISwitch extends Zam {
 
-	uiSwitchCSS() {
-		return {'position': 'relative','background-color': '#d0d2d3','margin':'50px','padding':'10px','width': '60px','height':'20px','border':'1px solid clear','border-radius':'50px','text-align':'right','transition':'background-color 0.1s ease-out'}
-	}
-
-	uiSwitchTextCSS() {
-		return {'position': 'absolute','top': '11px','left': '45px','transition': 'left 0.1s ease-out'}
-	}
-
-	uiSwitchCircleCSS() {
-		return {'position': 'absolute','left': '5px','top': '5px','width': '30px','height': '30px','background-color': 'white','border': '1px solid clear','border-radius': '50px','box-shadow': '0 0 1px 0 rgba(0,0,0,.25), 0 4px 11px 0 rgba(0,0,0,.08), -1px 3px 3px 0 rgba(0,0,0,.14)','transition': 'left 0.1s ease-out'}
-	}
-
 	constructor() {
 		super(`<div class="ui-switch"></div>`);
-		this.setCSS(this.uiSwitchCSS());
 		this.append(new Zam(`<span class="ui-switch-text">Off</span>`), 'text');
-		this['text'].setCSS(this.uiSwitchTextCSS());
 		this.append(new Zam(`<div class="ui-switch-circle"></div>`), 'circle');
-		this['circle'].setCSS(this.uiSwitchCircleCSS());
-		this['circle'].on('click', (function() {
-			var textCur =  this['text'].getCSS('left');
-			this['text'].setCSS({'left': textCur !== "10px" ? '10px' : "45px"});
-			var textCur = this['text'].getInnerHTML();
-			textCur === "Off" ? (this['text'].setInnerHTML("On")) : (this['text'].setInnerHTML("Off"));
-			var circleCur =  this['circle'].getCSS('left');
-			this['circle'].setCSS({'left': circleCur !== "45px" ? '45px' : "5px"});
-			var switchCur = this.getCSS('background-color');
-			this.setCSS({'background-color': switchCur !== "rgb(76, 218, 99)" ? 'rgb(76, 218, 99)' : "#d0d2d3"});
-		}.bind(this)));
 	}
 }
 
@@ -85,12 +60,6 @@ describe("switch", function () {
 describe("circle", function () {
 	it("circle should be a child of switch", function () {
 		expect(root['items']['item-0']['switch']['circle'] !== undefined).toBe(true);
-	});
-});
-root['items']['item-0']['switch']['circle'].e.click();
-describe("circle-style-left-value", function () {
-	it("circle's style left value should be 45px", function () {
-		expect(root['items']['item-0']['switch']['circle'].getCSS('left') === '45px').toBe(true);
 	});
 });
 </script>

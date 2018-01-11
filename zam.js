@@ -1,44 +1,161 @@
 export default class Zam {
 	constructor(html) {
-		this.html = html;
-		var elem = document.createElement('div');
-		elem.innerHTML = html;
-		this.e = elem.children[0].cloneNode(true);
+		this['children'] = [];
+		this.uniqueID = Zam.uniqueID;
+		if (!html) {
+			html = '';
+		}
+		this.origHTML = html;
+		var elem = document.createElement(this.constructor.name.toLowerCase());
+		elem.innerHTML = this._generateProperties(html);
+		this.e = elem.cloneNode(true);
 	}
+
+	linkPropertyToNode(key) {
+		if (!Zam.reverseProperties[key + '-' + this.uniqueID]) {
+			Zam.reverseProperties[key + '-' + this.uniqueID] = [];
+		}
+		Zam.reverseProperties[key + '-' + this.uniqueID].push(this);
+	}
+
+	_generateBindings(node) {
+
+		if (node.origHTML.indexOf('z-bind=') > -1) {
+			var key = node.origHTML;
+			key = key.slice(key.indexOf('z-bind="') + 8);
+			key = key.slice(0, key.indexOf('"'));
+			if(Zam.reverseProperties[key + '-' + node.uniqueID] !== undefined) {
+				var len = Zam.reverseProperties[key + '-' + node.uniqueID].length;
+				for(var i=0; i<len; i++) {
+					Zam.on('keyup', node.e.children[0], function(e) {
+						Zam.reverseProperties[key + '-' + node.uniqueID][i].prop(key, e.target.value);
+					}.bind(node));
+				}
+			}
+		}
+
+		var len = node.children.length;
+		for(var i=0; i<len; i++) {
+			node._generateBindings(node.children[i]);
+		}
+	}
+
+	searchForProperty(node, key) {
+		if (node['properties'][key] !== undefined) {
+			return node['properties'][key];
+		} else {
+			var len = node.children.length;
+			for(var i=0; i<len; i++) {
+				return this.searchForProperty(node['children'][i]);
+			}
+		}
+		return 0;
+	}
+
+	_updateProperties(html) {
+		var str = html;
+		var newhtml = '';
+		while(str.indexOf('{{') > -1) {
+			var key = str.slice(str.indexOf('{{') + 2, str.indexOf('}}'));
+			newhtml += str.slice(0, str.indexOf('{{'));
+
+			var result = this.searchForProperty(this, key);
+			if (result) {
+				newhtml += result;
+			}
+			str = str.slice(str.indexOf('}}') + 2);
+		}
+		newhtml += str;
+		return newhtml;
+	}
+
+	_generateProperties(html) {
+		this.properties = {};
+		if(html.indexOf('{{') > -1 && html.indexOf('}}') > -1) {
+			var str = html;
+			var newhtml = '';
+			this['properties-proxy'] = {};
+
+			while(str.indexOf('{{') > -1) {
+				var key = str.slice(str.indexOf('{{') + 2, str.indexOf('}}'));
+				this['properties-proxy'][key] = '';
+				this.linkPropertyToNode(key);
+				newhtml += str.slice(0, str.indexOf('{{'));
+				str = str.slice(str.indexOf('}}') + 2);
+			}
+			newhtml += str;
+
+			var _this = this;
+			var handler = {
+				set(target, key, value) {
+					target[key] = value;
+					if (value !== undefined) {
+						var len = Zam.reverseProperties[key + '-' + _this.uniqueID].length;
+						for(var  i=0; i<len; i++) {
+							var revProp = Zam.reverseProperties[key + '-' + _this.uniqueID][i];
+							revProp.html = _this._updateProperties(revProp.origHTML);
+							revProp.e.innerHTML = _this.html;
+						}
+						_this._generateBindings(_this);
+					}
+					return true;
+				}
+			};
+			this.properties = new Proxy(this['properties-proxy'], handler);
+
+			return newhtml;
+		} else {
+			return html;
+		}
+	}
+
+	prop(key, value) {
+		if (value !== undefined) {
+			this['properties'][key] = value;
+		}
+		return this['properties'][key];
+	}
+
+	// _refreshChildren(node, actualNode) {
+	// 	var len = node.children.length;
+	// 	for(var i=0; i<len; i++) {
+	// 		node._refreshChildren(node.children[i], actualNode.children[i]);
+	// 		node.e = actualNode;
+	// 	}
+	// }
 
 	static render() {
 		var elems = document.querySelectorAll(this.name.toLowerCase());
 		var len = elems.length;
+		var instances = [];
 		for(var i=0; i<elems.length; i++) {
-			var instance = new this(...arguments);
-			elems[i].appendChild(instance.e);
+			instances.push(new this(...arguments));
+			elems[i].replaceWith(instances[i].e);
+			instances[i].e = document.querySelectorAll(this.name.toLowerCase())[i];
+			instances[i]._generateBindings(instances[i]);
+			//instances[i]._refreshChildren(instances[i], instances[i].e);
+			Zam.uniqueID++;
 		}
+		return instances;
 	}
 
 	static shadowRender() {
 		var elems = document.querySelectorAll(this.name.toLowerCase());
 		var len = elems.length;
+		var instances = [];
 		for(var i=0; i<len; i++) {
-			var instance = new this(...arguments);
+			instances.push(new this(...arguments));
 			var div = document.createElement('div');
 			var shadowElem = div.attachShadow({mode: 'open'});
-			shadowElem.appendChild(instance.e);
+			shadowElem.appendChild(instances[i].e);
+			instances[i]._generateBindings(instances[i]);
 			elems[i].appendChild(div);
+			Zam.uniqueID++;
 		}
+		return instances;
 	}
 
-	customEvent(event) {
-		this[event] = new CustomEvent(event, {
-			bubbles: true,
-			cancelable: false
-		});
-	}
-
-	dispatchEvent(event) {
-		this.e.dispatchEvent(this[event]);
-	}
-
-	mount(selector, shadowSelector) {
+	render(selector, shadowSelector) {
 		if (shadowSelector) {
 			document.querySelectorAll(selector)[0].shadowRoot.querySelectorAll(shadowSelector)[0].appendChild(this.e);
 		} else {
@@ -46,7 +163,7 @@ export default class Zam {
 		}
 	}
 
-	mountPrepend(selector, shadowSelector) {
+	renderPrepend(selector, shadowSelector) {
 		if (shadowSelector) {
 			var elem = document.querySelectorAll(selector)[0].shadowRoot.querySelectorAll(shadowSelector)[0];
 			elem.insertBefore(this.e, elem.firstChild);
@@ -61,6 +178,7 @@ export default class Zam {
 		component.parent = this;
 		this[key] = component;
 		this.e.appendChild(component.e);
+		this.children.push(component);
 		return component;
 	}
 
@@ -69,14 +187,15 @@ export default class Zam {
 		component.parent = this;
 		this[key] = component;
 		this.e.insertBefore(component.e, this.e.firstChild);
+		this.children.push(component);
 		return component;
 	}
 
 	replace(component, key) {
 		component.parent = this.parent;
+		delete this.parent[this.key];
 		this.parent[key] = component;
 		this.e.replaceWith(component.e);
-		delete this.parent[this.key];
 		return component;
 	}
 
@@ -85,107 +204,9 @@ export default class Zam {
 		delete this.parent[this.key];
 	}
 
-	setInnerHTML(html) {
-		this.e.innerHTML = html;
-		return this;
-	}
-
-	getInnerHTML() {
-		return this.e.innerHTML;
-	}
-
-	setCSS(props) {
-		Zam._cssObject(props, this.e);
-		return this;
-	}
-
-	getCSS(property) {
-		if(property.indexOf('-') > -1) {
-			var idx = property.indexOf('-') + 1;
-			property = property.slice(0, idx - 1) + property.slice(idx, idx + 1).toUpperCase() + property.slice(idx+1);
-		}
-		return this.e.style[property];
-	}
-
-	toggleCSS(property, valOn, valOff) {
-		var prop = {}
-		prop[property] = this.getCSS(property) !== valOn ? valOn : valOff;
-		return this.setCSS(prop);
-	}
-
-	static setCSS(props, selector) {
-		if (typeof(selector) === 'object') {
-			Zam._cssObject(props, selector);
-		} else {
-			var elems = document.querySelectorAll(selector);
-			var len = elems.length;
-			for(var i=0; i<len; i++) {
-				Zam._cssObject(props, elems[i]);
-			}
-		}
-	}
-
-	static getCSS(property, selector) {
-		if (typeof(selector) === 'object') {
-			return selector.e.style[property];
-		} else {
-			return document.querySelectorAll(selector)[0].style[property];
-		}
-	}
-
-	static _cssAddValue(x, key, value) {
-		var val1 = value.slice(0, value.indexOf(' '));
-		var match;
-		if((match = x.style[key].match(new RegExp(`(^${val1}|, ${val1})`, 'g'))) === null) {
-			x.style[key] += (',' + value);
-		} else {
-			var start = x.style[key].indexOf(match[0]);
-			(match[0].indexOf(',') > -1) ? start += 2 : '';
-			var before = x.style[key].slice(0, start);
-			var middle = value;
-			var end = "";
-			var after = x.style[key].slice(start).indexOf(',');
-			if(after !== -1) {
-				end = x.style[key].slice(x.style[key].slice(start).indexOf(',')); 
-			}
-			x.style[key] = before + middle + end;
-		}
-	}
-
-	static _cssObject(props, x) {
-		for (var key in props) {
-			if (props.hasOwnProperty(key)) {
-				if(key.indexOf('-') !== -1) {
-					var val = props[key];
-					var idx = key.indexOf('-') + 1;
-					key = key.slice(0, idx - 1) + key[idx].toUpperCase() + key.slice(idx+1);
-					x.style[key] = val;
-				} else {
-					if(key === 'transition' || key === 'animation') {
-						if (props[key] === '' || x.style[key] === '') {
-							x.style[key] = props[key];
-						} else {
-							var stack = props[key];
-							var value = "";
-							while(stack.indexOf(',') !== -1) {
-								value = stack.slice(0, stack.indexOf(',')).trim();
-								Zam._cssAddValue(x, key, value);
-								stack = stack.slice(stack.indexOf(',') + 1).trim();
-							}
-							Zam._cssAddValue(x, key, stack);
-						}
-					} else {
-						x.style[key] = props[key];
-					}
-				}
-			}
-		}
-	}
-
-
 	on(event, func) {
 		var addListener = function(event, func) {
-			this.e.addEventListener(event, func);
+			this.e.children[0].addEventListener(event, func);
 		}.bind(this);
 
 		if (event.indexOf(' ') !== -1) {
@@ -203,13 +224,21 @@ export default class Zam {
 
 	static on(event, selector, func) {
 		var addListener = function(event, selector, func) {
-			var elems = document.querySelectorAll(selector);
-			var len = elems.length;
-			for(var i=0; i<len; i++) {
-				if (elems[i].shadowRoot) {
-					elems[i].shadowRoot.addEventListener(event, func);
+			if (typeof(selector) === 'string') {
+				var elems = document.querySelectorAll(selector);
+				var len = elems.length;
+				for(var i=0; i<len; i++) {
+					if (elems[i].shadowRoot) {
+						elems[i].shadowRoot.addEventListener(event, func);
+					} else {
+						elems[i].addEventListener(event, func);
+					}
+				}
+			} else {
+				if (selector.shadowRoot) {
+					selector.shadowRoot.addEventListener(event, func);
 				} else {
-					elems[i].addEventListener(event, func);
+					selector.addEventListener(event, func);
 				}
 			}
 		}
@@ -246,13 +275,21 @@ export default class Zam {
 
 	static off(event, selector, func) {
 		var removeListener = function(event, selector, func) {
-			var elems = document.querySelectorAll(selector);
-			var len = elems.length;
-			for(var i=0; i<len; i++) {
-				if (elems[i].shadowRoot) {
-					elems[i].shadowRoot.removeEventListener(event, func);
+			if (typeof(selector) === 'string') {
+				var elems = document.querySelectorAll(selector);
+				var len = elems.length;
+				for(var i=0; i<len; i++) {
+					if (elems[i].shadowRoot) {
+						elems[i].shadowRoot.removeEventListener(event, func);
+					} else {
+						elems[i].removeEventListener(event, func);
+					}
+				}
+			} else {
+				if (selector[i].shadowRoot) {
+					selector[i].shadowRoot.removeEventListener(event, func);
 				} else {
-					elems[i].removeEventListener(event, func);
+					selector[i].removeEventListener(event, func);
 				}
 			}
 		}
@@ -268,4 +305,19 @@ export default class Zam {
 			removeListener(event, selector, func);
 		}
 	}
+
+	customEvent(event) {
+		this[event] = new CustomEvent(event, {
+			bubbles: true,
+			cancelable: false
+		});
+	}
+
+	dispatchEvent(event) {
+		this.e.dispatchEvent(this[event]);
+	}
 }
+
+Zam.uniqueID = 0;
+
+Zam.reverseProperties = {};

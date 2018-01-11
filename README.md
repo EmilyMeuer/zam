@@ -102,13 +102,13 @@ for(var i=0; i<len; i++) {
 
 ## Import
 
-### Current Stable Build is 10.1
+### Current Stable Build is 10.2
 
 ```javascript
-inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.1.0/zam.min.js"
+inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.2.0/zam.min.js"
 ```
 ```
-npm install zamjs@10.1.0
+npm install zamjs@10.2.0
 ```
 
 ## Quickstart
@@ -127,11 +127,13 @@ Example - Hello World!
     <foo>
     </foo>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.1.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.2.0/zam.min.js";
 
         export class Foo extends Zam {
             constructor() {
-                super(`<div>Hello World!</div>`);
+                super();
+                this.append(new Zam('<div>Hello {{someData}}!</div>'), 'hello-text');
+                this.append(new Zam('<input type="text" z-bind="someData"></input>'), 'hello-input');
             }
         }
         
@@ -156,18 +158,23 @@ Now we will expand on the Hello World Example, and utilyze the shadow DOM and in
 <head>
 </head>
 <body>
-    <helloworld>
-    </helloworld>
+    <foo>
+    </foo>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.1.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.2.0/zam.min.js";
 
-        export class HelloWorld extends Zam {
+        export class Root extends Zam {
             constructor() {
-                super(`<div>Hello World!</div>`);
+                super();
+                this.append(new Zam(`<div style="{{helloStyle}}">Hello {{someData}}!</div>`), 'hello-world1');
+                this.append(new Zam(`<input z-bind="someData" placeholder="{{placeHolder}}" />`), 'input');
+                this['hello-world1'].prop('helloStyle', 'font-size:30px;');
             }
         }
-	
-	HelloWorld.shadowRender();
+        
+        var rootObjects = Root.shadowRender();
+        rootObjects[0]['input'].prop('placeHolder', 'Type something...');
+        rootObjects[1]['hello-world1'].prop('someData', 'Universe');
     </script>
 </body>
 </html>
@@ -187,23 +194,33 @@ http://zamjs.com/examples
 
   *  Example: someComponent.e.className
 
+## Class Methods
+
+* <strong>SubClass.render()</strong>
+
+  * Example: MyComponent.render(); it renders all <mycomponent> tags.
+  
+  * Returns: Nothing.
+  
+* <strong>SubClass.shadowRender()</strong>
+
+  * Example: MyComponent.shadowRender(); it shadowRenders all <mycomponent> tags.
+  
+  * Returns: Nothing.
+
+* <strong>Zam.on(events, selector, function)</strong>
+
+  * Example: Zam.on('mouseover', 'someSelector', someFunction);
+  
+  * Returns: Nothing.
+
+* <strong>Zam.off(events, selector, function)</strong>
+
+  * Example: Zam.off('mouseover', 'someSelector', someFunction);
+
+  * Returns: Nothing.
+
 ## Instance Methods
-
-* <strong>.mount(selector, shadowSelector)</strong>
-
-  * Example: someComponent.mount('someSelector');
-  
-  * shadowSelector is optional (you only use it if it's in a shadow)
-  
-  * Returns: Nothing.
-  
-* <strong>.mountPrepend(selector, shadowSelector)</strong>
-
-  * Example: someComponent.mountPrepend('someSelector');
-  
-  * shadowSelector is optional (you only use it if it's in a shadow)
-  
-  * Returns: Nothing.
 
 * <strong>.append(component, key)</strong>
 
@@ -240,36 +257,6 @@ http://zamjs.com/examples
   * Example: someComponent.off('mousedown', someFunction);
   
   * Returns: component that called .off().
-
-* <strong>.setCSS(properties-object)</strong>
-
-  * Example: someComponent.setCSS({'background-color':'red', 'color':'blue'});
-  
-  * Returns: component that called .setCSS().
-
-* <strong>.getCSS(property)</strong>
-
-  * Example: someComponent.getCSS('background-color');
-  
-  * Returns: String.
-
-* <strong>.toggleCSS(property, value1, value2)</strong>
-
-  * Example: someComponent.toggleCSS('background-color', 'red', '');
-  
-  * Returns: component that called .toggleCSS().
-
-* <strong>.setInnerHTML(value)</strong>
-
-  * Example: someComponent.setInnerHTML('Hello World!');
-  
-  * Returns: component that called .setInnerHTML().
-
-* <strong>.getInnerHTML()</strong>
-
-  * Example: someComponent.getInnerHTML();
-  
-  * Returns: String.
   
 * <strong>.customEvent(event)</strong>
 
@@ -282,107 +269,3 @@ http://zamjs.com/examples
   * Example: someComponent.dispatchEvent('some-event');
   
   * Returns: Nothing.
-
-## Class Methods
-
-* <strong>SubClass.render()</strong>
-
-  * Example: MyComponent.render(); it renders all <mycomponent> tags.
-  
-  * Returns: Nothing.
-  
-* <strong>SubClass.shadowRender()</strong>
-
-  * Example: MyComponent.shadowRender(); it shadowRenders all <mycomponent> tags.
-  
-  * Returns: Nothing.
-
-* <strong>Zam.on(events, selector, function)</strong>
-
-  * Example: Zam.on('mouseover', 'someSelector', someFunction);
-  
-  * Returns: Nothing.
-
-* <strong>Zam.off(events, selector, function)</strong>
-
-  * Example: Zam.off('mouseover', 'someSelector', someFunction);
-
-  * Returns: Nothing.
-
-* <strong>Zam.setCSS(properties-object, selector)</strong>
-
-  * Example: Zam.setCSS({'background-color':'red', 'color':'blue'}, 'someSelector');
-
-  * Returns: Nothing.
-
-* <strong>Zam.getCSS(property, selector)</strong>
-
-  * Example: Zam.getCSS('background-color', 'someSelector');
-
-  * Returns: String.
-  
-## Helper Sub-Classes
-
-```javascript
-class H1 extends Zam {
-    constructor(text) {
-        super(`<h1>${text}</h1>`);
-    }
-}
-
-class H2 extends Zam {
-    constructor(text) {
-	super(`<h2>${text}</h2>`);
-    }
-}
-
-class H3 extends Zam {
-    constructor(text) {
-	super(`<h3>${text}</h3>`);
-    }
-}
-
-class H4 extends Zam {
-    constructor(text) {
-	super(`<h4>${text}</h4>`);
-    }
-}
-
-class H5 extends Zam {
-    constructor(text) {
-	super(`<h5>${text}</h5>`);
-    }
-}
-
-class P extends Zam {
-    constructor(text) {
-	super(`<p>${text}</p>`);
-    }
-}
-
-class SPAN extends Zam {
-    constructor(text) {
-	super(`<span>${text}</span>`);
-    }
-}
-
-class A extends Zam {
-    constructor(text, href) {
-	super(`<a href="${href}">${text}</a>`);
-    }
-}
-
-class IMG extends Zam {
-    constructor(text, src, width, height) {
-	if (!width) {width = 'auto';}
-	if (!height) {height = 'auto';}
-	super(`<img src="${src}" width="${width}" height="${height}">${text}</img>`);
-    }
-}
-
-class DIV extends Zam {
-    constructor(text) {
-        super(`<div>${text}</div>`);
-    }
-}
-```
