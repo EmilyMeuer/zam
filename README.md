@@ -102,13 +102,13 @@ for(var i=0; i<len; i++) {
 
 ## Import
 
-### Current Stable Build is 10.3
+### Current Stable Build is 10.4
 
 ```javascript
-inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.3.0/zam.min.js"
+inport Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.4.0/zam.min.js"
 ```
 ```
-npm install zamjs@10.3.0
+npm install zamjs@10.4.0
 ```
 
 ## Quickstart
@@ -127,7 +127,7 @@ Example - Hello World!
     <foo>
     </foo>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.3.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.4.0/zam.min.js";
 
         export class Foo extends Zam {
             constructor() {
@@ -161,7 +161,7 @@ Now we will expand on the Hello World Example, and utilyze the shadow DOM and in
     <foo>
     </foo>
     <script type="module">
-        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.3.0/zam.min.js";
+        import Zam from "https://cdn.jsdelivr.net/npm/zamjs@10.4.0/zam.min.js";
 
         export class Root extends Zam {
             constructor() {

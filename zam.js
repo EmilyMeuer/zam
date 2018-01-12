@@ -1,7 +1,10 @@
+let uniqueID = Symbol('uniqueID');
+uniqueID = 0;
+
 export default class Zam {
 	constructor(html) {
 		this['children'] = [];
-		this.uniqueID = Zam.uniqueID;
+		this.uniqueID = uniqueID;
 		if (!html) {
 			html = '';
 		}
@@ -19,18 +22,49 @@ export default class Zam {
 	}
 
 	_generateBindings(node) {
-
-		if (node.origHTML.indexOf('z-bind=') > -1) {
-			let key = node.origHTML;
-			key = key.slice(key.indexOf('z-bind="') + 8);
-			key = key.slice(0, key.indexOf('"'));
-			if(Zam.reverseProperties[key + '-' + node.uniqueID] !== undefined) {
-				let len = Zam.reverseProperties[key + '-' + node.uniqueID].length;
-				for(let i=0; i<len; i++) {
-					Zam.on('keyup', node.e.children[0], function(e) {
-						Zam.reverseProperties[key + '-' + node.uniqueID][i].prop(key, e.target.value);
-					}.bind(node));
+		let origHTML = node.origHTML;
+		while(origHTML.indexOf('z-') > -1) {
+			let val = origHTML;
+			val = val.slice(val.indexOf('z-') + 2)
+			let type = val.slice(0, val.indexOf('='));
+			val = val.slice(val.indexOf('"') + 1);
+			val = val.slice(0, val.indexOf('"'));
+			origHTML = origHTML.slice(origHTML.indexOf(val) + val.length + 1);
+			switch(type) {
+				case 'bind':
+				if(Zam.reverseProperties[val + '-' + node.uniqueID] !== undefined) {
+					if (!node.bindingFunc) {
+						node.bindingFunc = (e) => {
+							Zam.reverseProperties[val + '-' + node.uniqueID][0].prop(val, e.target.value);
+						}
+					}
+					Zam.on('keyup', node.e.children[0], node.bindingFunc);
 				}
+				break;
+				default:
+				if(!this[type + 'Func']) {
+					this[type + 'Func'] = function(e) {
+						let obj = {}, expression = '', str = val;
+						let results = str.match(new RegExp(`[A-Za-z]{1}[A-Za-z0-9]*`, 'g'));
+						let len = results.length;
+						for(let i=0; i<len; i++) {
+							let components = Zam.reverseProperties[results[i] + '-' + this.uniqueID];
+							if(components === undefined) {
+								continue;
+							}
+							obj[val+i] = components[0].prop(results[i]);
+							obj[results[i]] = obj[val+i];
+							let varToEval = 'obj[\''+results[i]+'\']';
+							expression += str.slice(0, str.indexOf(results[i]) + results[i].length).replace(results[i], varToEval);
+							str = str.slice(str.indexOf(results[i]) + results[i].length);
+						}
+						expression += str;
+						let evalExp = eval(expression);
+						Zam.reverseProperties[results[0] + '-' + this.uniqueID][0].prop(results[0], evalExp);
+					}.bind(node);
+				}
+				Zam.on(type, node.e.children[0], this[type + 'Func']);
+				break;
 			}
 		}
 
@@ -52,7 +86,7 @@ export default class Zam {
 		return 0;
 	}
 
-	_updateProperties(html) {
+	_updateDoubleBraces(html) {
 		let str = html;
 		let newhtml = '';
 		while(str.indexOf('{{') > -1) {
@@ -93,7 +127,7 @@ export default class Zam {
 						let len = Zam.reverseProperties[key + '-' + _this.uniqueID].length;
 						for(let  i=0; i<len; i++) {
 							let revProp = Zam.reverseProperties[key + '-' + _this.uniqueID][i];
-							revProp.html = _this._updateProperties(revProp.origHTML);
+							revProp.html = _this._updateDoubleBraces(revProp.origHTML);
 							revProp.e.innerHTML = _this.html;
 						}
 						_this._generateBindings(_this);
@@ -116,14 +150,6 @@ export default class Zam {
 		return this['properties'][key];
 	}
 
-	// _refreshChildren(node, actualNode) {
-	// 	let len = node.children.length;
-	// 	for(let i=0; i<len; i++) {
-	// 		node._refreshChildren(node.children[i], actualNode.children[i]);
-	// 		node.e = actualNode;
-	// 	}
-	// }
-
 	static render() {
 		let elems = document.querySelectorAll(this.name.toLowerCase());
 		let len = elems.length;
@@ -133,8 +159,7 @@ export default class Zam {
 			elems[i].replaceWith(instances[i].e);
 			instances[i].e = document.querySelectorAll(this.name.toLowerCase())[i];
 			instances[i]._generateBindings(instances[i]);
-			//instances[i]._refreshChildren(instances[i], instances[i].e);
-			Zam.uniqueID++;
+			uniqueID++;
 		}
 		return instances;
 	}
@@ -150,7 +175,7 @@ export default class Zam {
 			shadowElem.appendChild(instances[i].e);
 			instances[i]._generateBindings(instances[i]);
 			elems[i].appendChild(div);
-			Zam.uniqueID++;
+			uniqueID++;
 		}
 		return instances;
 	}
@@ -179,6 +204,7 @@ export default class Zam {
 		this[key] = component;
 		this.e.appendChild(component.e);
 		this.children.push(component);
+		this._generateBindings(this);
 		return component;
 	}
 
@@ -188,6 +214,7 @@ export default class Zam {
 		this[key] = component;
 		this.e.insertBefore(component.e, this.e.firstChild);
 		this.children.push(component);
+		this._generateBindings(this);
 		return component;
 	}
 
@@ -196,6 +223,7 @@ export default class Zam {
 		delete this.parent[this.key];
 		this.parent[key] = component;
 		this.e.replaceWith(component.e);
+		this._generateBindings(this);
 		return component;
 	}
 
@@ -286,10 +314,10 @@ export default class Zam {
 					}
 				}
 			} else {
-				if (selector[i].shadowRoot) {
-					selector[i].shadowRoot.removeEventListener(event, func);
+				if (selector.shadowRoot) {
+					selector.shadowRoot.removeEventListener(event, func);
 				} else {
-					selector[i].removeEventListener(event, func);
+					selector.removeEventListener(event, func);
 				}
 			}
 		}
@@ -317,7 +345,5 @@ export default class Zam {
 		this.e.dispatchEvent(this[event]);
 	}
 }
-
-Zam.uniqueID = 0;
 
 Zam.reverseProperties = {};
